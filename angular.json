@@ -122,8 +122,13 @@
               "devServerTarget": "who-is-jesus:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "who-is-jesus"
 }
