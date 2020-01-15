@@ -1,0 +1,42 @@
+.verse {
+  display: flex;
+  line-height: 1.5em;
+}
+
+.reference {
+  min-width: 100px;
+  margin-right: 20px;
+  display: flex;
+  color: darkslategray;
+
+  .chapter-verse {
+    margin-left: 5px;
+  }
+}
+
+.text {
+  .jesus-words {
+    color: rgb(173, 6, 6);
+  }
+}
+
+.verse-number {
+  color: black;
+  line-height: 0;
+  display: none;
+}
+
+.verse-break::after {
+  content: '...';
+  margin: 0 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .verse {
+    flex-direction: column;
+  }
+
+  .reference {
+    margin-bottom: 3px;
+  }
+}

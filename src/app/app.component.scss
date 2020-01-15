@@ -1,0 +1,22 @@
+.title {
+  font-size: 5em;
+  font-weight: 100;
+  margin: 20px;
+}
+
+.jesus-title {
+  font-family: "Lovers Quarrel";
+  font-size: 1.6em;
+  margin: 0 15px;
+}
+
+.verse-container {
+  margin: 20px;
+}
+
+.verse {
+  margin-bottom: 10px;
+  @media only screen and (max-width: 500px) {
+    margin-bottom: 20px;
+  }
+}

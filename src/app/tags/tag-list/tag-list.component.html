@@ -1,0 +1,5 @@
+<div #container class="tag-container" [class.stuck]="isStuck()">
+  <ng-container *ngFor="let tag of tags">
+    <app-tag [tag]="tag" (selectionChange)="onTagSelected($event)"></app-tag>
+  </ng-container>
+</div>

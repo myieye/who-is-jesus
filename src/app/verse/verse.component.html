@@ -1,0 +1,11 @@
+<div class="verse">
+    <div class="reference">
+        <span class="book">{{verse.reference.book.abbr}}</span>
+        <span class="chapter-verse">
+            <span class="chapter">{{verse.reference.chapter}}</span>
+            <span class="colon">:</span>
+            <span class="verses">{{verse.reference.verses}}</span>
+        </span>
+    </div>
+    <div class="text" [innerHTML]="verse.html.replace('---', '&#8230;')"></div>
+</div>
