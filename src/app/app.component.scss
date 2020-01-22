@@ -1,3 +1,5 @@
+@import '../vars.scss';
+
 .title {
   font-size: 5em;
   font-weight: 100;
@@ -16,7 +18,24 @@
 
 .verse {
   margin-bottom: 10px;
-  @media only screen and (max-width: 500px) {
+  @media only screen and ($small-screen) {
     margin-bottom: 20px;
+  }
+}
+
+.option-container {
+  padding: 10px 30px;
+  display: flex;
+
+  * {
+    margin-right: 50px;
+  }
+
+  .multi-select {
+    margin-top: 18px;
+  }
+
+  .verse-filter {
+    width: 250px;
   }
 }

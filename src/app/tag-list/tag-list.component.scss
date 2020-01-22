@@ -1,0 +1,20 @@
+@import '../../vars.scss';
+
+:host {
+  line-height: 2em;
+  margin-bottom: 30px;
+  font-weight: 400;
+
+  .tag-container {
+    padding: 10px 20px;
+  }
+
+  app-tag {
+    margin-right: 4px;
+  }
+
+  @media only screen and ($big-screen) {
+    position: sticky;
+    top: 0;
+  }
+}

@@ -1,0 +1,28 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+@import '../../vars.scss';
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin wij-tag-list-theme($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+
+  app-tag-list .tag-container {
+    .mat-chip {
+      color: mat-color($primary);
+    }
+
+    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+      color: mat-color($background, unselected-chip);
+    }
+  }
+  
+  @media only screen and ($big-screen) {
+    .tag-container.stuck {
+      border-bottom: 1px solid mat-color($primary, lighter);
+    }
+  }
+
+}
+

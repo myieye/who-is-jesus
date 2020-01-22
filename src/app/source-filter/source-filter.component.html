@@ -1,0 +1,7 @@
+<mat-form-field class="verse-filter">
+    <mat-label>Filter by source</mat-label>
+    <mat-select multiple (selectionChange)="filterSelectionChanged($event)">
+        <mat-option *ngFor="let filter of filters" [value]="filter"
+            class="{{filter.cssClass}}">{{filter.displayName}}</mat-option>
+    </mat-select>
+</mat-form-field>

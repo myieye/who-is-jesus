@@ -1,0 +1,9 @@
+<div #container class="tag-container" [class.stuck]="_isStuck">
+  <mat-chip-list [multiple]="_multiple">
+    <ng-container *ngFor="let tag of tags">
+      <mat-chip [value]="tag" #chip="matChip" (click)="chipClicked(chip)">
+        {{tag}}
+      </mat-chip>
+    </ng-container>
+  </mat-chip-list>
+</div>
