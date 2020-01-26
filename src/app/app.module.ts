@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { SourceFilterComponent } from './source-filter/source-filter.component';
+import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SourceFilterComponent } from './source-filter/source-filter.component';
     VerseComponent,
     TagListComponent,
     SourceFilterComponent,
+    VerseOrderSelectComponent,
   ],
   imports: [
     BrowserModule,

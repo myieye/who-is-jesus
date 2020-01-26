@@ -1,20 +1,70 @@
-@import '../../vars.scss';
+@import "../../vars.scss";
 
 :host {
+  &.has-selected-tags {
+    position: sticky;
+    top: 0;
+  }
+
   line-height: 2em;
   margin-bottom: 30px;
   font-weight: 400;
+  z-index: 2;
 
   .tag-container {
     padding: 10px 20px;
+
+    .open-toggle {
+      display: none;
+    }
+
+    &.stuck {
+      position: absolute;
+      width: 100%;
+      box-sizing: border-box;
+
+      .open-toggle {
+        position: absolute;
+        right: 5px;
+        background: white;
+        padding: 0px 11px;
+        border: 1px solid black;
+        border-radius: 5em;
+        bottom: -16px;
+      }
+
+      @media only screen and ($not-very-big-screen) {
+        .open-toggle {
+          //display: initial;
+        }
+
+        &:not(.open) {
+          padding: 10px 4px 10px 4px;
+
+          .mat-chip {
+            overflow: initial;
+            white-space: nowrap;
+          }
+
+          .mat-chip:not(.mat-chip-selected) {
+            display: none;
+          }
+
+          ::ng-deep.mat-chip-list-wrapper {
+            flex-wrap: initial;
+            overflow-x: auto;
+            overflow-y: hidden;
+          }
+        }
+      }
+    }
+
+    .mat-chip {
+      transition: width 3s;
+    }
   }
 
   app-tag {
     margin-right: 4px;
-  }
-
-  @media only screen and ($big-screen) {
-    position: sticky;
-    top: 0;
   }
 }

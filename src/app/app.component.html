@@ -1,12 +1,13 @@
 <h1 class="title">Who is <span class="jesus-title">Jesus?</span></h1>
 
 <div class="option-container">
-  <mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</mat-checkbox>
-  <app-source-filter [filters]="sourceFilters" (filterChange)="sourceFilterChanged($event)"></app-source-filter>
+  <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</!--mat-checkbox-->
+  <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
+  <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
 </div>
 
-<app-tag-list class="mat-app-background" [tags]="tags" [multiple]="multiSelect.checked"
-  (selectedTagsChange)="onSelectedTagsChanged($event)"></app-tag-list>
+<app-tag-list [tags]="tags" [multiple]="true"
+  (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
 
 <div class="verse-container">
   <div *ngFor="let verse of verses" class="verse">

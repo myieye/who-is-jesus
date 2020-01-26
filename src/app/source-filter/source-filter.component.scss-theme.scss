@@ -1,0 +1,9 @@
+@import "~@angular/material/theming";
+
+@mixin wij-source-filter-theme($theme) {
+  $foreground: map-get($theme, foreground);
+
+  .mat-select-placeholder {
+    color: mat-color($foreground, text);
+  }
+}

@@ -18,11 +18,7 @@
     }
   }
   
-  @media only screen and ($big-screen) {
-    .tag-container.stuck {
-      border-bottom: 1px solid mat-color($primary, lighter);
-    }
+  .tag-container.stuck {
+    border-bottom: 1px solid mat-color($primary, lighter);
   }
-
 }
-

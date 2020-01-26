@@ -4,6 +4,10 @@
   font-size: 5em;
   font-weight: 100;
   margin: 20px;
+
+  @media only screen and ($small-screen) {
+    font-size: 3em;
+  }
 }
 
 .jesus-title {
@@ -27,15 +31,22 @@
   padding: 10px 30px;
   display: flex;
 
+  @media only screen and ($small-screen) {
+    flex-direction: column;
+  }
+
   * {
-    margin-right: 50px;
+    @media only screen and ($big-screen) {
+      margin-right: 20px;
+      min-width: 250px;
+    }
+
+    @media only screen and ($small-screen) {
+      width: 100%;
+    }
   }
 
   .multi-select {
     margin-top: 18px;
-  }
-
-  .verse-filter {
-    width: 250px;
   }
 }

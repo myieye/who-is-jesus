@@ -12,10 +12,16 @@ export enum BibleBookKey {
     Jude = 'Jude', Rev = 'Rev'
 }
 
-export interface BibleReference {
+export class BibleReference {
     book: BibleBook;
     chapter: number;
     verses: string;
+    numericReference: number;
+    chronologicalIndex: number;
+
+    static toString(ref: BibleReference): string {
+        return `${ref.book.full}${ref.chapter}:${ref.verses}`;
+    }
 }
 
 export interface BibleVerse {

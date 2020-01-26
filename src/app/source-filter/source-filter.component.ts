@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SourceFilter, VerseFilter } from './source-filters';
-import { MatSelectChange } from '@angular/material/select';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { sourceFilters, SourceFilter, VerseFilter, SourceFilterKey } from './source-filters';
+import { isNil } from 'lodash';
 
 @Component({
   selector: 'app-source-filter',
@@ -9,12 +9,46 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class SourceFilterComponent {
 
-  @Input() filters: SourceFilter[];
   @Output() readonly filterChange = new EventEmitter<Array<VerseFilter>>();
 
-  filterSelectionChanged(selectChange: MatSelectChange): void {
-    const sourceFilters = selectChange.value as SourceFilter[];
-    const verseFilters = sourceFilters.map(sourceFilter => sourceFilter.filter);
+  filters = Object.values(sourceFilters);
+
+  getTriggerText(filters?: SourceFilter[] | undefined): string {
+    if (isNil(filters) || filters.length === 0 || filters.length === Object.keys(sourceFilters).length ||
+      (filters.includes(sourceFilters.Matthew) && filters.includes(sourceFilters.Mark) &&
+        filters.includes(sourceFilters.Luke) && filters.includes(sourceFilters.John))) {
+      return 'All';
+    }
+
+    const items: string[] = [];
+
+    if (filters.includes(sourceFilters.Jesus)) {
+      items.push(SourceFilterKey.Jesus);
+    }
+
+    if (filters.includes(sourceFilters.Matthew) && filters.includes(sourceFilters.Mark) && filters.includes(sourceFilters.Luke)) {
+      items.push('Synoptic Gospels');
+    } else {
+      if (filters.includes(sourceFilters.Matthew)) {
+        items.push(SourceFilterKey.Matthew);
+      }
+      if (filters.includes(sourceFilters.Mark)) {
+        items.push(SourceFilterKey.Mark);
+      }
+      if (filters.includes(sourceFilters.Luke)) {
+        items.push(SourceFilterKey.Luke);
+      }
+    }
+
+    if (filters.includes(sourceFilters.John)) {
+      items.push(SourceFilterKey.John);
+    }
+
+    return items.join(', ');
+  }
+
+  filterSelectionChanged(filters: SourceFilter[]): void {
+    const verseFilters = filters.map(sourceFilter => sourceFilter.filter);
     this.filterChange.emit(verseFilters);
   }
 }

@@ -6,6 +6,13 @@
             <span class="colon">:</span>
             <span class="verses">{{verse.reference.verses}}</span>
         </span>
+        <span class="actions">
+            <a class="other-translations" title="Read other translations on biblegateway.com"
+                target="_blank"
+                href="{{getOtherTranslationsLink(verse.reference)}}">
+                <img src="assets/bible-gateway-icon.ico">
+            </a>
+        </span>
     </div>
     <div class="text" [innerHTML]="verse.html.replace('---', '&#8230;')"></div>
 </div>

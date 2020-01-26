@@ -1,4 +1,6 @@
-<div #container class="tag-container" [class.stuck]="_isStuck">
+<div #container class="tag-container mat-app-background"
+  [class.stuck]="_isStuck"
+  [class.open]="_isOpen">
   <mat-chip-list [multiple]="_multiple">
     <ng-container *ngFor="let tag of tags">
       <mat-chip [value]="tag" #chip="matChip" (click)="chipClicked(chip)">
@@ -6,4 +8,5 @@
       </mat-chip>
     </ng-container>
   </mat-chip-list>
+  <span class="open-toggle" (click)="_isOpen = !_isOpen">V</span>
 </div>
