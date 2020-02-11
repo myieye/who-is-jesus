@@ -14,18 +14,19 @@ export class SourceFilterComponent {
 
   sourceFilterMap: SourceFilterMap;
   filters: SourceFilter[];
-
+  jesus: string;
 
   constructor(private readonly content: ContentService) {
     this.sourceFilterMap = sourceFilters(content);
     this.filters = Object.values(this.sourceFilterMap);
+    this.jesus = content.jesus;
   }
 
-  getTriggerText(filters?: SourceFilter[] | undefined): string {
+  getSelectedSources(filters?: SourceFilter[] | undefined): string[] {
     if (isNil(filters) || filters.length === 0 || filters.length === Object.keys(sourceFilters).length ||
       (filters.includes(this.sourceFilterMap.Matthew) && filters.includes(this.sourceFilterMap.Mark) &&
         filters.includes(this.sourceFilterMap.Luke) && filters.includes(this.sourceFilterMap.John))) {
-      return this.content.all;
+      return [this.content.all];
     }
 
     const items: string[] = [];
@@ -54,7 +55,7 @@ export class SourceFilterComponent {
       items.push(SourceFilterKey.John);
     }
 
-    return items.join(', ');
+    return items;
   }
 
   filterSelectionChanged(filters: SourceFilter[]): void {

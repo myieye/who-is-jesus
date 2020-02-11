@@ -1,12 +1,14 @@
 <mat-form-field class="verse-filter" floatLabel="always">
     <mat-label>Sources</mat-label>
-    <mat-select #select multiple disableOptionCentering
-        (selectionChange)="filterSelectionChanged($event.value)"
+    <mat-select #select multiple disableOptionCentering (selectionChange)="filterSelectionChanged($event.value)"
         placeholder="All">
         <mat-select-trigger>
-            {{getTriggerText(select.value)}}
+            <ng-container *ngFor="let source of getSelectedSources(select.value); let last = last">
+                <span [class.jesus-words]="source === jesus">{{source}}</span>
+                <ng-container *ngIf="!last">, </ng-container>
+            </ng-container>
         </mat-select-trigger>
-        <mat-option *ngFor="let filter of filters"
-            [value]="filter" class="{{filter.cssClass}}">{{filter.displayName}}</mat-option>
+        <mat-option *ngFor="let filter of filters" [value]="filter" class="{{filter.cssClass}}">{{filter.displayName}}
+        </mat-option>
     </mat-select>
 </mat-form-field>
