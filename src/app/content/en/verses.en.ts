@@ -706,12 +706,12 @@ export const verses: TaggedVerse[] = [
     },
     {
         reference: { book: bibleBooks[BibleBookKey.John], chapter: 3, verses: '31', numericReference: 43003031, chronologicalIndex: 29 },
-        html: '<span class="jesus-words"><sup class="verse-number">31</sup>He who comes from above is above all. He who is from the Earth belongs to the Earth, and speaks of the Earth. He who comes from heaven is above all.</span>',
-        tags: [ VerseTagKey.Heaven, VerseTagKey.Authority, VerseTagKey.Himself ],
+        html: '<sup class="verse-number">31</sup>He who comes from above is above all. He who is from the Earth belongs to the Earth, and speaks of the Earth. He who comes from heaven is above all.',
+        tags: [ VerseTagKey.Heaven, VerseTagKey.Authority ],
     },
     {
         reference: { book: bibleBooks[BibleBookKey.John], chapter: 3, verses: '35-36', numericReference: 43003035, chronologicalIndex: 29 },
-        html: '<span class="jesus-words"><sup class="verse-number">35</sup>The Father loves the Son, and has given all things into his hand. <sup class="verse-number">36</sup>He who believes in the Son has eternal life, but he who disobeys the Son won\'t see life, but the wrath of God remains on him."</span>',
+        html: '<sup class="verse-number">35</sup>The Father loves the Son, and has given all things into his hand. <sup class="verse-number">36</sup>He who believes in the Son has eternal life, but he who disobeys the Son won\'t see life, but the wrath of God remains on him."',
         tags: [ VerseTagKey.Life, VerseTagKey.Son, VerseTagKey.Authority, VerseTagKey.Saviour, VerseTagKey.Faith ],
     },
     {
