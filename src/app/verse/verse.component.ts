@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { BibleVerse, BibleReference } from '../bible';
+import { BibleReference, BibleVerse } from '../models/bible';
 
 @Component({
   selector: 'app-verse',

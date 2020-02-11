@@ -1,18 +1,19 @@
-@import '../vars.scss';
+@import "../vars.scss";
 
 .title {
   font-size: 5em;
   font-weight: 100;
   margin: 20px;
+  text-align: center;
 
   @media only screen and ($small-screen) {
-    font-size: 3em;
+    font-size: 4em;
   }
 }
 
 .jesus-title {
   font-family: "Lovers Quarrel";
-  font-size: 1.6em;
+  font-size: 2.05em;
   margin: 0 15px;
 }
 
@@ -30,6 +31,7 @@
 .option-container {
   padding: 10px 30px;
   display: flex;
+  justify-content: center;
 
   @media only screen and ($small-screen) {
     flex-direction: column;
@@ -38,7 +40,8 @@
   * {
     @media only screen and ($big-screen) {
       margin-right: 20px;
-      min-width: 250px;
+      width: 250px;
+      max-width: 50%;
     }
 
     @media only screen and ($small-screen) {

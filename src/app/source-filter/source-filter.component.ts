@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { sourceFilters, SourceFilter, VerseFilter, SourceFilterKey } from './source-filters';
+import { sourceFilters, SourceFilter, VerseFilter, SourceFilterKey, SourceFilterMap } from './source-filters';
 import { isNil } from 'lodash';
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-source-filter',
@@ -11,36 +12,45 @@ export class SourceFilterComponent {
 
   @Output() readonly filterChange = new EventEmitter<Array<VerseFilter>>();
 
-  filters = Object.values(sourceFilters);
+  sourceFilterMap: SourceFilterMap;
+  filters: SourceFilter[];
+
+
+  constructor(private readonly content: ContentService) {
+    this.sourceFilterMap = sourceFilters(content);
+    this.filters = Object.values(this.sourceFilterMap);
+  }
 
   getTriggerText(filters?: SourceFilter[] | undefined): string {
     if (isNil(filters) || filters.length === 0 || filters.length === Object.keys(sourceFilters).length ||
-      (filters.includes(sourceFilters.Matthew) && filters.includes(sourceFilters.Mark) &&
-        filters.includes(sourceFilters.Luke) && filters.includes(sourceFilters.John))) {
-      return 'All';
+      (filters.includes(this.sourceFilterMap.Matthew) && filters.includes(this.sourceFilterMap.Mark) &&
+        filters.includes(this.sourceFilterMap.Luke) && filters.includes(this.sourceFilterMap.John))) {
+      return this.content.all;
     }
 
     const items: string[] = [];
 
-    if (filters.includes(sourceFilters.Jesus)) {
+    if (filters.includes(this.sourceFilterMap.Jesus)) {
       items.push(SourceFilterKey.Jesus);
     }
 
-    if (filters.includes(sourceFilters.Matthew) && filters.includes(sourceFilters.Mark) && filters.includes(sourceFilters.Luke)) {
-      items.push('Synoptic Gospels');
+    if (filters.includes(this.sourceFilterMap.Matthew) &&
+      filters.includes(this.sourceFilterMap.Mark) &&
+      filters.includes(this.sourceFilterMap.Luke)) {
+      items.push(this.content.synopticGospels);
     } else {
-      if (filters.includes(sourceFilters.Matthew)) {
+      if (filters.includes(this.sourceFilterMap.Matthew)) {
         items.push(SourceFilterKey.Matthew);
       }
-      if (filters.includes(sourceFilters.Mark)) {
+      if (filters.includes(this.sourceFilterMap.Mark)) {
         items.push(SourceFilterKey.Mark);
       }
-      if (filters.includes(sourceFilters.Luke)) {
+      if (filters.includes(this.sourceFilterMap.Luke)) {
         items.push(SourceFilterKey.Luke);
       }
     }
 
-    if (filters.includes(sourceFilters.John)) {
+    if (filters.includes(this.sourceFilterMap.John)) {
       items.push(SourceFilterKey.John);
     }
 

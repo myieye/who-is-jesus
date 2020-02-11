@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import { VerseOrder, VerseIndexer, verseOrders } from './verse-orders';
-import { MatSelectChange, MatSelect } from '@angular/material/select';
+import { MatSelect } from '@angular/material/select';
 import { first } from 'lodash';
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-verse-order-select',
@@ -14,9 +15,13 @@ export class VerseOrderSelectComponent implements OnInit {
 
   @ViewChild(MatSelect, { static: true }) select: MatSelect;
 
-  orders = verseOrders;
+  orders: VerseOrder[];
+
+  constructor(private readonly content: ContentService) {
+  }
 
   ngOnInit(): void {
+    this.orders = verseOrders(this.content);
     this.select.value = first(this.orders);
   }
 

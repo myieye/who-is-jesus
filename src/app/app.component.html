@@ -1,12 +1,12 @@
 <h1 class="title">Who is <span class="jesus-title">Jesus?</span></h1>
 
 <div class="option-container">
-  <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</!--mat-checkbox-->
+  <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</mat-checkbox-->
   <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
   <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
 </div>
 
-<app-tag-list [tags]="tags" [multiple]="true"
+<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="true"
   (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
 
 <div class="verse-container">
@@ -14,3 +14,12 @@
     <app-verse [verse]="verse"></app-verse>
   </div>
 </div>
+
+<app-page-actions>
+  <a href="https://github.com/myieye/who-is-jesus">
+    <i class="fab fa-github"></i>
+  </a>
+  <a (click)="infoClicked()">
+    <i class="fas fa-info-circle"></i>
+  </a>
+</app-page-actions>

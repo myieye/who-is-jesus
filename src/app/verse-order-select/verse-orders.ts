@@ -1,4 +1,5 @@
-import { TaggedVerse } from '../verses';
+import { ContentService } from '../content.service';
+import { TaggedVerse } from '../models/bible';
 
 export type VerseIndexer = (verse: TaggedVerse) => number;
 
@@ -7,13 +8,13 @@ export interface VerseOrder {
     indexer: VerseIndexer;
 }
 
-export const verseOrders: VerseOrder[] = [
+export const verseOrders = (content: ContentService): VerseOrder[] => ([
     {
-        displayName: 'Standard',
+        displayName: content.standard,
         indexer: verse => verse.reference.numericReference,
     },
     {
-        displayName: 'Chronological',
+        displayName: content.chronological,
         indexer: verse => verse.reference.chronologicalIndex,
     }
-];
+]);

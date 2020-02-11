@@ -21,4 +21,8 @@
   .tag-container.stuck {
     border-bottom: 1px solid mat-color($primary, lighter);
   }
+
+  .tooltip {
+    font-size: 1em;
+  }
 }

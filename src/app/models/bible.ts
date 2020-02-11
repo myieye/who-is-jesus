@@ -1,3 +1,5 @@
+import { VerseTagKey } from './tags';
+
 export enum BibleBookKey {
     Gen = 'Gen', Ex = 'Ex', Lev = 'Lev', Num = 'Num', Deut = 'Deut', Josh = 'Josh', Judg = 'Judg',
     Ruth = 'Ruth', Sam1 = 'Sam1', Sam2 = 'Sam2', Kings1 = 'Kings1', Kings2 = 'Kings2',
@@ -26,7 +28,6 @@ export class BibleReference {
 
 export interface BibleVerse {
     reference: BibleReference;
-    text: string;
     html: string;
 }
 
@@ -37,3 +38,5 @@ export interface BibleBook {
 }
 
 export type BibleBookMap = { [key in BibleBookKey]: BibleBook};
+
+export type TaggedVerse = BibleVerse & { tags: VerseTagKey[] };

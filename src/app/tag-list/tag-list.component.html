@@ -1,10 +1,9 @@
-<div #container class="tag-container mat-app-background"
-  [class.stuck]="_isStuck"
-  [class.open]="_isOpen">
+<div #container class="tag-container mat-app-background" [class.stuck]="_isStuck" [class.open]="_isOpen">
   <mat-chip-list [multiple]="_multiple">
     <ng-container *ngFor="let tag of tags">
-      <mat-chip [value]="tag" #chip="matChip" (click)="chipClicked(chip)">
-        {{tag}}
+      <mat-chip [value]="tag" #chip="matChip"
+      (click)="chipClicked(chip)" [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
+        {{tag.name}}
       </mat-chip>
     </ng-container>
   </mat-chip-list>

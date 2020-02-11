@@ -9,8 +9,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SourceFilterComponent } from './source-filter/source-filter.component';
 import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
+import { PageActionsComponent } from './page-actions/page-actions.component';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,8 @@ import { VerseOrderSelectComponent } from './verse-order-select/verse-order-sele
     TagListComponent,
     SourceFilterComponent,
     VerseOrderSelectComponent,
+    PageActionsComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +33,8 @@ import { VerseOrderSelectComponent } from './verse-order-select/verse-order-sele
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

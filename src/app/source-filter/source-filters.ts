@@ -1,6 +1,5 @@
-import { TaggedVerse } from '../verses';
-import { BibleBook } from '../bible';
-import { bibleBooks } from '../bible-books.en';
+import { TaggedVerse, BibleBook, BibleBookMap } from '../models/bible';
+import { ContentService } from '../content.service';
 
 export type VerseFilter = (verse: TaggedVerse) => boolean;
 
@@ -23,14 +22,14 @@ export enum SourceFilterKey {
 
 export type SourceFilterMap = { [key in SourceFilterKey]: SourceFilter };
 
-export const sourceFilters: SourceFilterMap = {
+export const sourceFilters = (content: ContentService): SourceFilterMap => ({
     [SourceFilterKey.Jesus]: {
-        displayName: 'Jesus',
+        displayName: content.jesus,
         cssClass: 'jesus-words',
         filter: (verse) => verse.html.indexOf('jesus-words') > -1
     },
-    [SourceFilterKey.Matthew]: SourceFilter.forBook(bibleBooks.Matt),
-    [SourceFilterKey.Mark]: SourceFilter.forBook(bibleBooks.Mark),
-    [SourceFilterKey.Luke]: SourceFilter.forBook(bibleBooks.Luke),
-    [SourceFilterKey.John]: SourceFilter.forBook(bibleBooks.John),
-};
+    [SourceFilterKey.Matthew]: SourceFilter.forBook(content.bibleBooks.Matt),
+    [SourceFilterKey.Mark]: SourceFilter.forBook(content.bibleBooks.Mark),
+    [SourceFilterKey.Luke]: SourceFilter.forBook(content.bibleBooks.Luke),
+    [SourceFilterKey.John]: SourceFilter.forBook(content.bibleBooks.John),
+});

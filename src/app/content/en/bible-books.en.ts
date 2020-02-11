@@ -1,4 +1,5 @@
-import { BibleBookKey, BibleBookMap } from './bible';
+import { BibleBookMap, BibleBookKey } from '../../models/bible';
+
 
 export const bibleBooks: BibleBookMap = {
     [BibleBookKey.Gen]: { key: BibleBookKey.Gen, full: 'Genesis', abbr: 'Gen.' },
