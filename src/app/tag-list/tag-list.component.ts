@@ -15,7 +15,7 @@ import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
   providers: [
     {
       provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
-      useValue: { showDelay: 0, hideDelay: 0, touchendHideDelay: 3000 }
+      useValue: { showDelay: 500, hideDelay: 0, touchendHideDelay: 3000 }
     }
   ]
 })
