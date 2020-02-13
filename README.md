@@ -1,27 +1,7 @@
-# WhoIsJesus
+# Who Is Jesus?
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Everyone should know who Jesus is! This site is a streamlined tool for discovering what the Gospels have to say about Him and even what He has to say about Himself.
 
-## Development server
+## Bible Translation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+All verses are quoted from the [World English Bible](https://worldenglish.bible/) (WEB) translation. The WEB was chosen, because it both aims to be true to the original text and is in the public domain. I encourage you to read the verses in other translations as well. For that purpose I've provided links to [Bible Gateway](https://www.biblegateway.com/). By hovering over a verse (not necessary on smaller devices) you'll find a link that will show the verse in several other translations.
