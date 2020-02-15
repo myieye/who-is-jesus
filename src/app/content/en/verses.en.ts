@@ -310,9 +310,9 @@ export const verses: TaggedVerse[] = [
         tags: [ VerseTagKey.Son, VerseTagKey.Demons, VerseTagKey.Honour, VerseTagKey.Authority ],
     },
     {
-        reference: { book: bibleBooks[BibleBookKey.Mark], chapter: 5, verses: '28', numericReference: 41005028, chronologicalIndex: 81 },
-        html: 'having heard the things concerning Jesus, came up behind him in the crowd, and touched his clothes. For she said, "If I just touch his clothes, I will be made well." Immediately the fountain of her blood was dried up, and she felt in her body that she was healed of her plague.',
-        tags: [ VerseTagKey.Clean ],
+        reference: { book: bibleBooks[BibleBookKey.Mark], chapter: 5, verses: '25, 27-29', numericReference: 41005025, chronologicalIndex: 81 },
+        html: '<sup class="verse-number">25</sup>A certain woman, who had a discharge of blood for twelve years,<span class="verse-break"></span><sup class="verse-number">27</sup>having heard the things concerning Jesus, came up behind him in the crowd, and touched his clothes. <sup class="verse-number">28</sup>For she said, “If I just touch his clothes, I will be made well.” <sup class="verse-number">29</sup>Immediately the flow of her blood was dried up, and she felt in her body that she was healed of her affliction.',
+        tags: [ VerseTagKey.Clean, VerseTagKey.Faith ],
     },
     {
         reference: { book: bibleBooks[BibleBookKey.Mark], chapter: 6, verses: '50', numericReference: 41006050, chronologicalIndex: 94 },
@@ -1017,7 +1017,7 @@ export const verses: TaggedVerse[] = [
     {
         reference: { book: bibleBooks[BibleBookKey.John], chapter: 17, verses: '1-5', numericReference: 43017001, chronologicalIndex: 295 },
         html: '<sup class="verse-number">1</sup>Jesus said these things, and lifting up his eyes to heaven, he said, <span class="jesus-words">"Father, the time has come. Glorify your Son, that your Son may also glorify you; <sup class="verse-number">2</sup>even as you gave him authority over all flesh, that to all whom you have given him, he will give eternal life. <sup class="verse-number">3</sup>This is eternal life, that they should know you, the only true God, and him whom you sent, Jesus Christ. <sup class="verse-number">4</sup>I glorified you on the earth. I have accomplished the work which you have given me to do. <sup class="verse-number">5</sup>Now, Father, glorify me with your own self with the glory which I had with you before the world existed.</span>',
-        tags: [ VerseTagKey.One, VerseTagKey.Glory, VerseTagKey.Eternal, VerseTagKey.Heaven, VerseTagKey.Himself, VerseTagKey.Son ],
+        tags: [ VerseTagKey.One, VerseTagKey.Glory, VerseTagKey.Eternal, VerseTagKey.Heaven, VerseTagKey.Himself, VerseTagKey.Son, VerseTagKey.Lowly ],
     },
     {
         reference: { book: bibleBooks[BibleBookKey.John], chapter: 17, verses: '10-11', numericReference: 43017010, chronologicalIndex: 295 },
@@ -1068,5 +1068,60 @@ export const verses: TaggedVerse[] = [
         reference: { book: bibleBooks[BibleBookKey.John], chapter: 21, verses: '17-23', numericReference: 43021017, chronologicalIndex: 385 },
         html: '<sup class="verse-number">17</sup>He said to him the third time, <span class="jesus-words">"Simon, son of Jonah, do you have affection for me?"</span> Peter was grieved because he asked him the third time, "Do you have affection for me?" He said to him, "Lord, you know everything. You know that I have affection for you." Jesus said to him, <span class="jesus-words">"Feed my sheep. <sup class="verse-number">18</sup>Most assuredly I tell you, when you were young, you dressed yourself, and walked where you wanted to. But when you are old, you will stretch out your hands, and another will dress you, and carry you where you don\'t want to go."</span> <sup class="verse-number">19</sup>Now he said this, signifying by what kind of death he would glorify God. When he had said this, he said to him, <span class="jesus-words">"Follow me."</span> <sup class="verse-number">20</sup>Then Peter, turning around, saw a disciple following. This was the disciple whom Jesus sincerely loved, the one who had also leaned on Jesus\' breast at the supper and asked, "Lord, who is going to betray You?" <sup class="verse-number">21</sup>Peter seeing him, said to Jesus, "Lord, and what will this man do?" <sup class="verse-number">22</sup>Jesus said to him, <span class="jesus-words">"If I desire that he stay until I come, what is that to you? You follow me."</span> <sup class="verse-number">23</sup>This saying therefore went forth among the brothers, that this disciple wouldn\'t die. Yet Jesus didn\'t say to him that he wouldn\'t die, but, "If I desire that he stay until I come, what is that to you?"',
         tags: [ VerseTagKey.Omniscient, VerseTagKey.Shepherd, VerseTagKey.Lord, VerseTagKey.Himself ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Luke], chapter: 17, verses: '12-19', numericReference: 42017012, chronologicalIndex: 280 },
+        html: '<sup class="verse-number">12</sup>As he entered into a certain village, ten men who were lepers met him, who stood at a distance. <sup class="verse-number">13</sup>They lifted up their voices, saying, “Jesus, Master, have mercy on us!” <sup class="verse-number">14</sup>When he saw them, he said to them, <span class="jesus-words">“Go and show yourselves to the priests.”</span> As they went, they were cleansed. <sup class="verse-number">15</sup>One of them, when he saw that he was healed, turned back, glorifying God with a loud voice. <sup class="verse-number">16</sup>He fell on his face at Jesus’ feet, giving him thanks; and he was a Samaritan. <sup class="verse-number">17</sup>Jesus answered, <span class="jesus-words">“Weren’t the ten cleansed? But where are the nine? <sup class="verse-number">18</sup>Were there none found who returned to give glory to God, except this foreigner?”</span> <sup class="verse-number">19</sup>Then he said to him, <span class="jesus-words">“Get up, and go your way. Your faith has healed you.”</span>',
+        tags: [ VerseTagKey.Clean, VerseTagKey.Faith, VerseTagKey.God, VerseTagKey.Honour ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Matt], chapter: 9, verses: '20-22', numericReference: 40009020, chronologicalIndex: 81 },
+        html: '<sup class="verse-number">20</sup>Behold, a woman who had a discharge of blood for twelve years came behind him, and touched the fringe of his garment; <sup class="verse-number">21</sup>for she said within herself, “If I just touch his garment, I will be made well.” <sup class="verse-number">22</sup>But Jesus, turning around and seeing her, said, <span class="jesus-words">“Daughter, cheer up! Your faith has made you well.”</span> And the woman was made well from that hour.',
+        tags: [ VerseTagKey.Clean, VerseTagKey.Faith ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Luke], chapter: 8, verses: '43-44', numericReference: 42008043, chronologicalIndex: 81 },
+        html: '<sup class="verse-number">43</sup>A woman who had a flow of blood for twelve years, who had spent all her living on physicians and could not be healed by any <sup class="verse-number">44</sup>came behind him, and touched the fringe of his cloak. Immediately the flow of her blood stopped.',
+        tags: [  ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Luke], chapter: 11, verses: '31-32', numericReference: 42011031, chronologicalIndex: 164 },
+        html: '<span class="jesus-words"><sup class="verse-number">31</sup>The Queen of the South will rise up in the judgment with the men of this generation, and will condemn them: for she came from the ends of the earth to hear the wisdom of Solomon; and behold, one greater than Solomon is here. <sup class="verse-number">32</sup>The men of Nineveh will stand up in the judgment with this generation, and will condemn it: for they repented at the preaching of Jonah, and behold, one greater than Jonah is here.</span>',
+        tags: [ VerseTagKey.Greater, VerseTagKey.Himself ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.John], chapter: 14, verses: '28', numericReference: 43014028, chronologicalIndex: 292 },
+        html: '<span class="jesus-words"><sup class="verse-number">28</sup>You heard how I told you, ‘I go away, and I come to you.’ If you loved me, you would have rejoiced, because I said ‘I am going to my Father;’ for the Father is greater than I.</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Mark], chapter: 10, verses: '17-18', numericReference: 41010017, chronologicalIndex: 222 },
+        html: '<sup class="verse-number">17</sup>As he was going out into the way, one ran to him, knelt before him, and asked him, “Good Teacher, what shall I do that I may inherit eternal life?” <sup class="verse-number">18</sup>Jesus said to him, <span class="jesus-words">“Why do you call me good? No one is good except one—God.</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Luke], chapter: 18, verses: '18-19', numericReference: 42018018, chronologicalIndex: 222 },
+        html: '<sup class="verse-number">18</sup>A certain ruler asked him, saying, “Good Teacher, what shall I do to inherit eternal life?” <sup class="verse-number">19</sup>Jesus asked him, <span class="jesus-words">“Why do you call me good? No one is good, except one: God.</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Matt], chapter: 19, verses: '16-17', numericReference: 40019016, chronologicalIndex: 222 },
+        html: '<sup class="verse-number">16</sup>Behold, one came to him and said, “Good teacher, what good thing shall I do, that I may have eternal life?” <sup class="verse-number">17</sup>He said to him, <span class="jesus-words">“Why do you call me good? No one is good but one, that is, God. But if you want to enter into life, keep the commandments.”</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Mark], chapter: 13, verses: '32', numericReference: 41013032, chronologicalIndex: 267 },
+        html: '<span class="jesus-words"><sup class="verse-number">32</sup>But of that day or that hour no one knows, not even the angels in heaven, nor the Son, but only the Father.</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.Matt], chapter: 24, verses: '36', numericReference: 40024036, chronologicalIndex: 267 },
+        html: '<span class="jesus-words"><sup class="verse-number">36</sup>“But no one knows of that day and hour, not even the angels of heaven, but my Father only.</span>',
+        tags: [ VerseTagKey.Lowly ],
+    },
+    {
+        reference: { book: bibleBooks[BibleBookKey.John], chapter: 12, verses: '41', numericReference: 43012041, chronologicalIndex: 274 },
+        html: '<sup class="verse-number">41</sup>Isaiah said these things when he saw his glory, and spoke of him.',
+        tags: [ VerseTagKey.God, VerseTagKey.YHWH ],
     },
 ];
