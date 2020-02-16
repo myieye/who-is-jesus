@@ -6,6 +6,11 @@ import { MatChip, MatChipList } from '@angular/material/chips';
 import { VerseTagKey, VerseTag } from '../models/tags';
 import { isNil } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { skip, take } from 'rxjs/operators';
+import { QueryParamServiceService } from '../services/query-param-service.service';
+
+const TAG_PARAM = 'tags';
 
 @Component({
   selector: 'app-tag-list',
@@ -78,7 +83,14 @@ export class TagListComponent {
     return this.container.nativeElement.offsetTop;
   }
 
-  constructor(private readonly renderer: Renderer2, private readonly ref: ChangeDetectorRef) {
+  constructor(
+    private readonly paramService: QueryParamServiceService) {
+    this.paramService.loadParams(TAG_PARAM, tags => {
+      this.chipList.chips
+        .filter(chip => tags.includes(chip.value.key))
+        .forEach(chip => chip.select());
+      this.selectedTagsChanged(false);
+    });
   }
 
   chipClicked(chip: MatChip) {
@@ -89,7 +101,7 @@ export class TagListComponent {
     chip.toggleSelected(true);
     this.cachedChipSelection = this.selectedChips;
     this._hasSelectedTags = this.cachedChipSelection.length > 0;
-    this.selectedTagsChange.emit(this.selectedTags);
+    this.selectedTagsChanged();
 
     const wasStuck = this._isStuck;
     this.updateStickiness(this._hasSelectedTags);
@@ -116,12 +128,12 @@ export class TagListComponent {
         .filter(chip => chip !== this.lastSelectedChip)
         .forEach(chip => chip.deselect());
     }
-    this.selectedTagsChange.emit(this.selectedTags);
+    this.selectedTagsChanged();
   }
 
   private restoreCachedSelection() {
     this.cachedChipSelection?.forEach(chip => chip.select());
-    this.selectedTagsChange.emit(this.selectedTags);
+    this.selectedTagsChanged();
   }
 
   private updateStickiness(stickableIfAbove = false): void {
@@ -142,5 +154,12 @@ export class TagListComponent {
     const scrollHeight = window.document.body.scrollHeight;
     const remainingScroll = scrollHeight - currScrollBottom;
     return remainingScroll > height;
+  }
+
+  private selectedTagsChanged(saveToUrl = true): void {
+    const selectedTags = this.selectedTags;
+    this.selectedTagsChange.emit(selectedTags);
+
+    this.paramService.saveParam(TAG_PARAM, selectedTags, saveToUrl);
   }
 }

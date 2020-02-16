@@ -4,6 +4,7 @@ import { sourceFilters, SourceFilter, VerseFilter, SourceFilterMap, SourceFilter
 import { isNil } from 'lodash';
 import { ContentService } from '../content.service';
 import { skip, take } from 'rxjs/operators';
+import { QueryParamServiceService } from '../services/query-param-service.service';
 
 const FILTER_PARAM = 'filter';
 
@@ -23,16 +24,15 @@ export class SourceFilterComponent {
   jesus: string;
 
   constructor(private readonly content: ContentService,
-              private readonly router: Router) {
+              private readonly paramService: QueryParamServiceService) {
     this.sourceFilterMap = sourceFilters(content);
     this.filters = Object.values(this.sourceFilterMap);
     this.jesus = content.jesus;
 
-    this.router.routerState.root.queryParamMap.pipe(skip(1), take(1))
-      .subscribe(params => {
-        this.selectedFilters = params.getAll(FILTER_PARAM).map(key => this.sourceFilterMap[key]);
-        this.filterSelectionChanged(this.selectedFilters);
-      });
+    paramService.loadParams(FILTER_PARAM, (filters) => {
+      this.selectedFilters = filters.map(key => this.sourceFilterMap[key]);
+      this.filterSelectionChanged(this.selectedFilters, false);
+    });
   }
 
   getSelectedSources(filters?: SourceFilter[] | undefined): string[] {
@@ -61,16 +61,15 @@ export class SourceFilterComponent {
     return items;
   }
 
-  filterSelectionChanged(filters: SourceFilter[]): void {
+  filterSelectionChanged(filters: SourceFilter[], saveToUrl = true): void {
     const verseFilters = filters.map(sourceFilter => sourceFilter.filter);
+
     this.filterChange.emit({
       filters: verseFilters,
       all: this.isAllFilters(filters),
     });
 
-    this.router.navigate([''], {
-      queryParams: { [FILTER_PARAM]: filters.map(sourceFilter => sourceFilter.key) }
-    });
+    this.paramService.saveParam(FILTER_PARAM, filters.map(sourceFilter => sourceFilter.key, saveToUrl));
   }
 
   private isAllFilters(filters: SourceFilter[]): boolean {
