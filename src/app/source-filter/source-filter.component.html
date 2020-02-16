@@ -1,6 +1,6 @@
 <mat-form-field class="verse-filter" floatLabel="always">
-    <mat-label>Sources</mat-label>
-    <mat-select #select multiple disableOptionCentering (selectionChange)="filterSelectionChanged($event.value)"
+    <mat-label i18n>Sources</mat-label>
+    <mat-select #select multiple disableOptionCentering [(value)]="selectedFilters" (selectionChange)="filterSelectionChanged($event.value)"
         placeholder="All">
         <mat-select-trigger>
             <ng-container *ngFor="let source of getSelectedSources(select.value); let last = last">

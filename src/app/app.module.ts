@@ -15,6 +15,7 @@ import { SourceFilterComponent } from './source-filter/source-filter.component';
 import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
 import { PageActionsComponent } from './page-actions/page-actions.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     MatSelectModule,
     MatDialogModule,
     MatTooltipModule,
+    RouterModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]

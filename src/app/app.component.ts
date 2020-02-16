@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { flatMap, union, difference, intersection, sortBy, orderBy } from 'lodash';
-import { VerseFilter } from './source-filter';
+import { VerseFilter, SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   activeTags: VerseTagKey[];
 
   private selectedTags: VerseTagKey[] = [];
-  private verseFilters: VerseFilter[] = [];
+  private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
 
   constructor(private readonly content: ContentService,
@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.verses = this.content.verses;
     this.tags = this.getVerseTagSet(this.content.verses);
-    //this.activeTags = this.tags.map((tag) => tag.key);
   }
 
   selectedTagsChanged(selectedTags: VerseTagKey[]) {
@@ -38,8 +37,8 @@ export class AppComponent implements OnInit {
     this.refreshVerses();
   }
 
-  sourceFilterChanged(filters: VerseFilter[]): void {
-    this.verseFilters = filters;
+  sourceFilterChanged(filtersChange: SourceFilterChangeEvent): void {
+    this.verseFilters = filtersChange;
     this.refreshVerses();
   }
 
@@ -51,8 +50,8 @@ export class AppComponent implements OnInit {
   private refreshVerses(): void {
     this.verses = this.content.verses;
 
-    if (this.verseFilters.length) {
-      this.verses = this.verses.filter(verse => this.verseFilters.some(filter => filter(verse)));
+    if (!this.verseFilters.all) {
+      this.verses = this.verses.filter(verse => this.verseFilters.filters.some(filter => filter(verse)));
     }
 
     this.activeTags = this.getVerseTagKeySet(this.verses);

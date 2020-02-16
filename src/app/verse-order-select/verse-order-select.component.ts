@@ -23,6 +23,7 @@ export class VerseOrderSelectComponent implements OnInit {
   ngOnInit(): void {
     this.orders = verseOrders(this.content);
     this.select.value = first(this.orders);
+    this.orderSelectionChanged(this.select.value);
   }
 
   orderSelectionChanged(verseOrder: VerseOrder): void {
