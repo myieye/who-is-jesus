@@ -17,6 +17,7 @@
     "@angular/compiler": "~9.0.0-rc.10",
     "@angular/core": "~9.0.0-rc.10",
     "@angular/forms": "~9.0.0-rc.10",
+    "@angular/localize": "^9.0.1",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~9.0.0-rc.10",
     "@angular/platform-browser-dynamic": "~9.0.0-rc.10",
