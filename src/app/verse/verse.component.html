@@ -15,5 +15,12 @@
             </a>
         </span>
     </div>
-    <div class="text" [innerHTML]="verse.html.replace('---', '&#8230;')"></div>
+    <div>
+        <div class="verse-tags" [class.hidden]="!debugTags">
+            <span *ngFor="let tag of tags; let last = last">
+                {{tag}}<ng-container *ngIf="!last">, </ng-container>
+            </span>
+        </div>
+        <div class="text" [innerHTML]="verse.html.replace('---', '&#8230;')"></div>
+    </div>
 </div>
