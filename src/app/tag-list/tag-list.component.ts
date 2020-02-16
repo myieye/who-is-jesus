@@ -40,7 +40,7 @@ export class TagListComponent {
   set activeTags(activeTags: VerseTagKey[]) {
     this._activeTags = activeTags || [];
 
-    if (isNil(activeTags) || activeTags.length === 0 || activeTags.length === this.tags.length) {
+    if (isNil(this.chipList) || isNil(this.chipList.chips)) {
       return;
     }
 
@@ -106,7 +106,6 @@ export class TagListComponent {
   }
 
   isDisabled(tag: VerseTag): boolean {
-    console.log(!(this.activeTags.length === 0 || this.activeTags.includes(tag.key)));
     return !(this.activeTags.length === 0 || this.activeTags.includes(tag.key));
   }
 
