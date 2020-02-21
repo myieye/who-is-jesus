@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Angular Github Actions
-      uses: mayur-rawte/github-angular-actions@latest
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1 #this installs node and npm for us
+      with:
+        node-version: '13.x'
+
     - name: Deploy
       run: ng deploy
