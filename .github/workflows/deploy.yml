@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Angular Github Actions
+      uses: mayur-rawte/github-angular-actions@latest
+    - uses: actions/checkout@v2
+    - name: Deploy
+      run: ng deploy
