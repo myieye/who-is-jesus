@@ -35,8 +35,12 @@ $theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
 
 body {
   margin: 0;
-  //font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  &, & [class*="mat-"] {
+    font-family: Montserrat, "Helvetica Neue", sans-serif;
+  }
 }
 
 app-root,

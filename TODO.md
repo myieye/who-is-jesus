@@ -11,11 +11,10 @@
 
 ## Ideas/Backlog
 
-- [Design(1)] Try font: Montserrat
 - [Function(2)] Show tag w/ description by tag group
 - [Function(5)] Show in context (load over API without red-letter)
 - [Option(1)] Tag selection [single/multiple = single]
-- [Option(2)] Group by tag [on/off = on]
+- [Option(2)] Group by tag [on/off = on] (or off, if putting all active tags at the top looks ok)
 - [Option(3)] Group parallels [on/off = off]
 - [Option(3)] Choose Bible Gateway translations (Max 3)
 - [Option(2)] Show verse tags [on/off = off]
@@ -25,6 +24,7 @@
 
 
 ## Done
+- [Design(1)] Change font to: Montserrat
 - Save source-filter, verse-order and selected-tags in URL
 - Add tag descriptions on hover
 - Add info dialog with about, translation and chronological soring info
