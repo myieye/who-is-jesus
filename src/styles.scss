@@ -60,3 +60,7 @@ app-tag-list.stuck + * {
 .hidden {
   display: none;
 }
+
+html[class*=loading] .loader-bg {
+ opacity: 1 !important;
+}
