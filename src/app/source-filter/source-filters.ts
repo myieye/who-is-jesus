@@ -1,5 +1,5 @@
 import { TaggedVerse, BibleBook, BibleBookMap } from '../models/bible';
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 
 export type VerseFilter = (verse: TaggedVerse) => boolean;
 

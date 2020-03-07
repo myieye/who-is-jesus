@@ -1,4 +1,4 @@
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 import { TaggedVerse } from '../models/bible';
 
 export type VerseIndexer = (verse: TaggedVerse) => number;

@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { flatMap, union, difference, intersection, sortBy, orderBy } from 'lodash';
-import { VerseFilter, SourceFilterChangeEvent } from './source-filter';
+import { flatMap, union, difference, intersection, sortBy, isNil } from 'lodash';
+import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { VerseTag, offLimits, VerseTagKey } from './models/tags';
 import { TaggedVerse } from './models/bible';
-import { ContentService } from './content.service';
+import { ContentService } from './services/content.service';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +22,15 @@ export class AppComponent implements OnInit {
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
 
-  constructor(private readonly content: ContentService,
-              private readonly dialog: MatDialog,
-              private readonly ref: ChangeDetectorRef) {
+  constructor(
+    readonly content: ContentService,
+    private readonly dialog: MatDialog,
+    private readonly ref: ChangeDetectorRef,
+  ) {
+    this.verses = this.content.verses;
   }
 
   ngOnInit(): void {
-    this.verses = this.content.verses;
     this.tags = this.getVerseTagSet(this.content.verses);
   }
 
@@ -68,7 +70,9 @@ export class AppComponent implements OnInit {
   }
 
   infoClicked(): void {
-    const dialogRef = this.dialog.open(InfoDialogComponent, {});
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      data: this.content,
+    });
   }
 
   getVerseTagSet(verses: TaggedVerse[]): VerseTag[] {

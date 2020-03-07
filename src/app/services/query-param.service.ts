@@ -7,7 +7,7 @@ import { isNil } from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class QueryParamServiceService {
+export class QueryParamService {
 
   constructor(
     private readonly router: Router,
@@ -33,17 +33,13 @@ export class QueryParamServiceService {
   }
 
   saveParam(key: string, value: string | string[], save = true): void {
-    if (save && this.router.routerState.snapshot.url) {
-      this.router.navigate([''], {
-        queryParams: { [key]: value },
-        queryParamsHandling: 'merge',
-      });
-    }
+    this.router.navigate([], {
+      queryParams: { [key]: value },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private getParam(getter: (value: ParamMap) => void): void {
-    this.router.routerState.root.queryParamMap
-      .pipe(skip(1), takeUntil(timer(1500)), take(1))
-      .subscribe(getter);
+    getter(this.route.snapshot.queryParamMap);
   }
 }

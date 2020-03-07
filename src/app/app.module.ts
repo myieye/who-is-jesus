@@ -15,17 +15,27 @@ import { SourceFilterComponent } from './source-filter/source-filter.component';
 import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
 import { PageActionsComponent } from './page-actions/page-actions.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { AppRouterComponent } from './app-router.component';
+import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LanguagePickerComponent } from './language-picker/language-picker.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppRouterComponent,
     VerseComponent,
     TagListComponent,
     SourceFilterComponent,
     VerseOrderSelectComponent,
     PageActionsComponent,
     InfoDialogComponent,
+    AppWrapperComponent,
+    LanguagePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +46,13 @@ import { RouterModule } from '@angular/router';
     MatSelectModule,
     MatDialogModule,
     MatTooltipModule,
-    RouterModule.forRoot([]),
+    AppRoutingModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppRouterComponent],
 })
 export class AppModule { }

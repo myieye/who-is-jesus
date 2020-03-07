@@ -1,5 +1,5 @@
 <mat-form-field class="verse-order-select">
-    <mat-label>Order</mat-label>
+    <mat-label i18n>{{content.order}}</mat-label>
     <mat-select (selectionChange)="orderSelectionChanged($event.value)">
         <mat-option *ngFor="let order of orders; first as first" [value]="order">
             {{order.displayName}}

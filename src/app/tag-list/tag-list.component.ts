@@ -1,14 +1,20 @@
 import {
-  Component, Input,
-  Output, EventEmitter, ElementRef, ViewChild, HostListener, ChangeDetectionStrategy, HostBinding, Renderer2, ChangeDetectorRef
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  HostListener,
+  ChangeDetectionStrategy,
+  HostBinding,
+  AfterViewInit,
 } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
 import { VerseTagKey, VerseTag } from '../models/tags';
 import { isNil } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
-import { skip, take } from 'rxjs/operators';
-import { QueryParamServiceService } from '../services/query-param-service.service';
+import { QueryParamService } from '../services/query-param.service';
 
 const TAG_PARAM = 'tags';
 
@@ -24,7 +30,7 @@ const TAG_PARAM = 'tags';
     }
   ]
 })
-export class TagListComponent {
+export class TagListComponent implements AfterViewInit {
 
   @Input() set multiple(multiple: boolean) {
     if (this._multiple !== multiple) {
@@ -84,7 +90,10 @@ export class TagListComponent {
   }
 
   constructor(
-    private readonly paramService: QueryParamServiceService) {
+    private readonly paramService: QueryParamService) {
+  }
+
+  ngAfterViewInit(): void {
     this.paramService.loadParams(TAG_PARAM, tags => {
       this.chipList.chips
         .filter(chip => tags.includes(chip.value.key))
@@ -132,8 +141,10 @@ export class TagListComponent {
   }
 
   private restoreCachedSelection() {
-    this.cachedChipSelection?.forEach(chip => chip.select());
-    this.selectedTagsChanged();
+    if (!isNil(this.cachedChipSelection) && this.cachedChipSelection.length) {
+      this.cachedChipSelection?.forEach(chip => chip.select());
+      this.selectedTagsChanged();
+    }
   }
 
   private updateStickiness(stickableIfAbove = false): void {

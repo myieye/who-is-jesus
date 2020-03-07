@@ -1,0 +1,18 @@
+:host {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    margin: 8px;
+
+    text-align: center;
+}
+
+.trigger {
+    z-index: 10;
+}
+
+.icon {
+    position: relative;
+    top: -17px;
+}

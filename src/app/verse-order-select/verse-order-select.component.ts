@@ -2,11 +2,11 @@ import { Component, Output, EventEmitter, ViewChild, OnInit } from '@angular/cor
 import { VerseOrder, VerseIndexer, verseOrders } from './verse-orders';
 import { MatSelect } from '@angular/material/select';
 import { first, isNil } from 'lodash';
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 import { Router } from '@angular/router';
 import { skip, take, takeUntil } from 'rxjs/operators';
 import { timer } from 'rxjs';
-import { QueryParamServiceService } from '../services/query-param-service.service';
+import { QueryParamService } from '../services/query-param.service';
 
 const ORDER_PARAM = 'order';
 
@@ -24,15 +24,15 @@ export class VerseOrderSelectComponent implements OnInit {
   orders: VerseOrder[];
 
   constructor(
-    private readonly content: ContentService,
-    private readonly paramService: QueryParamServiceService) {
-    paramService.loadParam(ORDER_PARAM, (order) => {
-      this.setOrder(this.orders.find(o => o.key === order));
-    });
+    readonly content: ContentService,
+    private readonly paramService: QueryParamService) {
   }
 
   ngOnInit(): void {
     this.orders = verseOrders(this.content);
+    this.paramService.loadParam(ORDER_PARAM, (order) => {
+      this.setOrder(this.orders.find(o => o.key === order));
+    });
     if (isNil(this.select.value)) {
       this.setOrder(first(this.orders));
     }

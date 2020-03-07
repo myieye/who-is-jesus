@@ -1,10 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { sourceFilters, SourceFilter, VerseFilter, SourceFilterMap, SourceFilterChangeEvent } from './source-filters';
 import { isNil } from 'lodash';
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 import { skip, take } from 'rxjs/operators';
-import { QueryParamServiceService } from '../services/query-param-service.service';
+import { QueryParamService } from '../services/query-param.service';
 
 const FILTER_PARAM = 'filter';
 
@@ -13,7 +13,7 @@ const FILTER_PARAM = 'filter';
   templateUrl: './source-filter.component.html',
   styleUrls: ['./source-filter.component.scss']
 })
-export class SourceFilterComponent {
+export class SourceFilterComponent implements OnInit {
 
   @Output() readonly filterChange = new EventEmitter<SourceFilterChangeEvent>();
 
@@ -23,13 +23,15 @@ export class SourceFilterComponent {
   filters: SourceFilter[];
   jesus: string;
 
-  constructor(private readonly content: ContentService,
-              private readonly paramService: QueryParamServiceService) {
+  constructor(readonly content: ContentService,
+              private readonly paramService: QueryParamService) {
     this.sourceFilterMap = sourceFilters(content);
     this.filters = Object.values(this.sourceFilterMap);
     this.jesus = content.jesus;
+  }
 
-    paramService.loadParams(FILTER_PARAM, (filters) => {
+  ngOnInit(): void {
+    this.paramService.loadParams(FILTER_PARAM, (filters) => {
       this.selectedFilters = filters.map(key => this.sourceFilterMap[key]);
       this.filterSelectionChanged(this.selectedFilters, false);
     });

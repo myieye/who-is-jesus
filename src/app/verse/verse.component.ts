@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { BibleReference, TaggedVerse } from '../models/bible';
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
 
 @Component({

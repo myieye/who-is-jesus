@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ContentService } from '../services/content.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-info-dialog',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) readonly content: ContentService,
+  ) {
+  }
 
   ngOnInit() {
   }
