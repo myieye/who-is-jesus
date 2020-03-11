@@ -98,6 +98,7 @@ export class TagListComponent implements AfterViewInit {
       this.chipList.chips
         .filter(chip => tags.includes(chip.value.key))
         .forEach(chip => chip.select());
+      this._hasSelectedTags = tags.length > 0;
       this.selectedTagsChanged(false);
     });
   }
