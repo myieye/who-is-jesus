@@ -5,7 +5,8 @@ export enum OptionKey { MultiTags = 'MultiTags' }
 export interface Option {
     key: OptionKey;
     displayName: string;
-    displayNameShort?: string;
+    selectedText?: string;
+    deselectedText?: string;
     default?: boolean;
 }
 
@@ -15,6 +16,7 @@ export const options = (content: ContentService): Option[] => ([
     {
         key: OptionKey.MultiTags,
         displayName: content.multipleTagSelection,
-        displayNameShort: content.multipleTags,
+        selectedText: content.multipleTags,
+        deselectedText: content.singleTag,
     },
 ]);

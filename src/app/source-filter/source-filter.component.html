@@ -5,7 +5,7 @@
         <mat-select-trigger>
             <ng-container *ngFor="let source of getSelectedSources(select.value); let last = last">
                 <span [class.jesus-words]="source === jesus">{{source}}</span>
-                <ng-container *ngIf="!last">, </ng-container>
+                <ng-container *ngIf="!last">,&nbsp;</ng-container>
             </ng-container>
         </mat-select-trigger>
         <mat-option *ngFor="let filter of filters" [value]="filter" class="{{filter.cssClass}}">{{filter.displayName}}
