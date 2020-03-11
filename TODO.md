@@ -14,7 +14,6 @@
 - [Function(2)] Show tag w/ description by tag group
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(4)] Simplify/Group tags for better overview
-- [Option(2)] Group by tag [on/off = on] (or off, if putting all active tags at the top looks ok)
 - [Option(3)] Group parallels [on/off = off]
 - [Option(3)] Choose Bible Gateway translations (Max 3)
 - [Option(2)] Show verse tags [on/off = off]
@@ -25,6 +24,9 @@
 
 
 ## Done
+- [Option(2)] Group by tag [on/off = on] (or off, if putting all active tags at the top looks ok)
+    - Add Option
+    - Implement grouping
 - [Option(1)] Tag selection [single/multiple = single]
     - Add options list/component
     - Add option

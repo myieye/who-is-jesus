@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OptionsListComponent } from './options-list/options-list.component';
+import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tagged-verse-group-header.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { OptionsListComponent } from './options-list/options-list.component';
     AppWrapperComponent,
     LanguagePickerComponent,
     OptionsListComponent,
+    TaggedVerseGroupHeaderComponent,
   ],
   imports: [
     BrowserModule,

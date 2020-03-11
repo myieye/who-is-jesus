@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { flatMap, union, difference, intersection, sortBy, isNil } from 'lodash';
 import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
@@ -13,12 +13,14 @@ import { OptionsSelection, OptionKey } from './options-list/options';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
 
   readonly options = OptionKey;
 
   verses: TaggedVerse[];
+  verseGroups: { tag: VerseTag, verses: TaggedVerse[] }[];
   tags: VerseTag[];
   activeTags: VerseTagKey[];
   optionsSelection: OptionsSelection = {};
@@ -26,6 +28,10 @@ export class AppComponent implements OnInit {
   private selectedTags: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
+
+  get groupByTag(): boolean {
+    return this.optionsSelection.GroupByTag && this.selectedTags.length > 0;
+  }
 
   constructor(
     readonly content: ContentService,
@@ -52,12 +58,19 @@ export class AppComponent implements OnInit {
   verseOrderChanged(indexer: VerseIndexer): void {
     if (this.verseIndexer !== indexer) {
       this.verseIndexer = indexer;
-      this.sortVerses();
+      if (this.groupByTag) {
+        // Instead of sorting each group just do a full refresh
+        this.refreshVerses();
+      } else {
+        // Slightly more performant than a full refresh
+        this.sortVerses();
+      }
     }
   }
 
   selectedOptionsChanged(optionsSelection: OptionsSelection): void {
     this.optionsSelection = optionsSelection;
+    this.refreshVerses();
   }
 
   private refreshVerses(): void {
@@ -75,7 +88,14 @@ export class AppComponent implements OnInit {
 
     this.sortVerses();
 
-    this.ref.detectChanges();
+    if (this.groupByTag) {
+      this.verseGroups = this.selectedTags.map((tag) => ({
+        tag: this.content.tags[tag],
+        verses: this.verses.filter((verse) => verse.tags.includes(tag)),
+      }));
+    }
+
+    this.ref.markForCheck();
   }
 
   infoClicked(): void {
@@ -97,7 +117,9 @@ export class AppComponent implements OnInit {
 
   private sortVerses(): void {
     if (this.verseIndexer) {
+      console.log('sorting');
       this.verses = sortBy(this.verses, this.verseIndexer);
+      this.ref.markForCheck();
     }
   }
 }

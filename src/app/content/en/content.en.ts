@@ -23,6 +23,7 @@ export const CONTENT: Content = {
     multipleTagSelection: 'Multiple tag selection',
     multipleTags: 'Multiple tags',
     singleTag: 'Single tag',
+    groupByTag: 'Group by tag',
     verses,
     bibleBooks,
     tags,

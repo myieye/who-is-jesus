@@ -1,6 +1,6 @@
 import { ContentService } from '../services/content.service';
 
-export enum OptionKey { MultiTags = 'MultiTags' }
+export enum OptionKey { MultiTags = 'MultiTags', GroupByTag = 'GroupByTag' }
 
 export interface Option {
     key: OptionKey;
@@ -18,5 +18,11 @@ export const options = (content: ContentService): Option[] => ([
         displayName: content.multipleTagSelection,
         selectedText: content.multipleTags,
         deselectedText: content.singleTag,
+    },
+    {
+        key: OptionKey.GroupByTag,
+        displayName: content.groupByTag,
+        selectedText: content.groupByTag,
+        default: true,
     },
 ]);

@@ -1,0 +1,21 @@
+// Import library functions for theme creation.
+@import "~@angular/material/theming";
+@import "../../vars.scss";
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin wij-tagged-verse-group-header-theme($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+
+  app-tagged-verse-group-header {
+
+    border-bottom: 1px solid mat-color($primary, lighter);
+
+    .mat-chip.mat-standard-chip {
+      color: mat-color($primary);
+      border: 1px solid mat-color($primary);
+      font-weight: 600;
+    }
+  }
+}
