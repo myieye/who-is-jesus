@@ -50,8 +50,10 @@ export class AppComponent implements OnInit {
   }
 
   verseOrderChanged(indexer: VerseIndexer): void {
-    this.verseIndexer = indexer;
-    this.refreshVerses();
+    if (this.verseIndexer !== indexer) {
+      this.verseIndexer = indexer;
+      this.sortVerses();
+    }
   }
 
   selectedOptionsChanged(optionsSelection: OptionsSelection): void {
@@ -71,9 +73,7 @@ export class AppComponent implements OnInit {
       this.verses = this.verses.filter(verse => intersection(verse.tags, this.selectedTags).length);
     }
 
-    if (this.verseIndexer) {
-      this.verses = sortBy(this.verses, this.verseIndexer);
-    }
+    this.sortVerses();
 
     this.ref.detectChanges();
   }
@@ -93,5 +93,11 @@ export class AppComponent implements OnInit {
 
   getVerseTagKeySet(verses: TaggedVerse[]): VerseTagKey[] {
     return difference(union(flatMap(verses, v => v.tags)), offLimits);
+  }
+
+  private sortVerses(): void {
+    if (this.verseIndexer) {
+      this.verses = sortBy(this.verses, this.verseIndexer);
+    }
   }
 }
