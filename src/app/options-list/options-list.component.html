@@ -1,0 +1,8 @@
+<mat-form-field class="options-list" floatLabel="always">
+    <mat-label i18n>{{content.options}}</mat-label>
+    <mat-select #select multiple disableOptionCentering [(value)]="selectedOptions"
+        (selectionChange)="optionsChanged($event.value)">
+        <mat-option *ngFor="let option of options" [value]="option">{{option.displayNameShort || option.displayName}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

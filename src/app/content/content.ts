@@ -16,6 +16,10 @@ export class ContentTemplate {
     infoAbout = '';
     infoBibleTranslation = '';
     infoChronology = '';
+    options = '';
+    multipleTagSelection = '';
+    multipleTags = '';
+    singleTag = '';
     verses: TaggedVerse[] = [];
     bibleBooks: BibleBookMap = {} as BibleBookMap;
     tags: VerseTagMap = {} as VerseTagMap;

@@ -6,9 +6,10 @@
   <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</mat-checkbox-->
   <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
   <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
+  <app-options-list (optionsChange)="selectedOptionsChanged($event)"></app-options-list>
 </div>
 
-<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="true"
+<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
   (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
 
 <div class="verse-container">

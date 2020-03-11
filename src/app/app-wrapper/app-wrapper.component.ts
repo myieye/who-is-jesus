@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
 import { LanguageService } from '../services/language.service';
 import { ContentService } from '../services/content.service';
+import { DebugSettings } from '../../debug-settings';
 
 @Component({
   selector: 'app-wrapper',
@@ -50,7 +51,7 @@ export class AppWrapperComponent {
         this.ref.detectChanges();
         this.loading = false;
 
-        if (!environment.production) {
+        if (DebugSettings.reloadNotification) {
           console.log('Reloaded with params:', paramMap);
           this.snackBar.open('Reloaded', undefined, { duration: 3000 });
         }

@@ -7,6 +7,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { VerseTag, offLimits, VerseTagKey } from './models/tags';
 import { TaggedVerse } from './models/bible';
 import { ContentService } from './services/content.service';
+import { OptionsSelection, OptionKey } from './options-list/options';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,13 @@ import { ContentService } from './services/content.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+
+  readonly options = OptionKey;
+
   verses: TaggedVerse[];
   tags: VerseTag[];
   activeTags: VerseTagKey[];
+  optionsSelection: OptionsSelection = {};
 
   private selectedTags: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
@@ -47,6 +52,10 @@ export class AppComponent implements OnInit {
   verseOrderChanged(indexer: VerseIndexer): void {
     this.verseIndexer = indexer;
     this.refreshVerses();
+  }
+
+  selectedOptionsChanged(optionsSelection: OptionsSelection): void {
+    this.optionsSelection = optionsSelection;
   }
 
   private refreshVerses(): void {

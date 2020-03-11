@@ -23,6 +23,7 @@ import { LanguagePickerComponent } from './language-picker/language-picker.compo
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OptionsListComponent } from './options-list/options-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     InfoDialogComponent,
     AppWrapperComponent,
     LanguagePickerComponent,
+    OptionsListComponent,
   ],
   imports: [
     BrowserModule,
