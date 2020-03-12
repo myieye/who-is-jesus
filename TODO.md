@@ -10,7 +10,7 @@
     - Add German Bible translation
 
 ## Ideas/Backlog
-
+- [Design(2)] Try max-width: 850px and justify-items: center for tag list
 - [Function(2)] Show tag w/ description by tag group
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(4)] Simplify/Group tags for better overview
@@ -24,6 +24,7 @@
 
 
 ## Done
+- [i18n(1)] Choose best available language for user
 - [Option(2)] Group by tag [on/off = on] (or off, if putting all active tags at the top looks ok)
     - Add Option
     - Implement grouping
