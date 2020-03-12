@@ -6,8 +6,6 @@
 }
 
 .reference {
-  min-width: 130px;
-  max-width: 130px;
   margin-right: 10px;
   display: flex;
   color: darkslategray;
@@ -41,6 +39,11 @@
 }
 
 @media only screen and ($big-screen) {
+  .text {
+    width: 600px;
+    max-width: 65vw;
+  }
+
   .actions {
     visibility: hidden;
   }
@@ -48,12 +51,15 @@
   .verse:hover .actions {
     visibility: visible;
   }
-}
 
+  .reference {
+    width: 25vw;
+    justify-content: flex-end;
+  }
+}
 
 .actions {
   height: 1em;
-  margin-left: auto;
   position: relative;
   top: 2px;
 
