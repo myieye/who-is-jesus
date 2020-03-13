@@ -5,6 +5,7 @@ import { QueryParamService } from '../services/query-param.service';
 import { reduce, isNil } from 'lodash';
 
 const OPTIONS_PARAM = 'options';
+const KEY_VALUE_SEP = ':';
 
 @Component({
   selector: 'app-options-list',
@@ -30,8 +31,15 @@ export class OptionsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.paramService.loadParams(OPTIONS_PARAM, (options) =>
-      this.selectedOptions = options.map(key => this.options.find(option => option.key === key)));
+    this.paramService.loadParams(OPTIONS_PARAM, (urlOptions) => {
+      urlOptions.forEach((urlOption) => {
+        const [key, value] = urlOption.split(KEY_VALUE_SEP);
+        urlOptions[key] = value === 'true';
+      });
+
+      this.selectedOptions = this.options.filter((option) =>
+        isNil(urlOptions[option.key]) ? option.default : urlOptions[option.key]);
+    });
 
     this.optionsChanged(this.selectedOptions, false);
   }
@@ -44,7 +52,11 @@ export class OptionsListComponent implements OnInit {
 
     this.optionsChange.emit(selection);
 
-    this.paramService.saveParam(OPTIONS_PARAM, options.map(option => option.key), saveToUrl);
+    const urlOptions = this.options
+      .filter((option) => options.includes(option) ? !option.default : option.default)
+      .map((option) => `${option.key}${KEY_VALUE_SEP}${options.includes(option) ? true : false}`);
+
+    this.paramService.saveParam(OPTIONS_PARAM, urlOptions, saveToUrl);
 
     this.optionsTriggerText = this.options
       .map((option) => options.includes(option) ? option.selectedText : option.deselectedText)

@@ -117,7 +117,6 @@ export class AppComponent implements OnInit {
 
   private sortVerses(): void {
     if (this.verseIndexer) {
-      console.log('sorting');
       this.verses = sortBy(this.verses, this.verseIndexer);
       this.ref.markForCheck();
     }
