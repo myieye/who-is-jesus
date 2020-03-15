@@ -20,11 +20,13 @@
             "outputPath": "dist/who-is-jesus",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "baseHref": "/who-is-jesus/",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/assets"
+              "src/assets",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.scss",
