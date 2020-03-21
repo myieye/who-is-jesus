@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+@mixin wij-info-dialog-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    app-info-dialog {
+        h3 {
+            border-bottom: 2px solid mat-color($primary);
+        }
+
+        a {
+            color: #555;
+            font-weight: 600;
+            text-decoration-color: mat-color($primary);
+            text-decoration-thickness: 2px;
+        }
+    }
+}

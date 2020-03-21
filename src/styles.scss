@@ -5,6 +5,7 @@
 @import "./app/source-filter/source-filter.component.scss-theme.scss";
 @import "./app/page-actions/page-actions.component.scss-theme.scss";
 @import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
+@import "./app/info-dialog/info-dialog.component.scss-theme.scss";
 
 // Plus imports for other components in your app.
 
@@ -34,6 +35,7 @@ $theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
 @include wij-source-filter-theme($theme);
 @include wij-page-actions-theme($theme);
 @include wij-tagged-verse-group-header-theme($theme);
+@include wij-info-dialog-theme($theme);
 
 body {
   margin: 0;
