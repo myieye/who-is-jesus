@@ -2,8 +2,6 @@
 
 ## Doing
 
-- [Design(2)] Make "about" more findable (either move the button to the top or use expandable text at the top w/o a dialog)
-
 - [Content(8)] Translate into German
     - Translate templates
     - Translate code
@@ -24,6 +22,7 @@
 
 
 ## Done
+- [Design(2)] Make "about" more findable (either move the button to the top or use expandable text at the top w/o a dialog)
 - [Function(2)] Show tag w/ description by tag group
 - [i18n(1)] Choose best available language for user
 - [Option(2)] Group by tag [on/off = on] (or off, if putting all active tags at the top looks ok)

@@ -40,6 +40,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/content/de/verses.de.ts",
+                  "with": "src/app/content/de/verses.de.ngü.__private.ts"
                 }
               ],
               "optimization": true,
