@@ -24,6 +24,7 @@ export const CONTENT: Content = {
     multipleTags: 'Multiple tags',
     singleTag: 'Single tag',
     groupByTag: 'Group by tag',
+    about: 'About',
     verses,
     bibleBooks,
     tags,

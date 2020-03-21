@@ -21,6 +21,7 @@ export class ContentTemplate {
     multipleTags = '';
     singleTag = '';
     groupByTag = '';
+    about = '';
     verses: TaggedVerse[] = [];
     bibleBooks: BibleBookMap = {} as BibleBookMap;
     tags: VerseTagMap = {} as VerseTagMap;

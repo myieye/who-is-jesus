@@ -1,23 +1,15 @@
 :host {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    margin: 8px;
-
     text-align: center;
+    position: relative;
 }
 
 .trigger {
     z-index: 10;
-
-    ::ng-deep .mat-button-wrapper {
-        position: relative;
-        top: -4px;
-    }
 }
 
 .icon {
-    position: relative;
-    top: -7px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -14px;
 }

@@ -1,6 +1,9 @@
 <h1 class="title" [innerHTML]="content.pageTitle" i18n></h1>
 
-<app-language-picker></app-language-picker>
+<div class="top-bar">
+  <button mat-button (click)="infoClicked()">{{content.about | uppercase}}</button>
+  <app-language-picker></app-language-picker>
+</div>
 
 <div class="option-container">
   <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</mat-checkbox-->
