@@ -7,11 +7,10 @@
             <span class="verses">{{verse.reference.verses}}</span>
         </span>
         <span class="actions">
-            <a class="other-translations" title="Read other translations on biblegateway.com"
+            <a class="other-translations" [title]="content.bibleGatewayLinkDescription"
                 target="_blank"
                 href="{{getOtherTranslationsLink(verse.reference)}}">
                 <img src="assets/bible-gateway-icon.ico">
-                <!-- https://iconscout.com/icon/columns-9 -->
             </a>
         </span>
     </div>

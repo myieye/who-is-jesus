@@ -6,10 +6,6 @@
     $accent: map-get($theme, accent);
 
     app-info-dialog {
-        h3 {
-            border-bottom: 2px solid mat-color($primary);
-        }
-
         a {
             color: #555;
             font-weight: 600;

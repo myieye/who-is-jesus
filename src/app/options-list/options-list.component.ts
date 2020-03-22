@@ -3,6 +3,9 @@ import { ContentService } from '../services/content.service';
 import { Option, options as verseOptions, OptionsSelection } from './options';
 import { QueryParamService } from '../services/query-param.service';
 import { reduce, isNil } from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { BibleTranslationsDialogComponent } from '../bible-translations-dialog/bible-translations-dialog.component';
+import { first } from 'rxjs/operators';
 
 const OPTIONS_PARAM = 'options';
 
@@ -24,6 +27,7 @@ export class OptionsListComponent implements OnInit {
   constructor(
     readonly content: ContentService,
     private readonly paramService: QueryParamService,
+    private readonly dialog: MatDialog,
   ) {
     this.options = verseOptions(content);
     this.selectedOptions = this.options.filter((option) => option.default);
@@ -37,7 +41,7 @@ export class OptionsListComponent implements OnInit {
   }
 
   optionsChanged(options: Option[], saveToUrl = true) {
-    const selection = reduce(options, (result, {key}) => {
+    const selection = reduce(options, (result, { key }) => {
       result[key] = true;
       return result;
     }, {});
@@ -50,5 +54,18 @@ export class OptionsListComponent implements OnInit {
       .map((option) => options.includes(option) ? option.selectedText : option.deselectedText)
       .filter((optionText) => !isNil(optionText))
       .join(', ');
+  }
+
+  bibleTranslationsClicked(): void {
+    this.dialog.open(BibleTranslationsDialogComponent, {
+      data: {
+        content: this.content,
+      },
+      width: "750px",
+    }).afterClosed().pipe(first()).subscribe((selectedTranslations) => this.updateSelectedTranslations(selectedTranslations));
+  }
+
+  private updateSelectedTranslations(selectedTranslations: string[]): void {
+    console.log(selectedTranslations);
   }
 }

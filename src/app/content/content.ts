@@ -22,6 +22,11 @@ export class ContentTemplate {
     singleTag = '';
     groupByTag = '';
     about = '';
+    searchByLanguageOrTranslation = '';
+    bibleGatewayTranslations = '';
+    bibleGatewayTranslationsDescription = '';
+    bibleGatewayLinkDescription = '';
+    defaultBibleTranslationKeys: string[] = [];
     verses: TaggedVerse[] = [];
     bibleBooks: BibleBookMap = {} as BibleBookMap;
     tags: VerseTagMap = {} as VerseTagMap;

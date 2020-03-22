@@ -6,7 +6,6 @@
 </div>
 
 <div class="option-container">
-  <!--mat-checkbox class="multi-select" #multiSelect color="primary">Multiple tags</mat-checkbox-->
   <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
   <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
   <app-options-list (optionsChange)="selectedOptionsChanged($event)"></app-options-list>
@@ -25,7 +24,7 @@
     </ng-container>
     <ng-template #standardVerseList let-verseGroup="verses">
       <div *ngFor="let verse of verseGroup || verses" class="verse">
-        <app-verse [verse]="verse"></app-verse>
+        <app-verse [verse]="verse" [translations]="content.defaultBibleTranslationKeys"></app-verse>
       </div>
     </ng-template>
   </div>
