@@ -12,6 +12,7 @@ import { DebugSettings } from '../../debug-settings';
 export class VerseComponent {
 
   @Input() verse: TaggedVerse;
+  @Input() translations: string[];
 
   debugTags = DebugSettings.verseTags;
 
@@ -19,9 +20,10 @@ export class VerseComponent {
     return this.verse.tags.map((tag) => this.content.tags[tag].name);
   }
 
-  constructor(private readonly content: ContentService) { }
+  constructor(readonly content: ContentService) { }
 
   getOtherTranslationsLink(ref: BibleReference): string {
-    return `https://www.biblegateway.com/passage/?search=${BibleReference.toString(ref)}&version=ESV;RSV;NKJV`;
+    const translations = this.translations.join(';');
+    return `https://www.biblegateway.com/passage/?search=${BibleReference.toString(ref)}&version=${translations}`;
   }
 }

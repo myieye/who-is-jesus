@@ -5,6 +5,7 @@
 @import "./app/source-filter/source-filter.component.scss-theme.scss";
 @import "./app/page-actions/page-actions.component.scss-theme.scss";
 @import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
+@import "./app/info-dialog/info-dialog.component.scss-theme.scss";
 
 // Plus imports for other components in your app.
 
@@ -24,7 +25,8 @@ $accent-palette: mat-palette($mat-pink, A200, A100, A400);
 $warn-palette: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+$theme: mat-light-theme($primary-palette, $primary-palette, $warn-palette);
+$primary: map-get($theme, primary);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -34,15 +36,25 @@ $theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
 @include wij-source-filter-theme($theme);
 @include wij-page-actions-theme($theme);
 @include wij-tagged-verse-group-header-theme($theme);
+@include wij-info-dialog-theme($theme);
 
 body {
   margin: 0;
 }
 
 body {
-  &, & [class*="mat-"] {
+  &,
+  & [class*="mat-"]:not(.mat-icon) {
     font-family: Montserrat, "Helvetica Neue", sans-serif;
   }
+}
+
+h3 {
+  display: inline-block;
+  margin: 5px 0 0 0;
+  max-width: 100%;
+  border-bottom: 3px solid mat-color($primary);
+  font-size: 2em;
 }
 
 app-root,
@@ -64,9 +76,21 @@ app-tag-list.stuck + * {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-html[class*=loading] .loader-bg {
- opacity: 1 !important;
+html[class*="loading"] .loader-bg {
+  opacity: 1 !important;
+}
+
+.mat-chip.mat-standard-chip.label-chip {
+  color: mat-color($primary);
+  border: 1px solid mat-color($primary);
+  font-weight: 600;
+}
+
+@media only screen and ($big-screen) {
+  .cdk-overlay-container .mat-dialog-container {
+    padding: 40px;
+  }
 }

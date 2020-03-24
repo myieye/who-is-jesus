@@ -22,9 +22,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LanguagePickerComponent } from './language-picker/language-picker.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OptionsListComponent } from './options-list/options-list.component';
 import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tagged-verse-group-header.component';
+import { BibleTranslationsDialogComponent } from './bible-translations-dialog/bible-translations-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tag
     LanguagePickerComponent,
     OptionsListComponent,
     TaggedVerseGroupHeaderComponent,
+    BibleTranslationsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,9 @@ import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tag
     MatMenuModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppRouterComponent],
