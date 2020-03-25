@@ -34,13 +34,12 @@ export class BibleTranslationsDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) readonly data: BibleTranslationsDialogData,
-    private readonly ref: ChangeDetectorRef,
-    private readonly dialogRef: MatDialogRef<BibleTranslationsDialogComponent>,
+    dialogRef: MatDialogRef<BibleTranslationsDialogComponent>,
   ) {
     this.content = data.content;
-    this.defaultBibles = bgBibles.filter((bible) => this.content.defaultBibleTranslationKeys.includes(bible.key));
+    this.defaultBibles = this.content.defaultBibleTranslationKeys.map((bibleKey) => this.findBible(bibleKey));
     this.selectedBibles = data.bibles?.length
-      ? bgBibles.filter((bible) => data.bibles.includes(bible.key))
+      ? data.bibles.map((bibleKey) => this.findBible(bibleKey))
       : this.defaultBibles;
 
     dialogRef.beforeClosed().pipe(first()).subscribe(() =>
@@ -83,5 +82,9 @@ export class BibleTranslationsDialogComponent {
         }
       });
     }
+  }
+
+  private findBible(bibleKey: string): BibleGatewayTranslation {
+    return bgBibles.find((bgBible) => bgBible.key === bibleKey);
   }
 }

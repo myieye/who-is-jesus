@@ -1,6 +1,6 @@
 import { ContentService } from '../services/content.service';
 
-export enum OptionKey { MultiTags = 'MultiTags', GroupByTag = 'GroupByTag' }
+export enum OptionKey { MultiTags = 'MultiTags', GroupByTag = 'GroupByTag', BGTranslations = 'BGTranslations' }
 
 export interface Option {
     key: OptionKey;
@@ -10,7 +10,9 @@ export interface Option {
     default?: boolean;
 }
 
-export type OptionsSelection = {[key in OptionKey]?: boolean};
+type OptionValue = boolean | string[];
+
+export type OptionsSelection = {[key in OptionKey]?: OptionValue};
 
 export const options = (content: ContentService): Option[] => ([
     {

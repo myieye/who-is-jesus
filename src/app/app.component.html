@@ -24,7 +24,7 @@
     </ng-container>
     <ng-template #standardVerseList let-verseGroup="verses">
       <div *ngFor="let verse of verseGroup || verses" class="verse">
-        <app-verse [verse]="verse" [translations]="content.defaultBibleTranslationKeys"></app-verse>
+        <app-verse [verse]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
       </div>
     </ng-template>
   </div>
