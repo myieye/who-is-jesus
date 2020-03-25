@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
 interface BibleTranslationsDialogData {
   content: ContentService;
   bibles: string[];
-};
+}
 
 const bgBiblesByLanguage = Object.values(BG_BIBLES);
 const bgBibles = flatMap(bgBiblesByLanguage, (bibleLanguageGroup) => bibleLanguageGroup.bibles);
@@ -23,10 +23,10 @@ const bgBibles = flatMap(bgBiblesByLanguage, (bibleLanguageGroup) => bibleLangua
 })
 export class BibleTranslationsDialogComponent {
 
-  @ViewChild(MatSelectionList, {static:true}) translationList: MatSelectionList;
+  @ViewChild(MatSelectionList, { static: true }) translationList: MatSelectionList;
 
   readonly biblesByLanguage = bgBiblesByLanguage;
-  hiddenBibles: {[index: string]: boolean} = {};
+  hiddenBibles: { [index: string]: boolean } = {};
 
   readonly content: ContentService;
   readonly defaultBibles: BibleGatewayTranslation[];
@@ -43,8 +43,8 @@ export class BibleTranslationsDialogComponent {
       ? bgBibles.filter((bible) => data.bibles.includes(bible.key))
       : this.defaultBibles;
 
-      dialogRef.beforeClosed().pipe(first()).subscribe(() =>
-        dialogRef.close(this.selectedBibles.map((bible) => bible.key)));
+    dialogRef.beforeClosed().pipe(first()).subscribe(() =>
+      dialogRef.close(this.selectedBibles.map((bible) => bible.key)));
   }
 
   selectedBiblesChanged(selectedOptions: SelectionModel<MatListOption>): void {
@@ -71,7 +71,7 @@ export class BibleTranslationsDialogComponent {
         if (!languageMatch) {
           const unmatchedBibles = bibleLanguageGroup.bibles.filter((bible) =>
             !bible.name.toLocaleLowerCase().includes(search));
-          
+
           // Hide the language if none of the bibles matched
           if (unmatchedBibles.length === bibleLanguageGroup.bibles.length) {
             this.hiddenBibles[languageName] = true;

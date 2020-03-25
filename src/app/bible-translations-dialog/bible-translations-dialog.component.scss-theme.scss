@@ -1,7 +1,6 @@
 @import '~@angular/material/theming';
 
 @mixin wij-bible-translations-dialog-theme($theme) {
-    // Extract the palettes you need from the theme definition.
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
 
