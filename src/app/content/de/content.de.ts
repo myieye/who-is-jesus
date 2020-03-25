@@ -10,7 +10,7 @@ export const CONTENT: Content = {
     synopticGospels: 'Synoptiker',
     standard: 'Standard',
     chronological: 'Chronologisch',
-    pageTitle: 'Wer ist <span class="jesus-title jesus-words">Jesus?</span>',
+    pageTitle: 'Wer ist <span class="jesus-glory">Jesus?</span>',
     sources: 'Quellen',
     order: 'Reihenfolge',
     infoAboutTitle: 'Worum geht es?',

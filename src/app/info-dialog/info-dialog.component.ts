@@ -4,7 +4,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-info-dialog',
-  templateUrl: './info-dialog.component.html'
+  templateUrl: './info-dialog.component.html',
+  styleUrls: ['./info-dialog.component.scss'],
 })
 export class InfoDialogComponent implements OnInit {
 

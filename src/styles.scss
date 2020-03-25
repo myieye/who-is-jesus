@@ -6,6 +6,7 @@
 @import "./app/page-actions/page-actions.component.scss-theme.scss";
 @import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
 @import "./app/info-dialog/info-dialog.component.scss-theme.scss";
+@import "./app/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss";
 
 // Plus imports for other components in your app.
 
@@ -27,6 +28,9 @@ $warn-palette: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary-palette, $primary-palette, $warn-palette);
 $primary: map-get($theme, primary);
+$foreground:  map-merge(map-get($theme, foreground), (elevation: $jesus-red-soft));
+
+$theme: map-merge($theme, (foreground: $foreground));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -37,6 +41,7 @@ $primary: map-get($theme, primary);
 @include wij-page-actions-theme($theme);
 @include wij-tagged-verse-group-header-theme($theme);
 @include wij-info-dialog-theme($theme);
+@include wij-bible-translations-dialog-theme($theme);
 
 body {
   margin: 0;
@@ -63,7 +68,14 @@ app-tag-list {
 }
 
 .jesus-words {
-  color: rgb(173, 6, 6) !important;
+  color: $jesus-red !important;
+}
+
+.jesus-glory {
+  font-size: 2.4em;
+  color: $jesus-red;
+  font-family: "Lovers Quarrel";
+  margin-left: 0.1em;
 }
 
 app-tag-list.stuck + * {

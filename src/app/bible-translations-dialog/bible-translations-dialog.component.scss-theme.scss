@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+
+@mixin wij-bible-translations-dialog-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    app-bible-translations-dialog {
+        .mat-list-base .mat-list-option .mat-list-item-content .mat-list-text {
+            padding: 10px 16px 10px 0;
+        }
+
+        .mat-list-base .mat-list-option {
+            height: auto;
+        }
+    }
+}
