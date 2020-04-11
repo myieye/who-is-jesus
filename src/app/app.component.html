@@ -15,7 +15,7 @@
   (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
 
 <div class="verse-container-wrapper">
-  <div class="verse-container">
+  <div class="verse-container" [class.hide-verses]="!content.showVerseNumbers">
     <ng-container *ngIf="groupByTag; else standardVerseList">
       <div class="verse-group" *ngFor="let group of verseGroups">
         <app-tagged-verse-group-header [tag]="group.tag"></app-tagged-verse-group-header>
@@ -30,11 +30,4 @@
   </div>
 </div>
 
-<app-page-actions>
-  <a href="https://github.com/myieye/who-is-jesus">
-    <i class="fab fa-github"></i>
-  </a>
-  <a (click)="infoClicked()">
-    <i class="fas fa-info-circle"></i>
-  </a>
-</app-page-actions>
+<app-page-footer></app-page-footer>

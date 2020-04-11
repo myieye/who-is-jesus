@@ -1,7 +1,10 @@
+$small-screen: "max-width: 500px";
+$not-small-screen: "min-width: 501px";
+
 $very-big-screen: "min-width: 1300px";
 $not-very-big-screen: "max-width: 1299px";
-$big-screen: "min-width: 501px";
-$small-screen: "max-width: 500px";
 
-$jesus-red: rgb(173, 6, 6);
+$not-big-screen: "max-width: 899px";
+
+$jesus-red: #AD0606;
 $jesus-red-soft: #ad060650;

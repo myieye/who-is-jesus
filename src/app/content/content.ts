@@ -26,10 +26,13 @@ export class ContentTemplate {
     bibleGatewayTranslations = '';
     bibleGatewayTranslationsDescription = '';
     bibleGatewayLinkDescription = '';
+    bibleTranslationCopyrightNotice = '';
+    bibleTranslationUnderCopyright = true;
     defaultBibleTranslationKeys: string[] = [];
     verses: TaggedVerse[] = [];
     bibleBooks: BibleBookMap = {} as BibleBookMap;
     tags: VerseTagMap = {} as VerseTagMap;
+    showVerseNumbers = false;
 }
 
 type ContentProps = Array<keyof ContentTemplate>;

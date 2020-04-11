@@ -13,7 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SourceFilterComponent } from './source-filter/source-filter.component';
 import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
-import { PageActionsComponent } from './page-actions/page-actions.component';
+import { PageFooterComponent } from './page-footer/page-footer.component';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppRouterComponent } from './app-router.component';
@@ -38,7 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
     TagListComponent,
     SourceFilterComponent,
     VerseOrderSelectComponent,
-    PageActionsComponent,
+    PageFooterComponent,
     InfoDialogComponent,
     AppWrapperComponent,
     LanguagePickerComponent,

@@ -15,7 +15,7 @@
         </span>
     </div>
     <div>
-        <div class="verse-tags" [class.hidden]="!debugTags">
+        <div class="verse-tags" *ngIf="debugTags">
             <span *ngFor="let tag of tags; let last = last">
                 {{tag}}<ng-container *ngIf="!last">, </ng-container>
             </span>

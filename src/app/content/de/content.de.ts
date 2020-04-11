@@ -3,7 +3,6 @@ import { verses } from './verses.de';
 import { bibleBooks } from './bible-books.de';
 import { tags } from './tags.de';
 
-// tslint:disable:max-line-length
 export const CONTENT: Content = {
     jesus: 'Jesus',
     all: 'Alle',
@@ -16,9 +15,19 @@ export const CONTENT: Content = {
     infoAboutTitle: 'Worum geht es?',
     infoBibleTranslationTitle: 'Bibelübersetzung',
     infoChronologyTitle: 'Chronologie',
-    infoAbout: 'Jeder soll wissen, wer <span class="jesus-glory">Jesus</span> ist! Diese Webseite ist ein hilfreiches Werkzeug um zu entdecken, was die Evangelien (und sogar Jesus selbst) über Ihn zu sagen haben.',
-    infoBibleTranslation: 'Alle Verse werden aus der <a href="https://worldenglish.bible/">World English Bible</a> (WEB) Übersetzung zitiert. Die WEB würde gewählt, weil sie treu zum originalen Text und auch in der Public Domain verfügbar ist. Ich empfehle, die Verse auch in anderen Übersetzungen zu lesen. Deshalb finden sich neben den Bibelstellen Links zu <a href="https://www.biblegateway.com/">Bible Gateway</a>. Beim Hovern über einen Vers (nicht auf mobilen Geräte notwendig), wird ein Link angezeigt, um den Vers in anderen Übersetzungen zu lesen.',
-    infoChronology: 'Die Chronologische Sortierung basiert auf <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a> von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auch auf ihrer Webseite angeben.',
+    infoAbout: `
+Jeder soll wissen, wer <span class="jesus-glory">Jesus</span> ist!
+Diese Webseite ist ein hilfreiches Werkzeug um zu entdecken, was die Evangelien
+(und sogar Jesus selbst) über Ihn zu sagen haben.`,
+    infoBibleTranslation: `
+Alle Verse werden aus der <a href="https://ngue.info/">Neuen Genfer Übersetzung</a> (NGÜ) zitiert.
+Die NGÜ wurde gewählt, weil sie treu zum originalen Text und auch leicht verständlich ist.
+Es finden sich neben den Bibelstellen auch Links zu <a href="https://www.biblegateway.com/">Bible Gateway</a>,
+um die Verse in anderen Übersetzungen zu lesen.
+Beim Drüberfahren mit der Maus über einen Vers (auf mobilen Geräten nicht notwendig) wird der Link angezeigt.`,
+    infoChronology: `
+Die Chronologische Sortierung basiert auf <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a>
+von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auch auf ihrer Webseite angeben.`,
     options: 'Optionen',
     multipleTagSelection: 'Multi-Tag Auswahl',
     multipleTags: 'Multi-Tag',
@@ -29,8 +38,15 @@ export const CONTENT: Content = {
     bibleGatewayTranslations: 'Bible Gateway Übersetzungen',
     bibleGatewayTranslationsDescription: 'Wähle Übersetzungen für BibleGateway.com aus.',
     bibleGatewayLinkDescription: 'Andere Übersetzungen auf BibleGateway.com lesen',
+    bibleTranslationCopyrightNotice: `
+<p>Bibeltext der Neuen Genfer Übersetzung — Neues Testament und Psalmen</p>
+<p>Copyright © 2011 Genfer Bibelgesellschaft</p>
+<p>Wiedergegeben mit freundlicher Genehmigung. Alle Rechte vorbehalten.</p>
+`,
+    bibleTranslationUnderCopyright: true,
     defaultBibleTranslationKeys: ['NGU-DE', 'SCH2000', 'HOF'],
     verses,
     bibleBooks,
     tags,
+    showVerseNumbers: true,
 };

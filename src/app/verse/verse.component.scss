@@ -16,9 +16,9 @@
 }
 
 .verse-number {
-  color: black;
+  color: #666;
   line-height: 0;
-  display: none;
+  margin-right: 2px;
 }
 
 .verse-break::after {
@@ -38,7 +38,7 @@
   }
 }
 
-@media only screen and ($big-screen) {
+@media only screen and ($not-small-screen) {
   .text {
     width: 600px;
     max-width: 65vw;
