@@ -20,7 +20,6 @@
             "outputPath": "dist/who-is-jesus",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "baseHref": "/who-is-jesus/",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
@@ -38,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/who-is-jesus/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
