@@ -22,6 +22,7 @@ export class ContentTemplate {
     singleTag = '';
     groupByTag = '';
     about = '';
+    noVersesFound = '';
     searchByLanguageOrTranslation = '';
     bibleGatewayTranslations = '';
     bibleGatewayTranslationsDescription = '';

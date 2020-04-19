@@ -34,6 +34,7 @@ from LifeofChrist.com. This is only an approximation as is indicated on their we
     singleTag: 'Single tag',
     groupByTag: 'Group by tag',
     about: 'About',
+    noVersesFound: 'No verses match your source/tag filter criteria.',
     searchByLanguageOrTranslation: 'Search for language or translation',
     bibleGatewayTranslations: 'Bible Gateway translations',
     bibleGatewayTranslationsDescription: 'Select the translations to use when navigating to a verse on BibleGateway.com.',

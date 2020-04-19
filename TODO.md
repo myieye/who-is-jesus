@@ -1,7 +1,7 @@
 # Todo
 
 ## Doing
-- [Content(1)] Add message when no verses match filter
+- [Bug(1)] When source is selected (eg. Luke), but no tags, then all tags are always enabled on page load
 
 ## Ideas/Backlog
 - [Design(2)] (?) Center tag list: max-width: 850px and justify-items: center
@@ -18,6 +18,7 @@
 
 
 ## Done
+- [Content(1)] Add message when no verses match filter
 - [i18n(1)] Hide "beim Drüberfahren..." on mobile
 - [Content(8)] Translate into German
     - Translate templates

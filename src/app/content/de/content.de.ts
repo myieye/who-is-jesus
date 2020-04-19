@@ -34,6 +34,7 @@ von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auc
     singleTag: 'Single-Tag',
     groupByTag: 'Nach Tag gruppieren',
     about: 'Info',
+    noVersesFound: 'Keine Verse erfüllen deine Quelle/Tag Filter-Kriterien.',
     searchByLanguageOrTranslation: 'Nach Sprache oder Übersetzung suchen',
     bibleGatewayTranslations: 'Bible Gateway Übersetzungen',
     bibleGatewayTranslationsDescription: 'Wähle Übersetzungen für BibleGateway.com aus.',
