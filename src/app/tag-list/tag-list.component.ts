@@ -55,7 +55,7 @@ export class TagListComponent implements AfterViewInit {
       return;
     }
 
-    this.chipList.chips.forEach((chip) => chip.disabled = this.isDisabled(chip.value));
+    this.updateChipStates();
   }
   get activeTags(): VerseTagKey[] {
     return this._activeTags;
@@ -101,6 +101,8 @@ export class TagListComponent implements AfterViewInit {
       this._hasSelectedTags = tags.length > 0;
       this.selectedTagsChanged(false);
     });
+
+    this.updateChipStates();
   }
 
   chipClicked(chip: MatChip) {
@@ -127,7 +129,11 @@ export class TagListComponent implements AfterViewInit {
     this.updateStickiness();
   }
 
-  isDisabled(tag: VerseTag): boolean {
+  private updateChipStates(): void {
+    this.chipList.chips.forEach((chip) => chip.disabled = this.isDisabled(chip.value));
+  }
+
+  private isDisabled(tag: VerseTag): boolean {
     return !(this.activeTags.length === 0 || this.activeTags.includes(tag.key));
   }
 
