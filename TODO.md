@@ -1,7 +1,7 @@
 # Todo
 
 ## Doing
-
+- [Content(1)] Add message when no verses match filter
 
 ## Ideas/Backlog
 - [Design(2)] (?) Center tag list: max-width: 850px and justify-items: center
@@ -13,13 +13,12 @@
 - [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
 - [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 - [Design(2)] Center verses + references better
-- [i18n(1)] Hide "beim Drüberfahren..." on mobile
-- [Content(1)] Add message when no verses match filter
 - [Content(5)] (?) More thorough discussions for each tag
 - [Design(2)] (?) Hero image
 
 
 ## Done
+- [i18n(1)] Hide "beim Drüberfahren..." on mobile
 - [Content(8)] Translate into German
     - Translate templates
     - Translate code

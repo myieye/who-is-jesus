@@ -127,3 +127,17 @@ html[class*="loading"] .loader-bg {
     line-height: 1.5;
   }
 }
+
+body {
+  &.big-screen {
+    .small-screen-content {
+      display: none;
+    }
+  }
+
+  &:not(.big-screen) {
+    .big-screen-content {
+      display: none;
+    }
+  }
+}

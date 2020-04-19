@@ -24,7 +24,7 @@ Alle Verse werden aus der <a href="https://ngue.info/">Neuen Genfer Übersetzung
 Die NGÜ wurde gewählt, weil sie treu zum originalen Text und auch leicht verständlich ist.
 Es finden sich neben den Bibelstellen auch Links zu <a href="https://www.biblegateway.com/">Bible Gateway</a>,
 um die Verse in anderen Übersetzungen zu lesen.
-Beim Drüberfahren mit der Maus über einen Vers (auf mobilen Geräten nicht notwendig) wird der Link angezeigt.`,
+<span class="big-screen-content">Beim Drüberfahren mit der Maus über einen Vers wird der Link angezeigt.</span>`,
     infoChronology: `
 Die Chronologische Sortierung basiert auf <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a>
 von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auch auf ihrer Webseite angeben.`,
