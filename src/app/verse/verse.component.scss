@@ -27,8 +27,11 @@
 }
 
 @media only screen and ($not-big-screen) {
+
   .verse {
     flex-direction: column;
+    max-width: 600px;
+    margin: auto;
   }
 
   .reference {
