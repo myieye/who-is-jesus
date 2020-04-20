@@ -1,9 +1,18 @@
-<div #container class="tag-container mat-app-background" [class.stuck]="_isStuck" [class.open]="_isOpen">
-  <mat-chip-list [multiple]="_multiple">
+<div #container class="tag-container mat-app-background">
+  <mat-chip-list #chipList [multiple]="_multiple">
     <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="chipClicked(chip)"
       [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
       {{tag.name}}
     </mat-chip>
   </mat-chip-list>
-  <span class="open-toggle" (click)="_isOpen = !_isOpen">V</span>
+</div>
+
+<div class="tag-container mat-app-background sticky-tag-list" [class.visible]="stickyListVisible" [class.collapsed]="collapsed">
+  <mat-chip-list #stickyChipList [multiple]="_multiple">
+    <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="chipClicked(chip)"
+      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
+      {{tag.name}}
+    </mat-chip>
+  </mat-chip-list>
+  <span class="open-toggle" (click)="collapsed = !collapsed">V</span>
 </div>

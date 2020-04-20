@@ -7,7 +7,6 @@ import {
   ViewChild,
   HostListener,
   ChangeDetectionStrategy,
-  HostBinding,
   AfterViewInit,
 } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
@@ -15,8 +14,10 @@ import { VerseTagKey, VerseTag } from '../models/tags';
 import { isNil } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { QueryParamService } from '../services/query-param.service';
+import { ScreenSizeService } from '../services/screen-size.service';
 
 const TAG_PARAM = 'tags';
+const COLLAPSED_TAG_LIST_HEIGHT = 50;
 
 @Component({
   selector: 'app-tag-list',
@@ -36,17 +37,17 @@ export class TagListComponent implements AfterViewInit {
     if (this._multiple !== multiple) {
       this._multiple = multiple;
       if (!multiple) {
-        this.reduceSelectionToFirst();
+        this.reduceSelectionToLastSelected();
       } else {
-        this.chipList.multiple = true;
+        this.chipList.multiple = this.stickyChipList.multiple = true;
         this.restoreCachedSelection();
       }
     }
   }
 
-  @Input() tags: VerseTag[] = [];
+  @Input()
+  tags: VerseTag[] = [];
 
-  private _activeTags: VerseTagKey[];
   @Input()
   set activeTags(activeTags: VerseTagKey[]) {
     this._activeTags = activeTags || [];
@@ -63,19 +64,17 @@ export class TagListComponent implements AfterViewInit {
 
   @Output() readonly selectedTagsChange = new EventEmitter<Array<VerseTagKey>>();
 
-
-  @ViewChild(MatChipList, { static: true }) chipList: MatChipList;
+  @ViewChild('chipList', { static: true }) chipList: MatChipList;
+  @ViewChild('stickyChipList', { static: true }) stickyChipList: MatChipList;
   @ViewChild('container', { static: true, read: ElementRef }) container: ElementRef<HTMLElement>;
 
-  @HostBinding('class.stuck')
-  _isStuck = false;
-  _isOpen = true;
+  collapsed = !this.screenSizeService.isVeryBigScreen;
+  stickyListVisible: boolean;
   _multiple: boolean;
-  @HostBinding('class.has-selected-tags') _hasSelectedTags: boolean;
-  @HostBinding('class.sticky') _sticky: boolean;
-
+  private _activeTags: VerseTagKey[];
   private lastSelectedChip: MatChip;
   private cachedChipSelection: MatChip[];
+  private allChips: MatChip[];
 
   private get selectedChips(): MatChip[] {
     return this.chipList?.chips?.filter(chip => chip.selected) || [];
@@ -85,20 +84,20 @@ export class TagListComponent implements AfterViewInit {
     return this.selectedChips.map(chip => chip.value.key);
   }
 
-  private get containerOffsetTop(): number {
-    return this.container.nativeElement.offsetTop;
-  }
-
   constructor(
-    private readonly paramService: QueryParamService) {
+    private readonly paramService: QueryParamService,
+    private readonly screenSizeService: ScreenSizeService,
+  ) {
   }
 
   ngAfterViewInit(): void {
+    this.allChips = [...this.chipList.chips.toArray(), ...this.stickyChipList.chips.toArray()];
+
     this.paramService.loadParams(TAG_PARAM, tags => {
-      this.chipList.chips
+      this.allChips
         .filter(chip => tags.includes(chip.value.key))
         .forEach(chip => chip.select());
-      this._hasSelectedTags = tags.length > 0;
+      this.cachedChipSelection = this.selectedChips;
       this.selectedTagsChanged(false);
     });
 
@@ -110,34 +109,48 @@ export class TagListComponent implements AfterViewInit {
       this.lastSelectedChip = chip;
     }
 
-    chip.toggleSelected(true);
+    this.chipList.chips.find((c) => c.value === chip.value).toggleSelected(true);
+    this.stickyChipList.chips.find((c) => c.value === chip.value).toggleSelected(true);
+
     this.cachedChipSelection = this.selectedChips;
-    this._hasSelectedTags = this.cachedChipSelection.length > 0;
+    const hasSelectedTags = this.cachedChipSelection.length > 0;
     this.selectedTagsChanged();
 
-    const wasStuck = this._isStuck;
-    this.updateStickiness(this._hasSelectedTags);
+    const wasVisible = this.stickyListVisible;
+    this.updateStickyList();
     setTimeout(() => {
-      if (!this._hasSelectedTags && wasStuck) {
-        window.scrollTo({ top: this.containerOffsetTop, behavior: 'smooth' });
+      if (!hasSelectedTags && wasVisible) {
+        window.scrollTo({ top: this.container.nativeElement.offsetTop, behavior: 'smooth' });
       }
     });
   }
 
   @HostListener('window:scroll')
   onScroll() {
-    this.updateStickiness();
+    this.updateStickyList();
+  }
+
+  private updateStickyList(): void {
+    const rect = this.container.nativeElement.getBoundingClientRect();
+    if (this.screenSizeService.isVeryBigScreen) {
+      this.stickyListVisible = rect.top <= 0 && (this.cachedChipSelection?.length ?? 0) > 0;
+    } else {
+      const hasSelectedTags = this.selectedChips.length > 0;
+      this.stickyListVisible = hasSelectedTags && rect.bottom <= COLLAPSED_TAG_LIST_HEIGHT;
+    }
+
+    this.collapsed = !this.screenSizeService.isVeryBigScreen;
   }
 
   private updateChipStates(): void {
-    this.chipList.chips.forEach((chip) => chip.disabled = this.isDisabled(chip.value));
+    this.allChips.forEach((chip) => chip.disabled = this.isDisabled(chip.value));
   }
 
   private isDisabled(tag: VerseTag): boolean {
     return !(this.activeTags.length === 0 || this.activeTags.includes(tag.key));
   }
 
-  private reduceSelectionToFirst() {
+  private reduceSelectionToLastSelected() {
     const chips = this.selectedChips;
     if (chips.length > 1) {
       chips
@@ -152,26 +165,6 @@ export class TagListComponent implements AfterViewInit {
       this.cachedChipSelection?.forEach(chip => chip.select());
       this.selectedTagsChanged();
     }
-  }
-
-  private updateStickiness(stickableIfAbove = false): void {
-    const rect = this.container.nativeElement.getBoundingClientRect();
-    const atTop = rect.top === 0 || (stickableIfAbove && rect.top < 0);
-    this._sticky = this.hasSpaceToCollapse(rect.height) || this._isStuck;
-    const newIsStuck = atTop && this._sticky && this._hasSelectedTags;
-
-    if (newIsStuck !== this._isStuck) {
-      this._isOpen = !newIsStuck;
-    }
-
-    this._isStuck = newIsStuck;
-  }
-
-  private hasSpaceToCollapse(height: number): boolean {
-    const currScrollBottom = window.innerHeight + window.scrollY;
-    const scrollHeight = window.document.body.scrollHeight;
-    const remainingScroll = scrollHeight - currScrollBottom;
-    return remainingScroll > height;
   }
 
   private selectedTagsChanged(saveToUrl = true): void {

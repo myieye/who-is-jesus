@@ -2,8 +2,7 @@
 
 ## Doing
 
-- [Design(2)] Only stick tags when bottom of list is at top of screen
-
+- [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 
 ## Ideas/Backlog
 - [Design(2)] (?) Center tag list: max-width: 850px and justify-items: center
@@ -12,13 +11,13 @@
 - [Option(3)] Group parallels [on/off = off]
 - [Option(2)] Show verse tags [on/off = off]
 - [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
-- [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 - [Design(2)] Center verses + references better
 - [Content(5)] (?) More thorough discussions for each tag
 - [Design(2)] (?) Hero image
-
+- [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Design(2)] Only stick tags when bottom of list is at top of screen
 - [Bug(1)] When source is selected (eg. Luke), but no tags, then all tags are always enabled on page load
 - [Content(1)] Add message when no verses match filter
 - [i18n(1)] Hide "beim Drüberfahren..." on mobile

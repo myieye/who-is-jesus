@@ -72,8 +72,7 @@ h3 {
   font-size: 2em;
 }
 
-app-root,
-app-tag-list {
+app-root {
   display: block;
 }
 
@@ -86,15 +85,6 @@ app-tag-list {
   color: $jesus-red;
   font-family: "Lovers Quarrel";
   margin-left: 0.1em;
-}
-
-app-tag-list.stuck + * {
-  @media only screen and ($not-very-big-screen) {
-    padding-top: 50px;
-  }
-  @media only screen and ($very-big-screen) {
-    padding-top: 132px;
-  }
 }
 
 .hidden {
