@@ -1,2 +1,4 @@
-<mat-chip class="label-chip">{{tag.name}}</mat-chip>
-<span>{{tag.description}}</span>
+<ng-container *ngFor="let tag of _tags">
+    <mat-chip class="label-chip">{{tag.name}}</mat-chip>
+    <span class="description">{{tag.description}}</span>
+</ng-container>

@@ -24,13 +24,14 @@ export class AppComponent implements OnInit {
   tags: VerseTag[];
   activeTags: VerseTagKey[];
   optionsSelection: OptionsSelection = {};
+  selectedTags: VerseTag[] = [];
 
-  private selectedTags: VerseTagKey[] = [];
+  private selectedTagKeys: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
 
   get groupByTag(): boolean {
-    return this.optionsSelection.GroupByTag && this.selectedTags.length > 0;
+    return this.optionsSelection.GroupByTag && this.selectedTagKeys.length > 0;
   }
 
   constructor(
@@ -45,8 +46,9 @@ export class AppComponent implements OnInit {
     this.tags = this.getVerseTagSet(this.content.verses);
   }
 
-  selectedTagsChanged(selectedTags: VerseTagKey[]) {
-    this.selectedTags = selectedTags;
+  selectedTagsChanged(selectedTagKeys: VerseTagKey[]) {
+    this.selectedTagKeys = selectedTagKeys;
+    this.selectedTags = selectedTagKeys.map((tagKey) => this.content.tags[tagKey]);
     this.refreshVerses();
   }
 
@@ -82,14 +84,14 @@ export class AppComponent implements OnInit {
 
     this.activeTags = this.getVerseTagKeySet(this.verses);
 
-    if (this.selectedTags.length) {
-      this.verses = this.verses.filter(verse => intersection(verse.tags, this.selectedTags).length);
+    if (this.selectedTagKeys.length) {
+      this.verses = this.verses.filter(verse => intersection(verse.tags, this.selectedTagKeys).length);
     }
 
     this.sortVerses();
 
     if (this.groupByTag) {
-      this.verseGroups = this.selectedTags.map((tag) => ({
+      this.verseGroups = this.selectedTagKeys.map((tag) => ({
         tag: this.content.tags[tag],
         verses: this.verses.filter((verse) => verse.tags.includes(tag)),
       }));

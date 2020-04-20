@@ -2,7 +2,6 @@
 
 ## Doing
 
-- [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 
 ## Ideas/Backlog
 - [Design(2)] (?) Center tag list: max-width: 850px and justify-items: center
@@ -17,6 +16,7 @@
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 - [Design(2)] Only stick tags when bottom of list is at top of screen
 - [Bug(1)] When source is selected (eg. Luke), but no tags, then all tags are always enabled on page load
 - [Content(1)] Add message when no verses match filter
