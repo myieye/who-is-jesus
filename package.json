@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-dev": "ng serve --host 0.0.0.0",
-    "start-prod": "ng serve --prod=true --host 0.0.0.0",
+    "dev": "ng serve --host 0.0.0.0",
+    "prod": "ng serve --prod=true --host 0.0.0.0",
     "build-prod": "ng build --prod=true --output-hashing=all"
   },
   "private": true,
