@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { BibleReference, TaggedVerse } from '../models/bible';
+import { UiBibleReference, TaggedVerse } from '../models/bible';
 import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
 
@@ -22,8 +22,8 @@ export class VerseComponent {
 
   constructor(readonly content: ContentService) { }
 
-  getOtherTranslationsLink(ref: BibleReference): string {
+  getOtherTranslationsLink(ref: UiBibleReference): string {
     const translations = this.translations.join(';');
-    return `https://www.biblegateway.com/passage/?search=${BibleReference.toString(ref)}&version=${translations}`;
+    return `https://www.biblegateway.com/passage/?search=${UiBibleReference.toString(ref)}&version=${translations}`;
   }
 }

@@ -2,6 +2,7 @@ import { Content } from '../content';
 import { verses } from './verses.de';
 import { bibleBooks } from './bible-books.de';
 import { tags } from './tags.de';
+import { tagVerses } from '../references';
 
 export const CONTENT: Content = {
     jesus: 'Jesus',
@@ -46,7 +47,7 @@ von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auc
 `,
     bibleTranslationUnderCopyright: true,
     defaultBibleTranslationKeys: ['NGU-DE', 'SCH2000', 'HOF'],
-    verses,
+    verses: tagVerses(verses, bibleBooks),
     bibleBooks,
     tags,
     showVerseNumbers: true,

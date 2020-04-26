@@ -2,6 +2,7 @@ import { Content } from '../content';
 import { verses } from './verses.en';
 import { bibleBooks } from './bible-books.en';
 import { tags } from './tags.en';
+import { tagVerses } from '../references';
 
 export const CONTENT: Content = {
     jesus: 'Jesus',
@@ -45,7 +46,7 @@ from LifeofChrist.com. This is only an approximation as is indicated on their we
 <p>The name "World English Bible" is trademarked.</p>`,
     bibleTranslationUnderCopyright: false,
     defaultBibleTranslationKeys: ['WEB', 'ESV', 'NIV'],
-    verses,
+    verses: tagVerses(verses, bibleBooks),
     bibleBooks,
     tags,
     showVerseNumbers: false,

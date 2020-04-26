@@ -15,19 +15,33 @@ export enum BibleBookKey {
 }
 
 export class BibleReference {
+    id: string;
+    book: BibleBookKey;
+    chapter: number;
+    verses: string;
+    numericReference: number;
+    chronologicalIndex: number;
+}
+
+export class UiBibleReference {
     book: BibleBook;
     chapter: number;
     verses: string;
     numericReference: number;
     chronologicalIndex: number;
+    parallelGroup?: number;
 
-    static toString(ref: BibleReference): string {
+    static toString(ref: UiBibleReference): string {
         return `${ref.book.full}${ref.chapter}:${ref.verses}`;
     }
 }
 
+interface Tagged {
+    tags: VerseTagKey[];
+}
+
 export interface BibleVerse {
-    reference: BibleReference;
+    reference: UiBibleReference;
     html: string;
 }
 
@@ -39,4 +53,14 @@ export interface BibleBook {
 
 export type BibleBookMap = { [key in BibleBookKey]: BibleBook};
 
-export type TaggedVerse = BibleVerse & { tags: VerseTagKey[] };
+export interface VerseText {
+    referenceId: string;
+    html: string;
+}
+
+export interface TaggedVerse extends BibleVerse, Tagged {}
+
+export interface TaggedReference extends Tagged {
+    reference: BibleReference;
+    parallelGroup?: number;
+}
