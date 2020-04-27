@@ -15,7 +15,6 @@ export enum BibleBookKey {
 }
 
 export class BibleReference {
-    id: string;
     book: BibleBookKey;
     chapter: number;
     verses: string;
@@ -29,7 +28,6 @@ export class UiBibleReference {
     verses: string;
     numericReference: number;
     chronologicalIndex: number;
-    parallelGroup?: number;
 
     static toString(ref: UiBibleReference): string {
         return `${ref.book.full}${ref.chapter}:${ref.verses}`;
@@ -58,9 +56,15 @@ export interface VerseText {
     html: string;
 }
 
-export interface TaggedVerse extends BibleVerse, Tagged {}
+export interface TaggedVerse extends BibleVerse, Tagged {
+    parallelGroup?: number;
+}
 
 export interface TaggedReference extends Tagged {
     reference: BibleReference;
     parallelGroup?: number;
 }
+
+export type TaggedVerseCollectionItem = TaggedVerse | TaggedVerse[];
+
+export type TaggedVerseCollection = TaggedVerseCollectionItem[];

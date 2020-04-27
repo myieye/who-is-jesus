@@ -21,6 +21,7 @@ export class ContentTemplate {
     multipleTags = '';
     singleTag = '';
     groupByTag = '';
+    mergeParallels = '';
     about = '';
     noVersesFound = '';
     searchByLanguageOrTranslation = '';

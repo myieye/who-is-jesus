@@ -1,6 +1,11 @@
 import { ContentService } from '../services/content.service';
 
-export enum OptionKey { MultiTags = 'MultiTags', GroupByTag = 'GroupByTag', BGTranslations = 'BGTranslations' }
+export enum OptionKey {
+    MultiTags = 'MultiTags',
+    GroupByTag = 'GroupByTag',
+    MergeParallels = 'MergeParallels',
+    BGTranslations = 'BGTranslations',
+}
 
 export interface Option {
     key: OptionKey;
@@ -26,5 +31,11 @@ export const options = (content: ContentService): Option[] => ([
         displayName: content.groupByTag,
         selectedText: content.groupByTag,
         default: true,
+    },
+    {
+        key: OptionKey.MergeParallels,
+        displayName: content.mergeParallels,
+        selectedText: content.mergeParallels,
+        default: false,
     },
 ]);

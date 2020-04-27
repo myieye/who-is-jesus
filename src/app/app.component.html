@@ -26,7 +26,7 @@
         <app-tagged-verse-group-header *ngIf="tag || selectedTags.length" [tags]="tag || selectedTags">
         </app-tagged-verse-group-header>
         <div *ngFor="let verse of verseGroup || verses" class="verse">
-          <app-verse [verse]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
+          <app-verse [verses]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
         </div>
       </ng-template>
     </ng-container>

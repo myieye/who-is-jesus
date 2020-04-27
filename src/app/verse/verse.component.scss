@@ -6,13 +6,21 @@
 }
 
 .reference {
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+
+.references {
   margin-right: 10px;
-  display: flex;
   color: darkslategray;
 
   .chapter-verse {
     margin-left: 5px;
   }
+}
+
+.reference-container {
+  display: inline-flex;
 }
 
 .verse-number {
@@ -26,18 +34,29 @@
   margin: 0 10px;
 }
 
-@media only screen and ($not-big-screen) {
+.selected-verse .reference {
+  border-bottom-color: darkslategray;
+}
 
+.multiple-references .reference {
+  cursor: pointer;
+}
+
+@media only screen and ($not-big-screen) {
   .verse {
     flex-direction: column;
     max-width: 600px;
     margin: auto;
   }
 
-  .reference {
+  .references {
     margin-bottom: 3px;
     min-width: initial;
     max-width: initial;
+  }
+
+  .reference-container {
+    margin-right: 20px;
   }
 }
 
@@ -55,9 +74,23 @@
     visibility: visible;
   }
 
-  .reference {
+  .references {
     width: 25vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  .reference-container {
     justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .reference-container:not(:last-child) {
+    margin-left: 20px;
   }
 }
 

@@ -13,8 +13,6 @@ export class TaggedVerseGroupHeaderComponent {
   @Input() tags: VerseTag | VerseTag[];
 
   get _tags(): VerseTag[] {
-    return isNil(this.tags) ? []
-      : Array.isArray(this.tags) ? this.tags
-        : [this.tags];
+    return Array.isArray(this.tags) ? this.tags : [this.tags];
   }
 }

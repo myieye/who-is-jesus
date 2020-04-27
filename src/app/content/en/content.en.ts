@@ -34,6 +34,7 @@ from LifeofChrist.com. This is only an approximation as is indicated on their we
     multipleTags: 'Multiple tags',
     singleTag: 'Single tag',
     groupByTag: 'Group by tag',
+    mergeParallels: 'Merge parallels',
     about: 'About',
     noVersesFound: 'No verses match your source/tag filter criteria.',
     searchByLanguageOrTranslation: 'Search for language or translation',

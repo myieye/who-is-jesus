@@ -1,13 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { flatMap, union, difference, intersection, sortBy, isNil } from 'lodash';
+import { flatMap, union, difference, intersection, sortBy, isNil, groupBy } from 'lodash';
 import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { VerseTag, offLimits, VerseTagKey } from './models/tags';
-import { TaggedVerse } from './models/bible';
+import { TaggedVerse, TaggedVerseCollection, TaggedVerseCollectionItem } from './models/bible';
 import { ContentService } from './services/content.service';
 import { OptionsSelection, OptionKey } from './options-list/options';
+import { VERSE_SEPARATOR } from '../utils/constants';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,8 @@ export class AppComponent implements OnInit {
 
   readonly options = OptionKey;
 
-  verses: TaggedVerse[];
-  verseGroups: { tag: VerseTag, verses: TaggedVerse[] }[];
+  verses: TaggedVerseCollection;
+  verseGroups: { tag: VerseTag, verses: TaggedVerseCollection }[];
   tags: VerseTag[];
   activeTags: VerseTagKey[];
   optionsSelection: OptionsSelection = {};
@@ -76,25 +77,31 @@ export class AppComponent implements OnInit {
   }
 
   private refreshVerses(): void {
-    this.verses = this.content.verses;
+    const sourceFilteredVerses = this.verseFilters.all ? this.content.verses
+      : this.content.verses.filter((verse) => this.verseFilters.filters.some(filter => filter(verse)));
+    let tagAndSourceFilteredVerses: TaggedVerse[] = [];
 
-    if (!this.verseFilters.all) {
-      this.verses = this.verses.filter(verse => this.verseFilters.filters.some(filter => filter(verse)));
-    }
+    this.activeTags = this.getVerseTagKeySet(sourceFilteredVerses);
+    const includeAllTags = !this.selectedTagKeys.length;
 
-    this.activeTags = this.getVerseTagKeySet(this.verses);
+    this.verses = this.filterVersesAndMergeParallels(sourceFilteredVerses, (verse) => {
+      const include = includeAllTags || intersection(verse.tags, this.selectedTagKeys).length > 0;
+      if (include) {
+        tagAndSourceFilteredVerses.push(verse);
+      }
+      return include;
+    });
 
-    if (this.selectedTagKeys.length) {
-      this.verses = this.verses.filter(verse => intersection(verse.tags, this.selectedTagKeys).length);
-    }
-
-    this.sortVerses();
-
-    if (this.groupByTag) {
-      this.verseGroups = this.selectedTagKeys.map((tag) => ({
-        tag: this.content.tags[tag],
-        verses: this.verses.filter((verse) => verse.tags.includes(tag)),
-      }));
+    if (!this.groupByTag) {
+      this.sortVerses();
+    } else {
+      tagAndSourceFilteredVerses = this.sortVerses(tagAndSourceFilteredVerses) as TaggedVerse[];
+      this.verseGroups = this.selectedTagKeys.map((tag) => {
+        return {
+          tag: this.content.tags[tag],
+          verses: this.filterVersesAndMergeParallels(tagAndSourceFilteredVerses, (verse) => verse.tags.includes(tag)),
+        };
+      });
     }
 
     this.ref.markForCheck();
@@ -117,10 +124,68 @@ export class AppComponent implements OnInit {
     return difference(union(flatMap(verses, v => v.tags)), offLimits);
   }
 
-  private sortVerses(): void {
-    if (this.verseIndexer) {
-      this.verses = sortBy(this.verses, this.verseIndexer);
-      this.ref.markForCheck();
+  private sortVerses(verses?: TaggedVerseCollection): TaggedVerseCollection {
+    const unsortedVerses = verses ?? this.verses;
+
+    if (isNil(this.verseIndexer)) {
+      return unsortedVerses;
     }
+
+    const sortedVerses = sortBy(unsortedVerses, (verse) =>
+    this.verseIndexer(this.mapVerseCollectionItemToVerse(verse)));
+    if (isNil(verses)) {
+      this.verses = sortedVerses;
+      this.ref.detectChanges();
+    }
+
+    return sortedVerses;
+  }
+
+  private filterVersesAndMergeParallels(verses: TaggedVerse[], filter: (verse: TaggedVerse) => boolean): TaggedVerseCollection {
+    const parallelGroups: { [index: number]: TaggedVerse[] } = {};
+    const filteredVerses: TaggedVerseCollection = [];
+
+    for (const verse of verses) {
+      const include = filter(verse);
+      const parallelGroup = verse.parallelGroup;
+      if (include) {
+        if (this.optionsSelection.MergeParallels && !isNil(parallelGroup)) {
+          if (isNil(parallelGroups[parallelGroup])) {
+            parallelGroups[parallelGroup] = [];
+            filteredVerses.push(parallelGroups[parallelGroup]);
+          }
+          parallelGroups[parallelGroup].push(verse);
+        } else {
+          filteredVerses.push(verse);
+        }
+      }
+    }
+
+    for (const parallels of Object.values(parallelGroups) as TaggedVerse[][]) {
+      const sortedParallels = sortBy(parallels, (verse) => verse.reference.numericReference);
+      const bookGroupedParallels = groupBy(sortedParallels, (verse) => verse.reference.book.key);
+      parallels.length = 0;
+      for (const bookGroup of Object.values(bookGroupedParallels) as TaggedVerse[][]) {
+        let mergedBookVerses = bookGroup.shift();
+        while (bookGroup.length > 0) {
+          const nextBookVerse = bookGroup.shift();
+          mergedBookVerses = {
+            reference: {
+              ...mergedBookVerses.reference,
+              verses: `${mergedBookVerses.reference.verses}, ${nextBookVerse.reference.verses}`,
+            },
+            html: `${mergedBookVerses.html}${VERSE_SEPARATOR}${nextBookVerse.html}`,
+            tags: union(mergedBookVerses.tags, nextBookVerse.tags),
+          };
+        }
+        parallels.push(mergedBookVerses);
+      }
+    }
+
+    return filteredVerses;
+  }
+
+  private mapVerseCollectionItemToVerse(item: TaggedVerseCollectionItem): TaggedVerse {
+    return Array.isArray(item) ? item[0] : item;
   }
 }

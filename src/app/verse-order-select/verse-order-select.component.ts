@@ -1,11 +1,8 @@
-import { Component, Output, EventEmitter, ViewChild, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { VerseOrder, VerseIndexer, verseOrders } from './verse-orders';
 import { MatSelect } from '@angular/material/select';
 import { first, isNil } from 'lodash';
 import { ContentService } from '../services/content.service';
-import { Router } from '@angular/router';
-import { skip, take, takeUntil } from 'rxjs/operators';
-import { timer } from 'rxjs';
 import { QueryParamService } from '../services/query-param.service';
 
 const ORDER_PARAM = 'order';
@@ -13,7 +10,8 @@ const ORDER_PARAM = 'order';
 @Component({
   selector: 'app-verse-order-select',
   templateUrl: './verse-order-select.component.html',
-  styleUrls: ['./verse-order-select.component.scss']
+  styleUrls: ['./verse-order-select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerseOrderSelectComponent implements OnInit {
 
