@@ -24,8 +24,10 @@ and even what He has to say about Himself.`,
 All verses are quoted from the <a href="https://worldenglish.bible/">World English Bible</a> (WEB) translation.
 The WEB was chosen, because it both aims to be true to the original text and is in the public domain.
 I encourage you to read the verses in other translations as well.
-For this purpose, a link to <a href="https://www.biblegateway.com/">Bible Gateway</a> has been provided next to each Bible reference.
-<span class="big-screen-content">Hover over the verse to reveal the link.</span>`,
+For this purpose, a link to <a href="https://www.biblegateway.com/">Bible Gateway</a>
+<span class="inline-icon-container"><img src="assets/bible-gateway-icon.ico"></span>
+has been provided next to each Bible reference.
+<span class="big-screen-content">Hover over the reference to reveal the link.</span>`,
     infoChronology: `
 Chronological sorting is based on <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a>
 from LifeofChrist.com. This is only an approximation as is indicated on their website.`,

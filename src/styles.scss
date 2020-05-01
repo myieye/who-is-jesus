@@ -131,3 +131,17 @@ body {
     }
   }
 }
+
+.inline-icon-container {
+  position: relative;
+  top: 2px;
+
+  @media only screen and ($not-big-screen) {
+    margin-left: initial;
+  }
+
+  img {
+    height: 1em;
+    filter: grayscale(100%);
+  }
+}

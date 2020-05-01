@@ -64,6 +64,10 @@
   }
 }
 
+.actions>* {
+  padding-left: 5px;
+}
+
 @media only screen and ($big-screen) {
   .text {
     width: 600px;
@@ -74,7 +78,7 @@
     visibility: hidden;
   }
 
-  .verse:hover .actions {
+  .reference-container:hover .actions {
     visibility: visible;
   }
 
@@ -95,25 +99,6 @@
 
   .reference-container:not(:last-child) {
     margin-left: 20px;
-  }
-}
-
-.actions {
-  height: 1em;
-  position: relative;
-  top: 2px;
-
-  @media only screen and ($not-big-screen) {
-    margin-left: initial;
-  }
-
-  &>* {
-    padding-left: 5px;
-  }
-
-  img {
-    height: 100%;
-    filter: grayscale(100%);
   }
 }
 
