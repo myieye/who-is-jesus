@@ -1,8 +1,7 @@
 <div class="verse">
     <div class="references" [class.multiple-references]="_verses.length > 1">
-        <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)"
-            [class.selected-verse]="_verses.length > 1 && verse === selectedVerse">
-            <span class="reference">
+        <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)">
+            <span class="reference" [class.selected-verse]="_verses.length > 1 && verse === selectedVerse">
                 <span class="book">{{verse.reference.book.abbr}}</span>
                 <span class="chapter-verse">
                     <span class="chapter">{{verse.reference.chapter}}</span>

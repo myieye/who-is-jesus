@@ -33,13 +33,16 @@
   content: '...';
   margin: 0 10px;
 }
-
-.selected-verse .reference {
-  border-bottom-color: darkslategray;
+.multiple-references .reference {
+  cursor: pointer;
 }
 
 .multiple-references .reference {
-  cursor: pointer;
+  border-bottom-color: #ccc;
+
+  &.selected-verse {
+    border-bottom-color: darkslategray;
+  }
 }
 
 @media only screen and ($not-big-screen) {
