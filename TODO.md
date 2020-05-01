@@ -1,9 +1,10 @@
 # Todo
 
 ## Doing
-- [Design(2)] Center verses + references better
+- [Design(2)] Center Tag-group-header texts to match verses and references
 
 ## Ideas/Backlog
+- [Content(2)] Add impressum (in info dialog)
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(4)] Simplify/Group tags for better overview
 - [Option(2)] Show verse tags [on/off = off]
@@ -13,6 +14,7 @@
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Design(2)] Center verses in page
 - [Design(2)] Center tag list
 - [Option(3)] Merge parallels [on/off = off]
 - [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)

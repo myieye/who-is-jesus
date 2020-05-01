@@ -1,28 +1,26 @@
-<div class="verse">
-    <div class="references" [class.multiple-references]="_verses.length > 1">
-        <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)">
-            <span class="reference" [class.selected-verse]="_verses.length > 1 && verse === selectedVerse">
-                <span class="book">{{verse.reference.book.abbr}}</span>
-                <span class="chapter-verse">
-                    <span class="chapter">{{verse.reference.chapter}}</span>
-                    <span class="colon">:</span>
-                    <span class="verses">{{verse.reference.verses}}</span>
-                </span>
-            </span>
-            <span class="inline-icon-container actions">
-                <a class="other-translations" [title]="content.bibleGatewayLinkDescription" target="_blank"
-                    href="{{getOtherTranslationsLink(verse.reference)}}">
-                    <img src="assets/bible-gateway-icon.ico">
-                </a>
+<div class="references" [class.multiple-references]="_verses.length > 1">
+    <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)">
+        <span class="reference" [class.selected-verse]="_verses.length > 1 && verse === selectedVerse">
+            <span class="book">{{verse.reference.book.abbr}}</span>
+            <span class="chapter-verse">
+                <span class="chapter">{{verse.reference.chapter}}</span>
+                <span class="colon">:</span>
+                <span class="verses">{{verse.reference.verses}}</span>
             </span>
         </span>
+        <span class="inline-icon-container actions">
+            <a class="other-translations" [title]="content.bibleGatewayLinkDescription" target="_blank"
+                href="{{getOtherTranslationsLink(verse.reference)}}">
+                <img src="assets/bible-gateway-icon.ico">
+            </a>
+        </span>
+    </span>
+</div>
+<div class="text-container">
+    <div class="verse-tags" *ngIf="debugTags">
+        <span *ngFor="let tag of getTagsForVerse(selectedVerse); let last = last">
+            {{tag}}<ng-container *ngIf="!last">, </ng-container>
+        </span>
     </div>
-    <div>
-        <div class="verse-tags" *ngIf="debugTags">
-            <span *ngFor="let tag of getTagsForVerse(selectedVerse); let last = last">
-                {{tag}}<ng-container *ngIf="!last">, </ng-container>
-            </span>
-        </div>
-        <div class="text" [innerHTML]="selectedVerse.html"></div>
-    </div>
+    <div class="text" [innerHTML]="selectedVerse.html"></div>
 </div>

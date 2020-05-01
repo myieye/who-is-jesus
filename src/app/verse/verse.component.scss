@@ -1,8 +1,19 @@
 @import "../../vars.scss";
 
-.verse {
-  display: flex;
+:host {
+  display: grid;
+  grid-template-columns: 1fr $text-block-width 1fr;
+  // #{'min(55vw, #{$text-block-width})'} would be better, but it's not well supported yet
+  // check Matt.24:27, 30-31 (parallels merged)
   line-height: 1.5em;
+}
+
+.references {
+  grid-column: 1;
+}
+  
+.text-container {
+  grid-column: 2;
 }
 
 .reference {
@@ -36,9 +47,9 @@
 }
 
 @media only screen and ($not-big-screen) {
-  .verse {
-    flex-direction: column;
-    max-width: 600px;
+  :host {
+    display: block;
+    max-width: $text-block-width;
     margin: auto;
   }
 
@@ -50,19 +61,11 @@
 
   .reference-container {
     margin-right: 20px;
+    margin-top: 5px;
   }
-}
-
-.actions > * {
-  padding-left: 5px;
 }
 
 @media only screen and ($big-screen) {
-  .text {
-    width: 600px;
-    max-width: 65vw;
-  }
-
   .actions {
     visibility: hidden;
   }
@@ -72,7 +75,6 @@
   }
 
   .references {
-    width: 25vw;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -89,6 +91,10 @@
   .reference-container:not(:last-child) {
     margin-left: 20px;
   }
+}
+
+.actions > * {
+  padding-left: 5px;
 }
 
 .verse-tags {
