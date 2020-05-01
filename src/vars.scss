@@ -17,3 +17,8 @@ $mid-grey: #333;
 $light-grey: #CCC;
 
 $text-block-width: 600px;
+
+@mixin centered-grid-column-layout {
+  display: grid;
+  grid-template-columns: 1fr $text-block-width 1fr;
+}

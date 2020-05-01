@@ -1,8 +1,7 @@
 @import "../../vars.scss";
 
 :host {
-  display: grid;
-  grid-template-columns: 1fr $text-block-width 1fr;
+  @include centered-grid-column-layout;
   // #{'min(55vw, #{$text-block-width})'} would be better, but it's not well supported yet
   // check Matt.24:27, 30-31 (parallels merged)
   line-height: 1.5em;
@@ -11,7 +10,7 @@
 .references {
   grid-column: 1;
 }
-  
+
 .text-container {
   grid-column: 2;
 }
