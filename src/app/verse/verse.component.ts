@@ -7,7 +7,6 @@ import { DebugSettings } from '../../debug-settings';
   selector: 'app-verse',
   templateUrl: './verse.component.html',
   styleUrls: ['./verse.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class VerseComponent {
 
