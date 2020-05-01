@@ -1,8 +1,10 @@
+@import './../../vars.scss';
+
 .search-field {
     width: 100%;
 }
 
 .mat-chip.mat-standard-chip.label-chip.default {
-    color: #555;
-    border-color: #555;
+    color: $dark-grey;
+    border-color: $dark-grey;
 }

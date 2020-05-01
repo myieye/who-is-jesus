@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import './../../vars.scss';
 
 @mixin wij-info-dialog-theme($theme) {
     // Extract the palettes you need from the theme definition.
@@ -7,7 +8,7 @@
 
     app-info-dialog {
         a {
-            color: #555;
+            color: $dark-grey;
             font-weight: 600;
             text-decoration-color: mat-color($primary);
             text-decoration-thickness: 2px;

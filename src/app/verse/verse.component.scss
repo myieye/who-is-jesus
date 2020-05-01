@@ -24,7 +24,7 @@
 }
 
 .verse-number {
-  color: #666;
+  color: $dark-grey;
   line-height: 0;
   margin-right: 2px;
 }
@@ -33,15 +33,16 @@
   content: '...';
   margin: 0 10px;
 }
+
 .multiple-references .reference {
   cursor: pointer;
 }
 
 .multiple-references .reference {
-  border-bottom-color: #ccc;
+  border-bottom-color: $light-grey;
 
   &.selected-verse {
-    border-bottom-color: darkslategray;
+    border-bottom-color: $mid-grey;
   }
 }
 
