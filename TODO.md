@@ -1,20 +1,19 @@
 # Todo
 
 ## Doing
-
+- [Design(2)] Center verses + references better
 
 ## Ideas/Backlog
-- [Design(2)] (?) Center tag list: max-width: 850px and justify-items: center
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(4)] Simplify/Group tags for better overview
 - [Option(2)] Show verse tags [on/off = off]
 - [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
-- [Design(2)] Center verses + references better
 - [Content(5)] (?) More thorough discussions for each tag
 - [Design(2)] (?) Hero image
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Design(2)] Center tag list
 - [Option(3)] Merge parallels [on/off = off]
 - [Function(2)] When "Group by tag" disabled show all tags + descriptions at top (Me + Calvin)
 - [Design(2)] Only stick tags when bottom of list is at top of screen

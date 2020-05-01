@@ -17,7 +17,6 @@ import { QueryParamService } from '../services/query-param.service';
 import { ScreenSizeService } from '../services/screen-size.service';
 
 const TAG_PARAM = 'tags';
-const COLLAPSED_TAG_LIST_HEIGHT = 50;
 
 @Component({
   selector: 'app-tag-list',
@@ -67,6 +66,7 @@ export class TagListComponent implements AfterViewInit {
   @ViewChild('chipList', { static: true }) chipList: MatChipList;
   @ViewChild('stickyChipList', { static: true }) stickyChipList: MatChipList;
   @ViewChild('container', { static: true, read: ElementRef }) container: ElementRef<HTMLElement>;
+  @ViewChild('stickyContainer', { static: true, read: ElementRef }) stickyContainer: ElementRef<HTMLElement>;
 
   collapsed = !this.screenSizeService.isVeryBigScreen;
   stickyListVisible: boolean;
@@ -132,13 +132,10 @@ export class TagListComponent implements AfterViewInit {
 
   private updateStickyList(): void {
     const rect = this.container.nativeElement.getBoundingClientRect();
-    if (this.screenSizeService.isVeryBigScreen) {
-      this.stickyListVisible = rect.top <= 0 && (this.cachedChipSelection?.length ?? 0) > 0;
-    } else {
-      const hasSelectedTags = this.selectedChips.length > 0;
-      this.stickyListVisible = hasSelectedTags && rect.bottom <= COLLAPSED_TAG_LIST_HEIGHT;
-    }
+    const stickyListHeight = this.stickyContainer.nativeElement.clientHeight;
+    const hasSelectedTags = this.selectedChips.length > 0;
 
+    this.stickyListVisible = hasSelectedTags && rect.bottom <= stickyListHeight;
     this.collapsed = !this.screenSizeService.isVeryBigScreen;
   }
 
