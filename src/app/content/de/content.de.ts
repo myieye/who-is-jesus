@@ -32,7 +32,7 @@ Die Chronologische Sortierung basiert auf <a href="http://www.lifeofchrist.com/L
 von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auch auf ihrer Webseite angeben.`,
 feedbackTitle: 'Feedback',
 feedbackInfo: `Hast du Fragen oder Ideen?
-Besuche meine Homepage, <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>,
+Besuche meine Homepage at <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>
 oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>.`,
     options: 'Optionen',
     multipleTagSelection: 'Multi-Tag Auswahl',

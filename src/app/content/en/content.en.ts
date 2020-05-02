@@ -33,7 +33,7 @@ Chronological sorting is based on <a href="http://www.lifeofchrist.com/Life/Harm
 from LifeofChrist.com. This is only an approximation as is indicated on their website.`,
     feedbackTitle: 'Feedback',
     feedbackInfo: `Do you have questions or ideas?
-Visit my homepage, <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>,
+Visit my homepage at <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>
 or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>.`,
     options: 'Options',
     multipleTagSelection: 'Multiple tag selection',
