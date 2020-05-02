@@ -9,9 +9,9 @@ import {
   ChangeDetectionStrategy,
   AfterViewInit,
 } from '@angular/core';
-import { MatChip, MatChipList } from '@angular/material/chips';
+import { MatChip } from '@angular/material/chips';
 import { VerseTagKey, VerseTag } from '../models/tags';
-import { isNil, first } from 'lodash';
+import { first, difference } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { QueryParamService } from '../services/query-param.service';
 import { ScreenSizeService } from '../services/screen-size.service';
@@ -36,10 +36,10 @@ export class TagListComponent implements AfterViewInit {
   set multiple(multiple: boolean) {
     if (this._multiple !== multiple) {
       this._multiple = multiple;
-      if (!multiple) {
-        this.reduceSelectionToLastSelected();
-      } else {
+      if (multiple) {
         this.restoreCachedSelection();
+      } else {
+        this.reduceSelectionToLastSelected();
       }
     }
   }
@@ -48,17 +48,19 @@ export class TagListComponent implements AfterViewInit {
   }
 
   @Input()
-  tags: VerseTag[] = [];
+  set tags(tags: VerseTag[]) {
+    this._tags = tags;
+    this.tagKeys = tags.map((tag) => tag.key);
+  }
+
+  get tags(): VerseTag[] {
+    return this._tags;
+  }
 
   @Input()
   set activeTags(activeTags: VerseTagKey[]) {
     this._activeTags = activeTags || [];
-
-    if (isNil(this.chipList) || isNil(this.chipList.chips)) {
-      return;
-    }
-
-    this.updateChipStates();
+    this.updateTagStates();
   }
   get activeTags(): VerseTagKey[] {
     return this._activeTags;
@@ -66,29 +68,23 @@ export class TagListComponent implements AfterViewInit {
 
   @Output() readonly selectedTagsChange = new EventEmitter<Array<VerseTagKey>>();
 
-  @ViewChild('chipList', { static: true }) chipList: MatChipList;
-  @ViewChild('stickyChipList', { static: true }) stickyChipList: MatChipList;
   @ViewChild('container', { static: true, read: ElementRef }) container: ElementRef<HTMLElement>;
   @ViewChild('stickyContainer', { static: true, read: ElementRef }) stickyContainer: ElementRef<HTMLElement>;
 
+  selectedTagMap: { [key in VerseTagKey]?: true } = {};
+  disabledTagMap: { [key in VerseTagKey]?: true } = {};
   collapsed = !this.screenSizeService.isVeryBigScreen;
   stickyListVisible: boolean;
+  private _tags: VerseTag[] = [];
+  private tagKeys: VerseTagKey[] = [];
   private _multiple: boolean;
   private _activeTags: VerseTagKey[];
-  private lastSelectedChip: MatChip;
-  private cachedSelectedChips: MatChip[];
-  private allChips: MatChip[];
-
-  private get selectedChips(): MatChip[] {
-    return this.chipList?.chips?.filter(chip => chip.selected) || [];
-  }
-
-  private get selectedTags(): VerseTagKey[] {
-    return this.selectedChips.map(chip => chip.value.key);
-  }
+  private lastSelectedTag: VerseTagKey;
+  private cachedSelectedTags: VerseTagKey[];
+  private selectedTags: VerseTagKey[] = [];
 
   private get hasSelectedTags(): boolean {
-    return this.selectedChips.length > 0;
+    return this.selectedTags.length > 0;
   }
 
   constructor(
@@ -98,30 +94,17 @@ export class TagListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.allChips = [...this.chipList.chips.toArray(), ...this.stickyChipList.chips.toArray()];
-
     this.paramService.loadParams(TAG_PARAM, tags => {
-      this.allChips
-        .filter(chip => tags.includes(chip.value.key))
-        .forEach(chip => chip.select());
-      this.selectedTagsChanged(false);
+      this.setSelectedTags(tags as VerseTagKey[]);
     });
 
-    this.cacheSelectedChips();
-    this.lastSelectedChip = first(this.cachedSelectedChips);
-    this.updateChipStates();
+    this.cacheSelectedTags();
+    this.lastSelectedTag = first(this.cachedSelectedTags);
+    this.updateTagStates();
   }
 
   chipClicked(chip: MatChip) {
-    if (!chip.selected) {
-      this.lastSelectedChip = chip;
-    }
-
-    this.toggleChip(chip);
-
-    this.cacheSelectedChips();
-    this.selectedTagsChanged();
-
+    this.selectTag(chip.value.key, !chip.selected);
     const wasVisible = this.stickyListVisible;
     this.updateStickyList();
     setTimeout(() => {
@@ -136,60 +119,68 @@ export class TagListComponent implements AfterViewInit {
     this.updateStickyList();
   }
 
-  private toggleChip(chip: MatChip, selected?: boolean): void {
-    this.allChips.forEach((c) => {
-      if (c.value === chip.value) {
-        if (isNil(selected)) {
-          c.toggleSelected(true);
-        } else {
-          c.selected = selected;
-        }
-      } else if (!this.multiple) {
-        c.deselect();
+  private selectTag(tag: VerseTagKey, select = true): void {
+    if (select) {
+      this.lastSelectedTag = tag;
+    }
+
+    if (this.multiple) {
+      if (select) {
+        this.setSelectedTags([...this.selectedTags, tag]);
+      } else {
+        this.setSelectedTags(this.selectedTags.filter((selectedTag) => selectedTag !== tag));
       }
-    });
+    } else {
+      if (select) {
+        this.setSelectedTags([tag]);
+      } else {
+        this.setSelectedTags([]);
+      }
+    }
+
+    this.cacheSelectedTags();
   }
 
   private updateStickyList(): void {
     const rect = this.container.nativeElement.getBoundingClientRect();
     const stickyListHeight = this.stickyContainer.nativeElement.clientHeight;
-
     this.stickyListVisible = this.hasSelectedTags && rect.bottom <= stickyListHeight;
     this.collapsed = !this.screenSizeService.isVeryBigScreen;
   }
 
-  private updateChipStates(): void {
-    this.allChips.forEach((chip) => chip.disabled = this.isDisabled(chip.value));
-  }
-
-  private isDisabled(tag: VerseTag): boolean {
-    return !(this.activeTags.length === 0 || this.activeTags.includes(tag.key));
+  private updateTagStates(): void {
+    this.disabledTagMap = {};
+    if (this.activeTags.length > 0 && this.activeTags.length < this.tags.length) {
+      difference(this.activeTags, this.tagKeys).forEach((tag) => this.disabledTagMap[tag] = true);
+    }
   }
 
   private reduceSelectionToLastSelected() {
-    if (this.selectedChips.length > 1) {
-      this.allChips
-        .filter(chip => chip.value !== this.lastSelectedChip.value)
-        .forEach(chip => chip.deselect());
+    if (this.selectedTags.length > 1) {
+      this.setSelectedTags([this.lastSelectedTag]);
     }
-    this.selectedTagsChanged();
   }
 
   private restoreCachedSelection() {
-    if (this.cachedSelectedChips?.length) {
-      this.cachedSelectedChips?.forEach(chip => this.toggleChip(chip, true));
-      this.selectedTagsChanged();
+    if (this.cachedSelectedTags?.length) {
+      this.setSelectedTags(this.cachedSelectedTags);
     }
   }
 
   private selectedTagsChanged(saveToUrl = true): void {
     const selectedTags = this.selectedTags;
     this.selectedTagsChange.emit(selectedTags);
-
     this.paramService.saveParam(TAG_PARAM, selectedTags, saveToUrl);
   }
 
-  private cacheSelectedChips(): void {
-    this.cachedSelectedChips = this.selectedChips;
+  private cacheSelectedTags(): void {
+    this.cachedSelectedTags = this.selectedTags;
+  }
+
+  private setSelectedTags(tags: VerseTagKey[]): void {
+    this.selectedTags = tags;
+    this.selectedTagMap = {};
+    tags.forEach((tag) => this.selectedTagMap[tag] = true);
+    this.selectedTagsChanged();
   }
 }
