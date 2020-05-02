@@ -1,7 +1,7 @@
 # Todo
 
 ## Doing
-- [Bugfix(1)] Sticky tag list not synced when changing between single/multi selection
+- [Bugfix(1)] Tags not properly synced to URL when changing between single/multi
 
 ## Ideas/Backlog
 - [Bugfix(1)] Combo boxes don't fit in screen at certain size
@@ -15,6 +15,7 @@
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Bugfix(1)] Sticky tag list not synced when changing between single/multi selection
 - [Bugfix(1)] Couldn't change back to single tag selection?
 - [Design(2)] Center Tag-group-header texts to match verses and references
 - [Design(2)] Center verses in page

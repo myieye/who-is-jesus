@@ -112,18 +112,12 @@ export class TagListComponent implements AfterViewInit {
     this.updateChipStates();
   }
 
-  chipClicked(clickedChip: MatChip) {
-    if (!clickedChip.selected) {
-      this.lastSelectedChip = clickedChip;
+  chipClicked(chip: MatChip) {
+    if (!chip.selected) {
+      this.lastSelectedChip = chip;
     }
 
-    this.allChips.forEach((chip) => {
-      if (chip.value === clickedChip.value) {
-        chip.toggleSelected(true);
-      } else if (!this.multiple) {
-        chip.deselect();
-      }
-    });
+    this.toggleChip(chip);
 
     this.cacheSelectedChips();
     this.selectedTagsChanged();
@@ -140,6 +134,20 @@ export class TagListComponent implements AfterViewInit {
   @HostListener('window:scroll')
   onScroll() {
     this.updateStickyList();
+  }
+
+  private toggleChip(chip: MatChip, selected?: boolean): void {
+    this.allChips.forEach((c) => {
+      if (c.value === chip.value) {
+        if (isNil(selected)) {
+          c.toggleSelected(true);
+        } else {
+          c.selected = selected;
+        }
+      } else if (!this.multiple) {
+        c.deselect();
+      }
+    });
   }
 
   private updateStickyList(): void {
@@ -159,10 +167,9 @@ export class TagListComponent implements AfterViewInit {
   }
 
   private reduceSelectionToLastSelected() {
-    const chips = this.selectedChips;
-    if (chips.length > 1) {
-      chips
-        .filter(chip => chip !== this.lastSelectedChip)
+    if (this.selectedChips.length > 1) {
+      this.allChips
+        .filter(chip => chip.value !== this.lastSelectedChip.value)
         .forEach(chip => chip.deselect());
     }
     this.selectedTagsChanged();
@@ -170,7 +177,7 @@ export class TagListComponent implements AfterViewInit {
 
   private restoreCachedSelection() {
     if (this.cachedSelectedChips?.length) {
-      this.cachedSelectedChips?.forEach(chip => chip.select());
+      this.cachedSelectedChips?.forEach(chip => this.toggleChip(chip, true));
       this.selectedTagsChanged();
     }
   }
