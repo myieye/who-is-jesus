@@ -70,6 +70,10 @@ h3 {
   max-width: 100%;
   border-bottom: 3px solid mat-color($primary);
   font-size: 2em;
+
+  @media only screen and ($small-screen) {
+    font-size: 1.6em;
+  }
 }
 
 app-root, app-tag-list {
