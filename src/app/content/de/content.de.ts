@@ -14,12 +14,11 @@ export const CONTENT: Content = {
     sources: 'Quellen',
     order: 'Reihenfolge',
     infoAboutTitle: 'Worum geht es?',
-    infoBibleTranslationTitle: 'Bibelübersetzung',
-    infoChronologyTitle: 'Chronologie',
     infoAbout: `
 Jeder soll wissen, wer <span class="jesus-glory">Jesus</span> ist!
 Diese Webseite ist ein hilfreiches Werkzeug um zu entdecken, was die Evangelien
 (und sogar Jesus selbst) über Ihn zu sagen haben.`,
+    infoBibleTranslationTitle: 'Bibelübersetzung',
     infoBibleTranslation: `
 Alle Verse werden aus der <a href="https://ngue.info/">Neuen Genfer Übersetzung</a> (NGÜ) zitiert.
 Die NGÜ wurde gewählt, weil sie treu zum originalen Text und auch leicht verständlich ist.
@@ -27,9 +26,14 @@ Es finden sich neben den Bibelstellen auch Links zu <a href="https://www.biblega
 <span class="inline-icon-container"><img src="assets/bible-gateway-icon.ico"></span>,
 um die Verse in anderen Übersetzungen zu lesen.
 <span class="big-screen-content">Beim Drüberfahren mit der Maus über eine Bibelstelle wird der Link angezeigt.</span>`,
+    infoChronologyTitle: 'Chronologie',
     infoChronology: `
 Die Chronologische Sortierung basiert auf <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a>
 von LifeofChrist.com. Dies ist schlichtweg eine Annahme, wie die Herausgeber auch auf ihrer Webseite angeben.`,
+feedbackTitle: 'Feedback',
+feedbackInfo: `Hast du Fragen oder Ideen?
+Besuche meine Homepage, <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>,
+oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>.`,
     options: 'Optionen',
     multipleTagSelection: 'Multi-Tag Auswahl',
     multipleTags: 'Multi-Tag',

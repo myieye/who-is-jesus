@@ -14,12 +14,11 @@ export const CONTENT: Content = {
     sources: 'Sources',
     order: 'Order',
     infoAboutTitle: 'About',
-    infoBibleTranslationTitle: 'Bible Translation',
-    infoChronologyTitle: 'Chronology',
     infoAbout: `
 Everyone should know who <span class="jesus-glory">Jesus</span> is!
 This site is a streamlined tool for discovering what the Gospels have to say about Him
 and even what He has to say about Himself.`,
+    infoBibleTranslationTitle: 'Bible Translation',
     infoBibleTranslation: `
 All verses are quoted from the <a href="https://worldenglish.bible/">World English Bible</a> (WEB) translation.
 The WEB was chosen, because it both aims to be true to the original text and is in the public domain.
@@ -28,9 +27,14 @@ For this purpose, a link to <a href="https://www.biblegateway.com/">Bible Gatewa
 <span class="inline-icon-container"><img src="assets/bible-gateway-icon.ico"></span>
 has been provided next to each Bible reference.
 <span class="big-screen-content">Hover over the reference to reveal the link.</span>`,
+    infoChronologyTitle: 'Chronology',
     infoChronology: `
 Chronological sorting is based on <a href="http://www.lifeofchrist.com/Life/Harmony">Harmony of the Gospels</a>
 from LifeofChrist.com. This is only an approximation as is indicated on their website.`,
+    feedbackTitle: 'Feedback',
+    feedbackInfo: `Do you have questions or ideas?
+Visit my homepage, <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>,
+or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>.`,
     options: 'Options',
     multipleTagSelection: 'Multiple tag selection',
     multipleTags: 'Multiple tags',

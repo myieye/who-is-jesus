@@ -11,11 +11,13 @@ export class ContentTemplate {
     sources = '';
     order = '';
     infoAboutTitle = '';
-    infoBibleTranslationTitle = '';
-    infoChronologyTitle = '';
     infoAbout = '';
+    infoBibleTranslationTitle = '';
     infoBibleTranslation = '';
+    infoChronologyTitle = '';
     infoChronology = '';
+    feedbackTitle = '';
+    feedbackInfo = '';
     options = '';
     multipleTagSelection = '';
     multipleTags = '';

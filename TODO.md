@@ -1,18 +1,23 @@
 # Todo
 
 ## Doing
-- [Content(2)] Add impressum (in info dialog)
+- [Bugfix(1)] Info-dialog headers don't fit on small screens
 
 ## Ideas/Backlog
+- [Bugfix(1)] BG translation dialog: can't close keyboard on enter in search field
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(4)] Simplify/Group tags for better overview
-- [Option(2)] Show verse tags [on/off = off]
+- [Option(2)] Show verse tags. Either:
+    - Simple clickable circle with number
+    - [on/off = off]
 - [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
 - [Content(5)] (?) More thorough discussions for each tag
 - [Design(2)] (?) Hero image
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Content(2)] Add feedback section to info dialog
+    - Don't need an Impressum (https://www.impressum-generator.de/2016/11/impressumspflicht-private-homepage/)
 - [Bugfix(1)] Combo boxes don't fit in screen at certain size
 - [Bugfix(1)] Tags not properly synced to URL when changing between single/multi
 - [Bugfix(1)] Sticky tag list not synced when changing between single/multi selection
