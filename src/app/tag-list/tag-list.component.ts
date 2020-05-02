@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
 import { VerseTagKey, VerseTag } from '../models/tags';
-import { isNil } from 'lodash';
+import { isNil, first } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { QueryParamService } from '../services/query-param.service';
 import { ScreenSizeService } from '../services/screen-size.service';
@@ -32,16 +32,19 @@ const TAG_PARAM = 'tags';
 })
 export class TagListComponent implements AfterViewInit {
 
-  @Input() set multiple(multiple: boolean) {
+  @Input()
+  set multiple(multiple: boolean) {
     if (this._multiple !== multiple) {
       this._multiple = multiple;
       if (!multiple) {
         this.reduceSelectionToLastSelected();
       } else {
-        this.chipList.multiple = this.stickyChipList.multiple = true;
         this.restoreCachedSelection();
       }
     }
+  }
+  get multiple(): boolean {
+    return this._multiple;
   }
 
   @Input()
@@ -70,10 +73,10 @@ export class TagListComponent implements AfterViewInit {
 
   collapsed = !this.screenSizeService.isVeryBigScreen;
   stickyListVisible: boolean;
-  _multiple: boolean;
+  private _multiple: boolean;
   private _activeTags: VerseTagKey[];
   private lastSelectedChip: MatChip;
-  private cachedChipSelection: MatChip[];
+  private cachedSelectedChips: MatChip[];
   private allChips: MatChip[];
 
   private get selectedChips(): MatChip[] {
@@ -82,6 +85,10 @@ export class TagListComponent implements AfterViewInit {
 
   private get selectedTags(): VerseTagKey[] {
     return this.selectedChips.map(chip => chip.value.key);
+  }
+
+  private get hasSelectedTags(): boolean {
+    return this.selectedChips.length > 0;
   }
 
   constructor(
@@ -97,29 +104,34 @@ export class TagListComponent implements AfterViewInit {
       this.allChips
         .filter(chip => tags.includes(chip.value.key))
         .forEach(chip => chip.select());
-      this.cachedChipSelection = this.selectedChips;
       this.selectedTagsChanged(false);
     });
 
+    this.cacheSelectedChips();
+    this.lastSelectedChip = first(this.cachedSelectedChips);
     this.updateChipStates();
   }
 
-  chipClicked(chip: MatChip) {
-    if (!chip.selected) {
-      this.lastSelectedChip = chip;
+  chipClicked(clickedChip: MatChip) {
+    if (!clickedChip.selected) {
+      this.lastSelectedChip = clickedChip;
     }
 
-    this.chipList.chips.find((c) => c.value === chip.value).toggleSelected(true);
-    this.stickyChipList.chips.find((c) => c.value === chip.value).toggleSelected(true);
+    this.allChips.forEach((chip) => {
+      if (chip.value === clickedChip.value) {
+        chip.toggleSelected(true);
+      } else if (!this.multiple) {
+        chip.deselect();
+      }
+    });
 
-    this.cachedChipSelection = this.selectedChips;
-    const hasSelectedTags = this.cachedChipSelection.length > 0;
+    this.cacheSelectedChips();
     this.selectedTagsChanged();
 
     const wasVisible = this.stickyListVisible;
     this.updateStickyList();
     setTimeout(() => {
-      if (!hasSelectedTags && wasVisible) {
+      if (!this.hasSelectedTags && wasVisible) {
         window.scrollTo({ top: this.container.nativeElement.offsetTop, behavior: 'smooth' });
       }
     });
@@ -133,9 +145,8 @@ export class TagListComponent implements AfterViewInit {
   private updateStickyList(): void {
     const rect = this.container.nativeElement.getBoundingClientRect();
     const stickyListHeight = this.stickyContainer.nativeElement.clientHeight;
-    const hasSelectedTags = this.selectedChips.length > 0;
 
-    this.stickyListVisible = hasSelectedTags && rect.bottom <= stickyListHeight;
+    this.stickyListVisible = this.hasSelectedTags && rect.bottom <= stickyListHeight;
     this.collapsed = !this.screenSizeService.isVeryBigScreen;
   }
 
@@ -158,8 +169,8 @@ export class TagListComponent implements AfterViewInit {
   }
 
   private restoreCachedSelection() {
-    if (!isNil(this.cachedChipSelection) && this.cachedChipSelection.length) {
-      this.cachedChipSelection?.forEach(chip => chip.select());
+    if (this.cachedSelectedChips?.length) {
+      this.cachedSelectedChips?.forEach(chip => chip.select());
       this.selectedTagsChanged();
     }
   }
@@ -169,5 +180,9 @@ export class TagListComponent implements AfterViewInit {
     this.selectedTagsChange.emit(selectedTags);
 
     this.paramService.saveParam(TAG_PARAM, selectedTags, saveToUrl);
+  }
+
+  private cacheSelectedChips(): void {
+    this.cachedSelectedChips = this.selectedChips;
   }
 }
