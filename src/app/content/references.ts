@@ -399,7 +399,7 @@ const references: { [index: string]: TaggedReference } = {
     'Luke:8:43-44': {
         reference: { book: BibleBookKey.Luke, chapter: 8, verses: '43-44', numericReference: 42008043, chronologicalIndex: 82 },
         parallelGroup: 10,
-        tags: [],
+        tags: [VerseTagKey.Clean, VerseTagKey.Faith],
     },
     'Luke:8:54-55': {
         reference: { book: BibleBookKey.Luke, chapter: 8, verses: '54-55', numericReference: 42008054, chronologicalIndex: 84 },
