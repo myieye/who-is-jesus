@@ -7,6 +7,8 @@ import { isNil } from 'lodash';
 })
 export class QueryParamService {
 
+  private navigation = Promise.resolve(true);
+
   private get paramMap(): ParamMap {
     return this.route.snapshot.queryParamMap;
   }
@@ -31,9 +33,10 @@ export class QueryParamService {
   }
 
   saveParam(key: string, value: string | string[], save = true): void {
-    this.router.navigate([], {
-      queryParams: { [key]: value },
-      queryParamsHandling: 'merge',
-    });
+    this.navigation = this.navigation.then(() =>
+      this.router.navigate([], {
+        queryParams: { [key]: value },
+        queryParamsHandling: 'merge',
+      }));
   }
 }
