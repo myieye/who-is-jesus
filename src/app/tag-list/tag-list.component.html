@@ -1,5 +1,5 @@
 <div #container class="tag-container mat-app-background static-tag-list">
-  <mat-chip-list #chipList [multiple]="multiple">
+  <mat-chip-list #chipList [multiple]="true">
     <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="chipClicked(chip)"
       [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
       {{tag.name}}
@@ -8,7 +8,7 @@
 </div>
 
 <div #stickyContainer class="tag-container mat-app-background sticky-tag-list" [class.visible]="stickyListVisible" [class.collapsed]="collapsed">
-  <mat-chip-list #stickyChipList [multiple]="multiple">
+  <mat-chip-list #stickyChipList [multiple]="true">
     <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="chipClicked(chip)"
       [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
       {{tag.name}}
