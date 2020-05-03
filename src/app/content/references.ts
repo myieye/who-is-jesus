@@ -1,8 +1,8 @@
 import { TaggedReference, BibleBookKey, TaggedVerse, VerseText, UiBibleReference, BibleBookMap } from '../models/bible';
-import { VerseTagKey, offLimits } from '../models/tags';
-import { difference } from 'lodash';
+import { VerseTagKey, offLimits, VerseTagMap } from '../models/tags';
+import { difference, sortBy } from 'lodash';
 
-export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap): TaggedVerse[] => {
+export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap, tags: VerseTagMap): TaggedVerse[] => {
     return verses.map((verse) => {
         const metaReference = references[verse.referenceId];
         const uiReference: UiBibleReference = {
@@ -13,7 +13,7 @@ export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap): Tagged
         return {
             reference: uiReference,
             html: verse.html,
-            tags: difference(metaReference.tags, offLimits),
+            tags: sortBy(difference(metaReference.tags, offLimits), (tag) => tags[tag].name),
             parallelGroup: metaReference.parallelGroup,
         };
     });

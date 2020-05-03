@@ -15,6 +15,11 @@
   grid-column: 2;
 }
 
+.extras {
+  grid-column: 3;
+  height: 0;
+}
+
 .reference {
   white-space: nowrap;
   border-bottom: 1px solid rgba(0, 0, 0, 0);
@@ -62,6 +67,18 @@
     margin-right: 20px;
     margin-top: 5px;
   }
+
+  .extras {
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+  }
+
+  .tag-count {
+    margin-left: 100%;
+    margin-bottom: 0.6em;
+  }
 }
 
 @media only screen and ($big-screen) {
@@ -90,6 +107,10 @@
   .reference-container:not(:last-child) {
     margin-left: 20px;
   }
+
+  .extras {
+    margin-left: 20px;
+  }
 }
 
 .actions > * {
@@ -97,7 +118,24 @@
 }
 
 .verse-tags {
-  font-weight: bold;
+  height: 0;
+  position: relative;
+}
+
+.tag-count {
+  box-sizing: content-box;
+  font-size: 1em;
+  height: 1em;
+  width: 1em;
+  min-width: 1em;
+  line-height: 1.1em;
+  border-radius: 100px;
+  padding: 3px;
+  font-weight: 600;
+}
+
+.tag-count:focus {
+  outline: 0;
 }
 
 ::ng-deep {
@@ -111,4 +149,21 @@
     content: " ... ";
     margin: 0 5px;
   }
+}
+
+.verse-tag {
+  box-sizing: content-box;
+  height: 1em;
+  min-height: 1em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 6px;
+  margin-bottom: 6px;
+
+  position: relative;
+  top: -1px;
+}
+
+.verse-tag::after {
+  opacity: 0 !important;
 }

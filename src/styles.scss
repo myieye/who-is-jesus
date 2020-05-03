@@ -1,6 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
+@import "./app/verse/verse.component.scss-theme.scss";
 @import "./app/tag-list/tag-list.component.scss-theme.scss";
 @import "./app/source-filter/source-filter.component.scss-theme.scss";
 @import "./app/page-footer/page-footer.component.scss-theme.scss";
@@ -46,6 +47,7 @@ $theme: map-merge(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($theme);
+@include wij-verse-theme($theme);
 @include wij-tag-list-theme($theme);
 @include wij-source-filter-theme($theme);
 @include wij-page-footer-theme($theme);

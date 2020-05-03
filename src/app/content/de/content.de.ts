@@ -53,7 +53,7 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
 `,
     bibleTranslationUnderCopyright: true,
     defaultBibleTranslationKeys: ['NGU-DE', 'SCH2000', 'HOF'],
-    verses: tagVerses(verses, bibleBooks),
+    verses: tagVerses(verses, bibleBooks, tags),
     bibleBooks,
     tags,
     showVerseNumbers: true,

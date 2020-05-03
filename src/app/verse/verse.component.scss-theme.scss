@@ -1,0 +1,33 @@
+@import "~@angular/material/theming";
+@import "../../vars.scss";
+
+@mixin wij-verse-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+
+  app-verse {
+    .tag-count {
+      background: transparent;
+      color: mat-color($primary, lighter);
+      border: 1px solid mat-color($primary, lighter);
+    }
+
+    .tag-count:hover {
+      cursor: pointer;
+      color: mat-color($primary);
+      border-color: mat-color($primary);
+    }
+
+    .tag-count.selected:hover,
+    .tag-count.selected {
+      color: mat-color($primary);
+      border-color: mat-color($primary);
+      background: mat-color($primary, lighter);
+    }
+
+    .verse-tag.mat-chip {
+      color: mat-color($primary);
+      box-shadow: 0px 0px 10px 3px mat-color($background, background);
+    }
+  }
+}

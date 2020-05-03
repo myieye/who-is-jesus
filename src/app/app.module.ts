@@ -64,7 +64,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    { provide: Window, useValue: window },
+  ],
   bootstrap: [AppRouterComponent],
 })
 export class AppModule { }

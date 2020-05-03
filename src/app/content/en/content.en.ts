@@ -53,7 +53,7 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
 <p>The name "World English Bible" is trademarked.</p>`,
     bibleTranslationUnderCopyright: false,
     defaultBibleTranslationKeys: ['WEB', 'ESV', 'NIV'],
-    verses: tagVerses(verses, bibleBooks),
+    verses: tagVerses(verses, bibleBooks, tags),
     bibleBooks,
     tags,
     showVerseNumbers: false,

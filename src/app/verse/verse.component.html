@@ -1,3 +1,10 @@
+<div class="extras">
+    <button class="tag-count" (click)="toggleTags($event)" [class.selected]="showTags">{{selectedVerse.tags.length}}</button>
+    <ng-container *ngIf="showTags">
+        <mat-chip *ngFor="let tag of getTagsForVerse(selectedVerse)" [selectable]="false" [disableRipple]="true"
+            class="verse-tag" (click)="tagClicked.emit(tag.key)">{{tag.name}}</mat-chip>
+    </ng-container>
+</div>
 <div class="references" [class.multiple-references]="_verses.length > 1">
     <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)">
         <span class="reference" [class.selected-verse]="_verses.length > 1 && verse === selectedVerse">
@@ -17,10 +24,5 @@
     </span>
 </div>
 <div class="text-container">
-    <div class="verse-tags" *ngIf="debugTags">
-        <span *ngFor="let tag of getTagsForVerse(selectedVerse); let last = last">
-            {{tag}}<ng-container *ngIf="!last">, </ng-container>
-        </span>
-    </div>
     <div class="text" [innerHTML]="selectedVerse.html"></div>
 </div>
