@@ -1,5 +1,6 @@
 import { TaggedReference, BibleBookKey, TaggedVerse, VerseText, UiBibleReference, BibleBookMap } from '../models/bible';
-import { VerseTagKey } from '../models/tags';
+import { VerseTagKey, offLimits } from '../models/tags';
+import { difference } from 'lodash';
 
 export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap): TaggedVerse[] => {
     return verses.map((verse) => {
@@ -12,7 +13,7 @@ export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap): Tagged
         return {
             reference: uiReference,
             html: verse.html,
-            tags: metaReference.tags,
+            tags: difference(metaReference.tags, offLimits),
             parallelGroup: metaReference.parallelGroup,
         };
     });
