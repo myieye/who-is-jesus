@@ -9,7 +9,6 @@ import {
   ChangeDetectionStrategy,
   AfterViewInit,
 } from '@angular/core';
-import { MatChip } from '@angular/material/chips';
 import { VerseTagKey, VerseTag } from '../models/tags';
 import { first, difference } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
@@ -103,8 +102,8 @@ export class TagListComponent implements AfterViewInit {
     this.updateTagStates();
   }
 
-  chipClicked(chip: MatChip) {
-    this.selectTag(chip.value.key, !chip.selected);
+  tagClicked(tag: VerseTagKey) {
+    this.selectTag(tag, this.selectedTagMap[tag] !== true);
     const wasVisible = this.stickyListVisible;
     this.updateStickyList();
     setTimeout(() => {
