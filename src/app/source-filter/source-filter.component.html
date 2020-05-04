@@ -4,7 +4,7 @@
         (selectionChange)="filterSelectionChanged($event.value)" placeholder="{{content.all}}">
         <mat-select-trigger>
             <ng-container *ngFor="let source of getSelectedSources(select.value); let last = last">
-                <span [class.jesus-words]="source === jesus">{{source}}</span>
+                <span [class.jesus]="source === jesus">{{source}}</span>
                 <ng-container *ngIf="!last">,&nbsp;</ng-container>
             </ng-container>
         </mat-select-trigger>

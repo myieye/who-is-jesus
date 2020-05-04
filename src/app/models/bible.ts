@@ -57,11 +57,13 @@ export interface VerseText {
 }
 
 export interface TaggedVerse extends BibleVerse, Tagged {
+    hasJesusWords: boolean;
     parallelGroup?: number;
 }
 
 export interface TaggedReference extends Tagged {
     reference: BibleReference;
+    hasJesusWords: boolean;
     parallelGroup?: number;
 }
 

@@ -27,8 +27,8 @@ export type SourceFilterMap = { [key in SourceFilterKey]: SourceFilter };
 export const sourceFilters = (content: ContentService): SourceFilterMap => ({
     [SourceFilterKey.Jesus]: {
         displayName: content.jesus,
-        cssClass: 'jesus-words',
-        filter: (verse) => verse.html.indexOf('jesus-words') > -1,
+        cssClass: 'jesus',
+        filter: (verse) => verse.hasJesusWords,
         key: SourceFilterKey.Jesus,
     },
     [SourceFilterKey.Matt]: SourceFilter.forBook(content.bibleBooks.Matt, SourceFilterKey.Matt),

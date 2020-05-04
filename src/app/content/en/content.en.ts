@@ -10,12 +10,12 @@ export const CONTENT: Content = {
     synopticGospels: 'Synoptic Gospels',
     standard: 'Standard',
     chronological: 'Chronological',
-    pageTitle: 'Who is <span class="jesus-glory">Jesus?</span>',
+    pageTitle: 'Who is <span class="glory">Jesus?</span>',
     sources: 'Sources',
     order: 'Order',
     infoAboutTitle: 'About',
     infoAbout: `
-Everyone should know who <span class="jesus-glory">Jesus</span> is!
+Everyone should know who <span class="glory">Jesus</span> is!
 This site is a streamlined tool for discovering what the Gospels have to say about Him
 and even what He has to say about Himself.`,
     infoBibleTranslationTitle: 'Bible Translation',

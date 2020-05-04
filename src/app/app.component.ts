@@ -176,6 +176,7 @@ export class AppComponent implements OnInit {
             },
             html: `${mergedBookVerses.html}${VERSE_SEPARATOR}${nextBookVerse.html}`,
             tags: union(mergedBookVerses.tags, nextBookVerse.tags),
+            hasJesusWords: mergedBookVerses.hasJesusWords || nextBookVerse.hasJesusWords,
           };
         }
         parallels.push(mergedBookVerses);
