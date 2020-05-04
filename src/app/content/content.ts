@@ -1,6 +1,7 @@
 import { TaggedVerse, BibleBookMap } from '../models/bible';
 import { VerseTagMap } from '../models/tags';
 
+// tslint:disable:member-ordering
 export class ContentTemplate {
     jesus = '';
     all = '';
@@ -8,6 +9,7 @@ export class ContentTemplate {
     standard = '';
     chronological = '';
     pageTitle = '';
+    pageIntro = (verseCount: number) => '';
     sources = '';
     order = '';
     infoAboutTitle = '';

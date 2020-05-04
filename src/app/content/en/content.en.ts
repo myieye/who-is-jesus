@@ -11,6 +11,11 @@ export const CONTENT: Content = {
     standard: 'Standard',
     chronological: 'Chronological',
     pageTitle: 'Who is <span class="glory">Jesus?</span>',
+    pageIntro: (verseCount) => `
+Explore the biblical greatness of <span class="jesus">Jesus</span> with
+${verseCount} handpicked scripture passages that demonstrate
+who <span class="jesus">He</span> is, what <span class="jesus">He</span> did
+and what that means for <span class="primary">you</span>.`,
     sources: 'Sources',
     order: 'Order',
     infoAboutTitle: 'About',

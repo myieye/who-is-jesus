@@ -1,8 +1,12 @@
-<h1 class="title" [innerHTML]="content.pageTitle" i18n></h1>
-
 <div class="top-bar">
   <button mat-button (click)="infoClicked()">{{content.about | uppercase}}</button>
   <app-language-picker></app-language-picker>
+</div>
+
+<h1 class="title" [innerHTML]="content.pageTitle" i18n></h1>
+
+<div class="intro-wrapper inverse-section">
+  <div class="intro text-block" [innerHTML]="content.pageIntro(content.verses.length)"></div>
 </div>
 
 <div class="option-container">

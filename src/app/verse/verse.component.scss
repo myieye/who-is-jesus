@@ -46,7 +46,7 @@
   border-bottom-color: $light-grey;
 
   &.selected-verse {
-    border-bottom-color: $mid-grey;
+    border-bottom-color: $dark-grey;
   }
 }
 
@@ -146,7 +146,7 @@
 
 ::ng-deep {
   .verse-number {
-    color: $dark-grey;
+    color: $mid-grey;
     line-height: 0;
     margin-right: 2px;
   }

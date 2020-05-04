@@ -11,6 +11,11 @@ export const CONTENT: Content = {
     standard: 'Standard',
     chronological: 'Chronologisch',
     pageTitle: 'Wer ist <span class="glory">Jesus?</span>',
+    pageIntro: (verseCount) => `
+Entdecke die biblische Größe <span class="jesus">Jesu</span> anhand von ${verseCount}
+ausgewählten Bibelabschnitten, die zeigen
+wer <span class="jesus">Er</span> ist, was <span class="jesus">Er</span> tat
+und was das für <span class="primary">dich</span> bedeutet.`,
     sources: 'Quellen',
     order: 'Reihenfolge',
     infoAboutTitle: 'Worum geht es?',

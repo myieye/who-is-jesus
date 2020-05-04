@@ -22,6 +22,7 @@
 $primary-palette: mat-palette($mat-indigo, 500, 100, 700);
 // default: #3f51b5 darker: #303f9f, lighter: #c5cae9
 $accent-palette: mat-palette($mat-pink, A200, A100, A400);
+$inverse-primary-palette: mat-palette($mat-indigo, A200, 50, 600);
 
 // The warn palette is optional (defaults to red).
 $warn-palette: mat-palette($mat-red);
@@ -29,10 +30,11 @@ $warn-palette: mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary-palette, $primary-palette, $warn-palette);
 $primary: map-get($theme, primary);
+$background: map-get($theme, background);
 $foreground: map-merge(
   map-get($theme, foreground),
   (
-    elevation: $jesus-red-soft,
+    elevation: $jesus-red-dark,
   )
 );
 
@@ -86,11 +88,32 @@ app-root, app-tag-list {
   color: $jesus-red !important;
 }
 
+.primary {
+  color: mat-color($primary);
+}
+
+.inverse-section {
+  background: $dark-grey;
+  color: mat-color($background, background);
+
+  .jesus {
+    color: $jesus-red-light !important;
+  }
+
+  .primary {
+    color: mat-color($inverse-primary-palette);
+  }
+}
+
 .glory {
   font-size: 2.4em;
   color: $jesus-red;
   font-family: "Lovers Quarrel";
   margin-left: 0.1em;
+}
+
+.text-block {
+  max-width: $text-block-width;
 }
 
 .hidden {
