@@ -8,16 +8,21 @@
 
   @media only screen and ($small-screen) {
     font-size: 4em;
+    line-height: 1.7em;
   }
 
   @media only screen and ($not-big-screen) {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 }
 
 .intro-wrapper {
   padding: 20px;
   margin: 20px 0 30px;
+  
+  @media only screen and ($small-screen) {
+    margin-top: 40px;
+  }
 }
 
 .intro {
