@@ -69,15 +69,17 @@
   }
 
   .extras {
-    float: right;
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-end;
   }
 
   .tag-count {
-    margin-left: 100%;
     margin-bottom: 0.6em;
+  }
+
+  .tag-container {
+    text-align: right;
   }
 }
 
@@ -110,6 +112,10 @@
 
   .extras {
     margin-left: 20px;
+  }
+
+  .tag-count {
+    margin-bottom: 6px;
   }
 }
 
@@ -160,8 +166,10 @@
   margin-left: 6px;
   margin-bottom: 6px;
 
-  position: relative;
-  top: -1px;
+  @media only screen and ($big-screen) {  
+    position: relative;
+    top: -1px;
+  }
 }
 
 .verse-tag::after {

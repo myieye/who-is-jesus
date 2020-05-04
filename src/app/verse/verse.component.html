@@ -1,9 +1,12 @@
 <div class="extras">
-    <button class="tag-count" (click)="toggleTags($event)" [class.selected]="showTags">{{selectedVerse.tags.length}}</button>
-    <ng-container *ngIf="showTags">
-        <mat-chip *ngFor="let tag of getTagsForVerse(selectedVerse)" [selectable]="false" [disableRipple]="true"
-            class="verse-tag" (click)="tagClicked.emit(tag.key)">{{tag.name}}</mat-chip>
-    </ng-container>
+    <button class="tag-count small-screen-content" (click)="toggleTags($event)" [class.selected]="showTags">{{selectedVerse.tags.length}}</button>
+    <div class="tag-container">
+        <button class="tag-count big-screen-content" (click)="toggleTags($event)" [class.selected]="showTags">{{selectedVerse.tags.length}}</button>
+        <ng-container *ngIf="showTags">
+            <mat-chip *ngFor="let tag of getTagsForVerse(selectedVerse)" [selectable]="false" [disableRipple]="true"
+                class="verse-tag" (click)="tagClicked.emit(tag.key)">{{tag.name}}</mat-chip>
+        </ng-container>
+    </div>
 </div>
 <div class="references" [class.multiple-references]="_verses.length > 1">
     <span class="reference-container" *ngFor="let verse of _verses" (click)="verseClicked(verse)">
