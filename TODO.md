@@ -1,18 +1,18 @@
 # Todo
 
 ## Doing
-- [Bugfix(1)] BG translation dialog: can't close keyboard on enter in search field
+- [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
 
 ## Ideas/Backlog
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(7)] Simplify/Group tags for better overview
     - 2 Modes/Categorizations: Identity + Attributes/Characteristics
-- [Content(2)] Add instructions (Calvin - " I think instructions are always good so maybe a nice little title above the tags that says something like narrow results by selecting one or more tags.")
 - [Content(5)] (?) More thorough discussions for each tag
 - [Design(2)] (?) Hero image
 - [Function(1)] Rethink collapsed/expanded sticky tag list. Collapsed could be handy on big screens too.
 
 ## Done
+- [Bugfix(1)] BG translation dialog: can't close keyboard on enter in search field
 - [Option(2)] Show verse tags. Either:
     - Simple clickable circle with number
     - [on/off = off]
