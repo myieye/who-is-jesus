@@ -9,14 +9,14 @@
   <div class="intro text-block" [innerHTML]="content.pageIntro(content.verses.length)"></div>
 </div>
 
+<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
+  (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
+
 <div class="option-container">
   <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
   <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
   <app-options-list (optionsChange)="selectedOptionsChanged($event)"></app-options-list>
 </div>
-
-<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
-  (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
 
 <div class="verse-container-wrapper">
   <div class="verse-container" [class.hide-verses]="!content.showVerseNumbers">
