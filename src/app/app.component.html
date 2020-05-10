@@ -9,8 +9,21 @@
   <div class="intro text-block" [innerHTML]="content.pageIntro(content.verses.length)"></div>
 </div>
 
-<app-tag-list [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
+
+<div #tagInstructions class="instructions-container">
+  <div class="text-block instructions">
+    <app-tag-instructions-content></app-tag-instructions-content>
+  </div>
+</div>
+
+<app-tag-list class="tag-list" [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
   (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
+
+<div #optionInstructions class="instructions-container">
+  <div class="text-block instructions">
+    {{content.optionInstructions}}
+  </div>
+</div>
 
 <div class="option-container">
   <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>

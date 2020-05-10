@@ -10,6 +10,7 @@ export class ContentTemplate {
     chronological = '';
     pageTitle = '';
     pageIntro = (verseCount: number) => '';
+    optionInstructions = '';
     sources = '';
     order = '';
     infoAboutTitle = '';

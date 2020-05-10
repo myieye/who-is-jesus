@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { flatMap, union, difference, intersection, sortBy, isNil, groupBy } from 'lodash';
 import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
@@ -9,6 +9,7 @@ import { TaggedVerse, TaggedVerseCollection, TaggedVerseCollectionItem } from '.
 import { ContentService } from './services/content.service';
 import { OptionsSelection, OptionKey } from './options-list/options';
 import { VERSE_SEPARATOR } from '../utils/constants';
+import { hideInstructions } from '../utils/hider-util';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,16 @@ import { VERSE_SEPARATOR } from '../utils/constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+
+  @ViewChild('tagInstructions')
+  set tagInstructions(tagInstructions: ElementRef<HTMLElement>) {
+    //setTimeout(() => hideInstructions(tagInstructions.nativeElement), 2000);
+  }
+
+  @ViewChild('optionInstructions')
+  set optionInstructions(optionInstructions: ElementRef<HTMLElement>) {
+    //setTimeout(() => hideInstructions(optionInstructions.nativeElement), 4000);
+  }
 
   readonly options = OptionKey;
 

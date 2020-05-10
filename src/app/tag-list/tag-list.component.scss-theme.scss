@@ -9,11 +9,6 @@
   $background: map-get($theme, background);
 
   app-tag-list .tag-container {
-    .mat-chip {
-      color: mat-color($primary);
-      font-weight: 600;
-    }
-
     .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
       color: mat-color($background, unselected-chip);
     }

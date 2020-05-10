@@ -2,7 +2,8 @@
   <mat-chip-list #chipList [multiple]="true">
     <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
       [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]"
-      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
+      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip"
+      class="clickable">
       {{tag.name}}
     </mat-chip>
   </mat-chip-list>
@@ -12,7 +13,8 @@
   <mat-chip-list #stickyChipList [multiple]="true">
     <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
       [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]"
-      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip">
+      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip"
+      class="clickable">
       {{tag.name}}
     </mat-chip>
   </mat-chip-list>

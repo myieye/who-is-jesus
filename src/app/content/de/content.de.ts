@@ -16,6 +16,7 @@ Entdecke die biblische Größe <span class="jesus">Jesu</span> anhand von ${vers
 ausgewählten Bibelabschnitten, die zeigen
 wer <span class="jesus">Er</span> ist, was <span class="jesus">Er</span> tat
 und was das für <span class="primary">dich</span> bedeutet.`,
+    optionInstructions: 'Filtere und organisiere deine Suche...',
     sources: 'Quellen',
     order: 'Reihenfolge',
     infoAboutTitle: 'Worum geht es?',
@@ -40,13 +41,13 @@ feedbackInfo: `Hast du Fragen oder Ideen?
 Besuche meine Homepage at <a href="http://timhaasdyk.com/">TimHaasdyk.com</a>
 oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>.`,
     options: 'Optionen',
-    multipleTagSelection: 'Multi-Tag Auswahl',
-    multipleTags: 'Multi-Tag',
-    singleTag: 'Single-Tag',
-    groupByTag: 'Nach Tag gruppieren',
+    multipleTagSelection: 'Multi-Stichwort-Auswahl',
+    multipleTags: 'Multi-Auswahl',
+    singleTag: 'Einzel-Auswahl',
+    groupByTag: 'Stichwort-Gruppierung',
     mergeParallels: 'Parallelstellen zusammenführen',
     about: 'Info',
-    noVersesFound: 'Keine Verse erfüllen deine Quelle-/Tag-Filter-Kriterien.',
+    noVersesFound: 'Keine Verse erfüllen deine Quelle-/Stichwort-Filter-Kriterien.',
     searchByLanguageOrTranslation: 'Nach Sprache oder Übersetzung suchen',
     bibleGatewayTranslations: 'Bible Gateway Übersetzungen',
     bibleGatewayTranslationsDescription: 'Wähle Übersetzungen für BibleGateway.com aus.',

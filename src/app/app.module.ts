@@ -29,6 +29,7 @@ import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tag
 import { BibleTranslationsDialogComponent } from './bible-translations-dialog/bible-translations-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { TagInstructionsContentComponent } from './content/tag-instructions-content.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatIconModule } from '@angular/material/icon';
     OptionsListComponent,
     TaggedVerseGroupHeaderComponent,
     BibleTranslationsDialogComponent,
+    TagInstructionsContentComponent,
   ],
   imports: [
     BrowserModule,
