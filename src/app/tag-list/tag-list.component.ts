@@ -58,7 +58,7 @@ export class TagListComponent implements AfterViewInit {
 
   @Input()
   set activeTags(activeTags: VerseTagKey[]) {
-    this._activeTags = activeTags || [];
+    this._activeTags = activeTags ?? [];
     this.updateTagStates();
   }
   get activeTags(): VerseTagKey[] {
@@ -150,7 +150,7 @@ export class TagListComponent implements AfterViewInit {
   private updateTagStates(): void {
     this.disabledTagMap = {};
     if (this.activeTags.length > 0 && this.activeTags.length < this.tags.length) {
-      difference(this.activeTags, this.tagKeys).forEach((tag) => this.disabledTagMap[tag] = true);
+      difference(this.tagKeys, this.activeTags).forEach((tag) => this.disabledTagMap[tag] = true);
     }
   }
 
