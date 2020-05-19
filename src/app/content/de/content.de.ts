@@ -3,8 +3,10 @@ import { verses } from './verses.de';
 import { bibleBooks } from './bible-books.de';
 import { tags } from './tags.de';
 import { tagVerses } from '../references';
+import { Language } from '../languages';
 
 export const CONTENT: Content = {
+    language: Language.DE,
     jesus: 'Jesus',
     all: 'Alle',
     synopticGospels: 'Synoptiker',
@@ -63,4 +65,6 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
     bibleBooks,
     tags,
     showVerseNumbers: true,
+    impressum: 'Impressum',
+    privacyPolicy: 'Datenschutzerklärung',
 };

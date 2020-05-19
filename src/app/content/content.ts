@@ -1,8 +1,10 @@
 import { TaggedVerse, BibleBookMap } from '../models/bible';
 import { VerseTagMap } from '../models/tags';
+import { Language } from './languages';
 
 // tslint:disable:member-ordering
 export class ContentTemplate {
+    language: Language = undefined;
     jesus = '';
     all = '';
     synopticGospels = '';
@@ -40,6 +42,8 @@ export class ContentTemplate {
     bibleBooks: BibleBookMap = {} as BibleBookMap;
     tags: VerseTagMap = {} as VerseTagMap;
     showVerseNumbers = false;
+    impressum = '';
+    privacyPolicy = '';
 }
 
 type ContentProps = Array<keyof ContentTemplate>;
