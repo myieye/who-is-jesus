@@ -20,6 +20,7 @@ $dark-grey: #333;
 $page-padding: 20px;
 $text-block-width: 600px;
 
+/* autoprefixer grid: autoplace */
 @mixin centered-grid-column-layout {
   display: grid;
   grid-template-columns: 1fr $text-block-width 1fr;
