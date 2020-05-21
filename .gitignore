@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+/www
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -50,3 +50,31 @@ Thumbs.db
 
 # Content under Copyright
 *__private*
+
+# Created by https://www.gitignore.io/api/cordova,apachecordova
+# Edit at https://www.gitignore.io/?templates=cordova,apachecordova
+
+
+
+### ApacheCordova ###
+# Apache Cordova generated files and directories
+bin/*
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*
+
+### Cordova ###
+# gitignore template for the Cordova framework
+# website: https://cordova.apache.org/
+#
+# Recommended template: Node.gitignore
+
+# App platform binaries and built files
+/platforms
+
+# Optional to ignore plugin Git clones
+#/plugins
+
+# End of https://www.gitignore.io/api/cordova,apachecordova
