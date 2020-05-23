@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/www
+/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -58,6 +58,7 @@ Thumbs.db
 
 ### ApacheCordova ###
 # Apache Cordova generated files and directories
+/www
 bin/*
 !/plugins
 !/plugins/android.json

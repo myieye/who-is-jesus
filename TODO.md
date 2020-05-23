@@ -13,6 +13,7 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Platform(5)] Configure Cordova build
 - [Content(1)] Add page intro
 - [Bugfix(1)] BG translation dialog: can't close keyboard on enter in search field
 - [Option(2)] Show verse tags. Either:
