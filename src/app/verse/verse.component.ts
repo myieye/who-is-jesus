@@ -85,6 +85,7 @@ export class VerseComponent implements OnDestroy {
   private static closeTags(): void {
     if (!isNil(VerseComponent.verseShowingTags)) {
       VerseComponent.verseShowingTags.showTags = false;
+      VerseComponent.verseShowingTags = undefined;
     }
   }
   // tslint:enable:member-ordering
