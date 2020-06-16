@@ -51,11 +51,6 @@ export interface BibleBook {
 
 export type BibleBookMap = { [key in BibleBookKey]: BibleBook};
 
-export interface VerseText {
-    referenceId: string;
-    html: string;
-}
-
 export interface TaggedVerse extends BibleVerse, Tagged {
     hasJesusWords: boolean;
     parallelGroup?: number;

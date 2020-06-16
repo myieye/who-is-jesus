@@ -1,9 +1,9 @@
-import { TaggedReference, BibleBookKey, TaggedVerse, VerseText, UiBibleReference, BibleBookMap } from '../models/bible';
+import { TaggedReference, BibleBookKey, TaggedVerse, UiBibleReference, BibleBookMap } from '../models/bible';
 import { VerseTagKey, offLimits, VerseTagMap } from '../models/tags';
 import { difference, sortBy } from 'lodash';
 
 export const tagVerses = (verses: VerseText[], bibleBooks: BibleBookMap, tags: VerseTagMap): TaggedVerse[] => {
-    return verses.map((verse) => {
+    return verses?.map((verse) => {
         const metaReference = references[verse.referenceId];
         const uiReference: UiBibleReference = {
             ...metaReference.reference,

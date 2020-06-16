@@ -1,5 +1,3 @@
-import { VerseText } from '../../models/bible';
-
 // tslint:disable:max-line-length
 export const verses: VerseText[] = [
     {

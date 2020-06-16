@@ -14,8 +14,14 @@
     "e2e": "ng e2e",
     "dev": "ng serve --host 0.0.0.0",
     "prod": "ng serve --prod=true --host 0.0.0.0",
-    "build-prod": "ng build --prod=true --aot --output-hashing=all",
-    "build-cordova": "ng build --configuration=production,cordova --aot --output-hashing=all"
+
+    "prebuild-prod": "npm run build-online-content",
+    "build-prod": "ng build --prod=true --aot",
+
+    "prebuild-cordova": "npm run build-online-content",
+    "build-cordova": "ng build --configuration=production,cordova --aot",
+
+    "build-online-content": "tsc --build tsconfig.online-content.json"
   },
   "private": true,
   "optionalDependencies": {},
@@ -31,9 +37,11 @@
     "@angular/platform-browser": "^9.0.7",
     "@angular/platform-browser-dynamic": "^9.0.7",
     "@angular/router": "^9.0.7",
+    "@types/cordova": "0.0.34",
     "@types/lodash": "^4.14.149",
     "angular-cli-ghpages": "^0.6.2",
     "cordova-android": "^8.1.0",
+    "cordova-disable-http-cache": "^1.0.0",
     "cordova-plugin-splashscreen": "^5.0.3",
     "lodash": "^4.17.15",
     "rxjs": "^6.5.4",
@@ -65,7 +73,8 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "cordova-disable-http-cache": {}
     },
     "platforms": [
       "android"

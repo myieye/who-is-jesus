@@ -67,4 +67,6 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
     showVerseNumbers: false,
     impressum: 'Impressum',
     privacyPolicy: 'Privacy policy',
+    internetRequiredForLanguageVerses:
+'Due to copyright, an internet connection is required to view verses in the selected language.'
 };

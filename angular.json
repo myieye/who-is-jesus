@@ -24,13 +24,17 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/favicon.ico",
               "src/assets",
               "src/.htaccess"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/scripts/web-init.js",
+              "src/scripts/webfont-loader.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -42,7 +46,7 @@
                 },
                 {
                   "replace": "src/app/content/de/verses.de.ts",
-                  "with": "src/app/content/de/verses.de.ngü.__private.ts"
+                  "with": "src/app/content/de/verses.de.ngü.__private.v1.ts"
                 }
               ],
               "optimization": true,
@@ -69,10 +73,34 @@
             "cordova": {
               "baseHref": "./",
               "outputPath": "www",
+              "scripts": [
+                "src/scripts/script-loader.js",
+                "src/scripts/cordova-init.js"
+              ],
+              "styles": [
+                "src/styles.scss",
+                "src/cordova/fonts/fonts.css"
+              ],
+              "assets": [
+                {
+                  "glob": "bible-gateway-icon.ico",
+                  "input": "src/assets",
+                  "output": "./assets"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "platforms/android/platform_www",
+                  "output": "./cordova/android"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.cordova.prod.ts"
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/content/language-configs.ts",
+                  "with": "src/app/content/mobile-language-configs.__private.ts"
                 }
               ]
             }

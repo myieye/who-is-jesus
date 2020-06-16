@@ -22,7 +22,7 @@ export class ContentService extends ContentTemplate implements Content {
 
         for (const prop of CONTENT_PROPS) {
             // @ts-ignore
-            this[prop] = currLanguageContent.CONTENT[prop] || defaultLanguageContent.CONTENT[prop];
+            this[prop] = currLanguageContent.CONTENT[prop] ?? defaultLanguageContent.CONTENT[prop];
         }
 
         return this;

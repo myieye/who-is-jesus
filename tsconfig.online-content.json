@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "outDir": "src/assets/online-content"
+    },
+    "include": [
+        "src/app/content/de/verses.de.ngü.__private.*.ts",
+        "src/**/*.d.ts",
+    ]
+}

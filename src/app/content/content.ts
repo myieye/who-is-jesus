@@ -44,6 +44,7 @@ export class ContentTemplate {
     showVerseNumbers = false;
     impressum = '';
     privacyPolicy = '';
+    internetRequiredForLanguageVerses = '';
 }
 
 type ContentProps = Array<keyof ContentTemplate>;

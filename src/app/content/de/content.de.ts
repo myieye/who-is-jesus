@@ -1,12 +1,16 @@
 import { Content } from '../content';
-import { verses } from './verses.de';
+import { germanVerses } from './verses.de';
 import { bibleBooks } from './bible-books.de';
 import { tags } from './tags.de';
 import { tagVerses } from '../references';
 import { Language } from '../languages';
+import { languageConfigs } from '../mobile-language-configs.__private';
+
+const language = Language.DE;
+const verses = languageConfigs[language]?.getter() ?? germanVerses;
 
 export const CONTENT: Content = {
-    language: Language.DE,
+    language,
     jesus: 'Jesus',
     all: 'Alle',
     synopticGospels: 'Synoptiker',
@@ -67,4 +71,6 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
     showVerseNumbers: true,
     impressum: 'Impressum',
     privacyPolicy: 'Datenschutzerklärung',
+    internetRequiredForLanguageVerses:
+'Wegen Copyright, ist eine Internet-Verbindng erforderlich, um Verse in der ausgewählten Sprache zu lesen.',
 };

@@ -11,6 +11,7 @@
   "include": [
     "src/**/*.d.ts",
     "src/**/content.*.ts",
+    "plugins/**/*.d.ts",
   ],
   "exclude": [
     "src/test.ts",

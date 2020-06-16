@@ -120,10 +120,6 @@ app-root, app-tag-list {
   display: none !important;
 }
 
-html[class*="loading"] .loader-bg {
-  opacity: 1 !important;
-}
-
 .mat-chip.mat-standard-chip.label-chip {
   color: mat-color($primary);
   border: 1px solid mat-color($primary);

@@ -1,24 +1,30 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { languages, DEFAULT_LANGUAGE } from '../content/languages';
+import { languages, DEFAULT_LANGUAGE, Language } from '../content/languages';
+import { CustomLanguageConfig } from '../models/mobile-language-config';
+import { languageConfigs } from '../content/language-configs';
 
 @Injectable()
 export class LanguageService implements OnDestroy {
 
-  get language(): string {
+  get language(): Language {
     return this._language;
   }
 
-  private readonly languageSubject = new BehaviorSubject<string>(DEFAULT_LANGUAGE);
+  get languageConfig(): CustomLanguageConfig | undefined {
+    return languageConfigs[this.language];
+  }
+
+  private readonly languageSubject = new BehaviorSubject<Language>(DEFAULT_LANGUAGE);
   readonly language$ = this.languageSubject.asObservable();
 
-  private _language: string;
+  private _language: Language;
 
   setLanguage(language: string) {
     language = language.toLowerCase();
 
-    if (languages.includes(language)) {
-      this._language = language;
+    if (languages.includes(language as Language)) {
+      this._language = language as Language;
       this.languageSubject.next(this._language);
     }
   }
