@@ -42,7 +42,7 @@ export const tags: VerseTagMap = {
     [VerseTagKey.Unique]: { key: VerseTagKey.Unique, name: 'Einmalig', description: 'Jesus ist äußerst einmalig im Vergleich zu allen anderen Menschen.' },
     [VerseTagKey.Worship]: { key: VerseTagKey.Worship, name: 'Anbetung', description: 'Jesus bekommt und akzeptiert Anbetung.' },
     [VerseTagKey.Worthy]: { key: VerseTagKey.Worthy, name: 'Würdig', description: 'Jesus ist vielem würdig und würdiger als viele.' },
-    [VerseTagKey.YHWH]: { key: VerseTagKey.YHWH, name: 'YHWH', description: 'Das Tetragramm ist Gottes einmaliger Name im Altentestament. Verse und Konzepte die von Ihm handeln, werden im Neuentestament für Jesus angewendet.' },
+    [VerseTagKey.YHWH]: { key: VerseTagKey.YHWH, name: 'YHWH', description: 'Das Tetragramm ist Gottes einmaliger Name im Alten Testament. Verse und Konzepte die von Ihm handeln, werden im Neuen Testament für Jesus angewendet.' },
     [VerseTagKey.Sacrifice]: { key: VerseTagKey.Sacrifice, name: 'Opfer', description: 'Jesus war ein Sündopfer; das makellose, verheißene Lamm Gottes.' },
     [VerseTagKey.Word]: { key: VerseTagKey.Word, name: 'Wort', description: '' },
     [VerseTagKey.Immanuel]: { key: VerseTagKey.Immanuel, name: 'Immanuel', description: '' },
