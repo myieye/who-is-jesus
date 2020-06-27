@@ -28,7 +28,7 @@ und was das für <span class="primary">dich</span> bedeutet.`,
     infoAboutTitle: 'Worum geht es?',
     infoAbout: `
 Jeder soll wissen, wer <span class="glory">Jesus</span> ist!
-Diese Webseite ist ein hilfreiches Werkzeug um zu entdecken, was die Evangelien
+Dies ist ein hilfreiches Tool um zu entdecken, was die Evangelien
 (und sogar Jesus selbst) über Ihn zu sagen haben.`,
     infoBibleTranslationTitle: 'Bibelübersetzung',
     infoBibleTranslation: `

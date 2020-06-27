@@ -24,7 +24,7 @@ and what that means for <span class="primary">you</span>.`,
     infoAboutTitle: 'About',
     infoAbout: `
 Everyone should know who <span class="glory">Jesus</span> is!
-This site is a streamlined tool for discovering what the Gospels have to say about Him
+This is a streamlined tool for discovering what the Gospels have to say about Him
 and even what He has to say about Himself.`,
     infoBibleTranslationTitle: 'Bible Translation',
     infoBibleTranslation: `

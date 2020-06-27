@@ -2,7 +2,7 @@
 <widget id="com.timhaasdyk.whoisjesus" version="1.0.0" 
     xmlns="http://www.w3.org/ns/widgets" 
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Who is Jesus?</name>
+    <name>Jesus?</name>
     <description>
         A streamlined tool for exploring the biblical greatness of Jesus in the gospels.
     </description>

@@ -1,6 +1,6 @@
 # Who Is Jesus?
 
-Everyone should know who Jesus is! This site is a streamlined tool for discovering what the Gospels have to say about Him and even what He has to say about Himself.
+Everyone should know who Jesus is! This is a streamlined tool for discovering what the Gospels have to say about Him and even what He has to say about Himself.
 
 ## Bible Translation
 
