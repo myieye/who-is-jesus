@@ -1,58 +1,120 @@
-<div class="top-bar">
-  <button mat-button (click)="infoClicked()">{{content.about | uppercase}}</button>
-  <app-language-picker></app-language-picker>
-</div>
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ng-container *ngIf="platform.useAppFeatures | async">
+      <ion-menu [menuId]="menus.main" contentId="main-content" type="overlay">
+        <ion-content>
+          <ion-list>
+            <ion-list-header>{{content.menu}}</ion-list-header>
+            <ion-menu-toggle>
+              <ion-item (click)="infoClicked()">
+                <ion-icon slot="start" icon="book-outline"></ion-icon>
+                <ion-label>{{content.about}}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
 
-<h1 class="title" [innerHTML]="content.pageTitle" i18n></h1>
+            <ion-item (click)="openMenu(menus.language)">
+              <ion-icon slot="start" icon="language-outline"></ion-icon>
+              <ion-label>{{content.language}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
 
-<div class="intro-wrapper inverse-section">
-  <div class="intro text-block" [innerHTML]="content.pageIntro(content.verses.length)"></div>
-</div>
-
-
-<div #tagInstructions class="instructions-container">
-  <div class="text-block instructions">
-    <app-tag-instructions-content></app-tag-instructions-content>
-  </div>
-</div>
-
-<app-tag-list class="tag-list" [tags]="tags" [activeTags]="activeTags" [multiple]="optionsSelection[options.MultiTags]"
-  (selectedTagsChange)="selectedTagsChanged($event)"></app-tag-list>
-
-<div #optionInstructions class="instructions-container">
-  <div class="text-block instructions">
-    {{content.optionInstructions}}
-  </div>
-</div>
-
-<div class="option-container">
-  <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
-  <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
-  <app-options-list (optionsChange)="selectedOptionsChanged($event)"></app-options-list>
-</div>
-
-<div class="verse-container-wrapper">
-  <div class="verse-container" [class.hide-verses]="!content.showVerseNumbers">
-    <ng-container *ngIf="verses.length; else noVersesFiller">
-      <ng-container *ngIf="groupByTag; else standardVerseList">
-        <div class="verse-group" *ngFor="let group of verseGroups">
-          <ng-container *ngTemplateOutlet="standardVerseList; context: group"></ng-container>
-        </div>
-      </ng-container>
-      <ng-template #standardVerseList let-verseGroup="verses" let-tag="tag">
-        <app-tagged-verse-group-header *ngIf="tag || selectedTags.length" [tags]="tag || selectedTags">
-        </app-tagged-verse-group-header>
-        <div *ngFor="let verse of verseGroup || verses" class="verse">
-          <app-verse [verses]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
-        </div>
-      </ng-template>
+      <ion-menu [menuId]="menus.language" contentId="main-content">
+        <ion-content>
+          <ion-list>
+            <ion-item (click)="openMenu(menus.main)">
+              <ion-icon slot="start" icon="chevron-back-outline"></ion-icon>
+              <ion-label>{{content.menu}}</ion-label>
+            </ion-item>
+            <ion-list-header>{{content.language}}</ion-list-header>
+            <ion-menu-toggle *ngFor="let lang of languageService.languages" (click)="languageService.setLanguage(lang)">
+              <ion-item>
+                <ion-icon slot="start" icon="checkmark-outline" [class.invisible]="lang !== content.languageCode">
+                </ion-icon>
+                <ion-label>
+                  {{content[lang]}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
     </ng-container>
-    <ng-template #noVersesFiller>
-      <div class="no-verses-filler text-block">
-        {{content.noVersesFound}}
-      </div>
-    </ng-template>
-  </div>
-</div>
 
-<app-page-footer></app-page-footer>
+    <div id="main-content" class="main-content">
+      <ion-header *ngIf="platform.useAppFeatures | async">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button color="dark" (click)="openMenu(menus.main)" auto-hide="false"></ion-menu-button>
+          </ion-buttons>
+          <ion-title slot="end" class="glory">
+            <span class="toolbar-title-text">{{content.jesus}}</span>
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content [scrollEvents]="true">
+        <div class="top-bar" *ngIf="!(platform.useAppFeatures | async)">
+          <button mat-button (click)="infoClicked()">{{content.about | uppercase}}</button>
+          <app-language-picker></app-language-picker>
+        </div>
+
+        <h1 class="title" [innerHTML]="content.pageTitle" i18n></h1>
+
+        <div class="intro-wrapper inverse-section">
+          <div class="intro text-block" [innerHTML]="content.pageIntro(content.verses.length)"></div>
+        </div>
+
+
+        <div #tagInstructions class="instructions-container">
+          <div class="text-block instructions">
+            <app-tag-instructions-content></app-tag-instructions-content>
+          </div>
+        </div>
+
+        <app-tag-list class="tag-list" [tags]="tags" [activeTags]="activeTags"
+          [multiple]="optionsSelection[options.MultiTags]" (selectedTagsChange)="selectedTagsChanged($event)">
+        </app-tag-list>
+
+        <div #optionInstructions class="instructions-container">
+          <div class="text-block instructions">
+            {{content.optionInstructions}}
+          </div>
+        </div>
+
+        <div class="option-container">
+          <app-source-filter (filterChange)="sourceFilterChanged($event)"></app-source-filter>
+          <app-verse-order-select (orderChange)="verseOrderChanged($event)"></app-verse-order-select>
+          <app-options-list (optionsChange)="selectedOptionsChanged($event)"></app-options-list>
+        </div>
+
+        <div class="verse-container-wrapper">
+          <div class="verse-container" [class.hide-verses]="!content.showVerseNumbers">
+            <ng-container *ngIf="verses.length; else noVersesFiller">
+              <ng-container *ngIf="groupByTag; else standardVerseList">
+                <div class="verse-group" *ngFor="let group of verseGroups">
+                  <ng-container *ngTemplateOutlet="standardVerseList; context: group"></ng-container>
+                </div>
+              </ng-container>
+              <ng-template #standardVerseList let-verseGroup="verses" let-tag="tag">
+                <app-tagged-verse-group-header *ngIf="tag || selectedTags.length" [tags]="tag || selectedTags">
+                </app-tagged-verse-group-header>
+                <div *ngFor="let verse of verseGroup || verses" class="verse">
+                  <app-verse [verses]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
+                </div>
+              </ng-template>
+            </ng-container>
+            <ng-template #noVersesFiller>
+              <div class="no-verses-filler text-block">
+                {{content.noVersesFound}}
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <app-page-footer></app-page-footer>
+      </ion-content>
+    </div>
+  </ion-split-pane>
+</ion-app>

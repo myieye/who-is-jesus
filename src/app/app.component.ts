@@ -1,15 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { flatMap, union, difference, intersection, sortBy, isNil, groupBy } from 'lodash';
 import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
-import { MatDialog } from '@angular/material/dialog';
-import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { VerseTag, offLimits, VerseTagKey } from './models/tags';
 import { TaggedVerse, TaggedVerseCollection, TaggedVerseCollectionItem } from './models/bible';
 import { ContentService } from './services/content.service';
 import { OptionsSelection, OptionKey } from './options-list/options';
 import { VERSE_SEPARATOR } from '../utils/constants';
 import { hideInstructions } from '../utils/hider-util';
+import { ModalController, MenuController } from '@ionic/angular';
+import { LanguageService } from './services/language.service';
+import { PlatformService } from './services/platform.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,7 @@ import { hideInstructions } from '../utils/hider-util';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('tagInstructions')
   set tagInstructions(tagInstructions: ElementRef<HTMLElement>) {
@@ -38,6 +40,11 @@ export class AppComponent implements OnInit {
   optionsSelection: OptionsSelection = {};
   selectedTags: VerseTag[] = [];
 
+  readonly menus = {
+    main: 'main',
+    language: 'language',
+  };
+
   private selectedTagKeys: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
@@ -48,14 +55,21 @@ export class AppComponent implements OnInit {
 
   constructor(
     readonly content: ContentService,
-    private readonly dialog: MatDialog,
     private readonly ref: ChangeDetectorRef,
+    readonly languageService: LanguageService,
+    readonly platform: PlatformService,
+    private readonly modalController: ModalController,
+    private readonly menuController: MenuController,
   ) {
     this.verses = this.content.verses;
   }
 
   ngOnInit(): void {
     this.tags = this.getVerseTagSet(this.content.verses);
+  }
+
+  ngAfterViewInit(): void {
+    this.menuController.enable(true, this.menus.main);
   }
 
   selectedTagsChanged(selectedTagKeys: VerseTagKey[]) {
@@ -118,10 +132,21 @@ export class AppComponent implements OnInit {
     this.ref.markForCheck();
   }
 
-  infoClicked(): void {
-    const dialogRef = this.dialog.open(InfoDialogComponent, {
-      data: this.content,
+  async infoClicked(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: InfoDialogComponent,
+      componentProps: {
+        content: this.content,
+      },
+      swipeToClose: true,
     });
+
+    return await modal.present();
+  }
+
+  openMenu(menuId: string): void {
+    this.menuController.enable(true, menuId);
+    this.menuController.open(menuId);
   }
 
   getVerseTagSet(verses: TaggedVerse[]): VerseTag[] {

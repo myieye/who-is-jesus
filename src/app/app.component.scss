@@ -19,7 +19,7 @@
 .intro-wrapper {
   padding: $page-padding;
   margin: 20px 0 30px;
-  
+
   @media only screen and ($small-screen) {
     margin-top: 40px;
   }
@@ -125,4 +125,21 @@
   font-size: 1.1em;
   text-align: center;
   margin: 0 auto 10px;
+}
+
+/* ionic */
+.main-content {
+  flex-grow: 1;
+}
+
+.md .toolbar-title-text {
+  padding: 10px;
+}
+
+ion-list-header {
+  font-weight: 400;
+
+  &.ios {
+    margin-bottom: 20px;
+  }
 }

@@ -14,7 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { SourceFilterComponent } from './source-filter/source-filter.component';
 import { VerseOrderSelectComponent } from './verse-order-select/verse-order-select.component';
 import { PageFooterComponent } from './page-footer/page-footer.component';
-import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppRouterComponent } from './app-router.component';
 import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
@@ -26,10 +26,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OptionsListComponent } from './options-list/options-list.component';
 import { TaggedVerseGroupHeaderComponent } from './tagged-verse-group-header/tagged-verse-group-header.component';
-import { BibleTranslationsDialogComponent } from './bible-translations-dialog/bible-translations-dialog.component';
+import { BibleTranslationsDialogComponent } from './dialogs/bible-translations-dialog/bible-translations-dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { TagInstructionsContentComponent } from './content/tag-instructions-content.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { DialogHeaderComponent } from './dialogs/dialog-header/dialog-header.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +51,10 @@ import { TagInstructionsContentComponent } from './content/tag-instructions-cont
     TaggedVerseGroupHeaderComponent,
     BibleTranslationsDialogComponent,
     TagInstructionsContentComponent,
+    DialogHeaderComponent,
   ],
   imports: [
+    IonicModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     MatChipsModule,
@@ -68,6 +74,8 @@ import { TagInstructionsContentComponent } from './content/tag-instructions-cont
   ],
   providers: [
     { provide: Window, useValue: window },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    StatusBar,
   ],
   bootstrap: [AppRouterComponent],
 })

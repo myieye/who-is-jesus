@@ -2,11 +2,11 @@ import { Component, OnInit, EventEmitter, Output, ChangeDetectionStrategy } from
 import { ContentService } from '../services/content.service';
 import { Option, options as verseOptions, OptionsSelection, OptionKey } from './options';
 import { QueryParamService } from '../services/query-param.service';
-import { reduce, isNil, isEqual, sortBy } from 'lodash';
-import { MatDialog } from '@angular/material/dialog';
-import { BibleTranslationsDialogComponent } from '../bible-translations-dialog/bible-translations-dialog.component';
-import { first } from 'rxjs/operators';
+import { reduce, isNil } from 'lodash';
+import { BibleTranslationsDialogComponent } from '../dialogs/bible-translations-dialog/bible-translations-dialog.component';
 import { haveSameItems } from 'src/utils/array-utils';
+import { ModalController } from '@ionic/angular';
+import { MatSnackBar } from '@angular/material';
 
 const OPTIONS_PARAM = 'options';
 const KEY_VALUE_SEP = ':';
@@ -31,7 +31,8 @@ export class OptionsListComponent implements OnInit {
   constructor(
     readonly content: ContentService,
     private readonly paramService: QueryParamService,
-    private readonly dialog: MatDialog,
+    private readonly modalController: ModalController,
+    private readonly snackBar: MatSnackBar,
   ) {
     this.selectedOptions = this.options.filter((option) => option.default);
   }
@@ -82,15 +83,17 @@ export class OptionsListComponent implements OnInit {
       .join(', ');
   }
 
-  bibleTranslationsClicked(): void {
-    this.dialog.open(BibleTranslationsDialogComponent, {
-      data: {
+  async bibleTranslationsClicked(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: BibleTranslationsDialogComponent,
+      componentProps: {
         content: this.content,
         bibles: this.bgTranslations,
       },
-      width: '750px',
-    }).afterClosed().pipe(first()).subscribe(
-      (selectedTranslations) => this.updateSelectedTranslations(selectedTranslations));
+      swipeToClose: true,
+    });
+    modal.onDidDismiss().then(({data}) => data && this.updateSelectedTranslations(data));
+    return await modal.present();
   }
 
   private updateSelectedTranslations(selectedTranslations: string[]): void {
@@ -99,5 +102,7 @@ export class OptionsListComponent implements OnInit {
         ? selectedTranslations : this.content.defaultBibleTranslationKeys;
       this.optionsChanged(this.selectedOptions);
     }
+
+    this.snackBar.open(`${this.content.bibleGatewayTranslations}: ${this.bgTranslations.join(', ')}`, undefined, { duration: 3000 });
   }
 }

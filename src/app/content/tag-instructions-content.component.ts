@@ -5,7 +5,7 @@ import { ContentService } from '../services/content.service';
 @Component({
   selector: 'app-tag-instructions-content',
   template: `
-<ng-container [ngSwitch]="content.language">
+<ng-container [ngSwitch]="content.languageCode">
   <ng-container *ngSwitchCase="Language.EN">
     Select a <mat-chip class='clickable'>tag</mat-chip> to focus your search...
   </ng-container>

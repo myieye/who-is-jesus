@@ -4,7 +4,8 @@ import { Language } from './languages';
 
 // tslint:disable:member-ordering
 export class ContentTemplate {
-    language: Language = undefined;
+    languageCode: Language = undefined;
+    language = '';
     jesus = '';
     all = '';
     synopticGospels = '';
@@ -45,10 +46,13 @@ export class ContentTemplate {
     impressum = '';
     privacyPolicy = '';
     internetRequiredForLanguageVerses = '';
+    menu = '';
+    [Language.EN] = '';
+    [Language.DE] = '';
 }
 
 type ContentProps = Array<keyof ContentTemplate>;
 
-export type Content = ContentTemplate;
+export type Content = ContentTemplate & {[key in Language]: string};
 
 export const CONTENT_PROPS = Object.keys(new ContentTemplate()) as ContentProps;

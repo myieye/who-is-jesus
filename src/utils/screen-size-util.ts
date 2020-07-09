@@ -1,5 +1,6 @@
 import { $bigScreen, bigScreenClass } from '../vars';
 import { isNil } from 'lodash';
+import { Observable } from 'rxjs';
 
 export const initScreenSizeCssClassHandlers = () => {
     createBodyClassMediaQueryHandler($bigScreen, bigScreenClass);
@@ -11,6 +12,10 @@ const createBodyClassMediaQueryHandler = (query: string, cssClass: string): void
     });
 };
 
+export const createBodyClassObservableHandler = (observable: Observable<boolean>, cssClass: string): void => {
+    observable.subscribe((on) => window.document.body.classList.toggle(cssClass, on));
+};
+
 export const createMediaQueryHandler = (
     query: string, changeHandler: (matches: boolean) => void): void => {
     const mediaQuery = window.matchMedia(`(${query})`);
@@ -20,6 +25,7 @@ export const createMediaQueryHandler = (
             changeHandler(mediaQueryEvent.matches);
         });
     } else {
+        // tslint:disable-next-line: deprecation
         mediaQuery.addListener((mediaQueryEvent: MediaQueryListEvent) => {
             changeHandler(mediaQueryEvent.matches);
         });

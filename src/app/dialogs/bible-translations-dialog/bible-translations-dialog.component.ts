@@ -1,16 +1,9 @@
-import { Component, Inject, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ContentService } from '../services/content.service';
-import { BG_BIBLES, BibleGatewayTranslation } from '../content/bible-gateway-bibles';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatListOption, MatSelectionList } from '@angular/material/list';
+import { Component, ViewChild, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { ContentService } from '../../services/content.service';
+import { BG_BIBLES, BibleGatewayTranslation } from '../../content/bible-gateway-bibles';
+import { MatSelectionList } from '@angular/material/list';
 import { flatMap } from 'lodash';
-import { first } from 'rxjs/operators';
-
-interface BibleTranslationsDialogData {
-  content: ContentService;
-  bibles: string[];
-}
+import { ModalController } from '@ionic/angular';
 
 const bgBiblesByLanguage = Object.values(BG_BIBLES);
 const bgBibles = flatMap(bgBiblesByLanguage, (bibleLanguageGroup) => bibleLanguageGroup.bibles);
@@ -21,33 +14,46 @@ const bgBibles = flatMap(bgBiblesByLanguage, (bibleLanguageGroup) => bibleLangua
   styleUrls: ['./bible-translations-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BibleTranslationsDialogComponent {
+export class BibleTranslationsDialogComponent implements OnInit {
+
+  @Input() content: ContentService;
+
+  @Input() set bibles(bibles: string[]) {
+    this.selectedBibles = bibles?.length
+      ? bibles.map((bibleKey) => this.findBible(bibleKey))
+      : this.defaultBibles;
+    this.prevSelectedBibles = [...this.selectedBibles];
+  }
 
   @ViewChild(MatSelectionList, { static: true }) translationList: MatSelectionList;
 
   readonly biblesByLanguage = bgBiblesByLanguage;
   hiddenBibles: { [index: string]: boolean } = {};
 
-  readonly content: ContentService;
-  readonly defaultBibles: BibleGatewayTranslation[];
+  prevSelectedBibles: BibleGatewayTranslation[];
+  defaultBibles: BibleGatewayTranslation[];
   selectedBibles: BibleGatewayTranslation[];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) readonly data: BibleTranslationsDialogData,
-    dialogRef: MatDialogRef<BibleTranslationsDialogComponent>,
+    private readonly modalController: ModalController,
   ) {
-    this.content = data.content;
-    this.defaultBibles = this.content.defaultBibleTranslationKeys.map((bibleKey) => this.findBible(bibleKey));
-    this.selectedBibles = data.bibles?.length
-      ? data.bibles.map((bibleKey) => this.findBible(bibleKey))
-      : this.defaultBibles;
-
-    dialogRef.beforeClosed().pipe(first()).subscribe(() =>
-      dialogRef.close(this.selectedBibles.map((bible) => bible.key)));
   }
 
-  selectedBiblesChanged(selectedOptions: SelectionModel<MatListOption>): void {
-    this.selectedBibles = selectedOptions.selected.map((option) => option.value) as BibleGatewayTranslation[];
+  async ngOnInit() {
+    this.defaultBibles = this.content.defaultBibleTranslationKeys.map((bibleKey) => this.findBible(bibleKey));
+  }
+
+  save(): void {
+    this.modalController.dismiss(this.selectedBibles.map((bible) => bible.key));
+  }
+
+  toggleBible(bible: BibleGatewayTranslation): void {
+    const index = this.selectedBibles.indexOf(bible);
+    if (index >= 0) {
+      this.selectedBibles.splice(index, 1);
+    } else {
+      this.selectedBibles.push(bible);
+    }
   }
 
   deselectBible(bible: BibleGatewayTranslation): void {

@@ -6,8 +6,8 @@
 @import "./app/source-filter/source-filter.component.scss-theme.scss";
 @import "./app/page-footer/page-footer.component.scss-theme.scss";
 @import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
-@import "./app/info-dialog/info-dialog.component.scss-theme.scss";
-@import "./app/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss";
+@import "./app/dialogs/info-dialog/info-dialog.component.scss-theme.scss";
+@import "./app/dialogs/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss";
 
 // Plus imports for other components in your app.
 
@@ -110,6 +110,7 @@ app-root, app-tag-list {
   color: $jesus-red;
   font-family: "Lovers Quarrel";
   margin-left: 0.1em;
+  font-weight: 200;
 }
 
 .text-block {
@@ -118,6 +119,10 @@ app-root, app-tag-list {
 
 .hidden {
   display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .mat-chip.mat-standard-chip.label-chip {
@@ -174,4 +179,30 @@ body {
 .mat-chip.clickable {
   color: mat-color($primary);
   font-weight: 600;
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
+/* Hack for displaying tooltips on the bottom of the screen */
+body.use-app-features {
+  .mat-tooltip-panel {
+    bottom: 0 !important;
+    left: 0 !important;
+    top: initial !important;
+    right: initial !important;
+    width: 100% !important;
+  }
+
+  mat-tooltip-component {
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+  }
+
+  .mat-tooltip {
+    margin: 14px 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
 }

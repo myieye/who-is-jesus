@@ -10,7 +10,8 @@ const language = Language.DE;
 const verses = languageConfigs[language]?.getter() ?? germanVerses;
 
 export const CONTENT: Content = {
-    language,
+    languageCode: language,
+    language: 'Sprache',
     jesus: 'Jesus',
     all: 'Alle',
     synopticGospels: 'Synoptiker',
@@ -73,4 +74,7 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
     privacyPolicy: 'Datenschutzerklärung',
     internetRequiredForLanguageVerses:
 'Wegen Copyright, ist eine Internet-Verbindng erforderlich, um Verse in der ausgewählten Sprache zu lesen.',
+    menu: 'Menü',
+    en: 'English',
+    de: 'Deutsch',
 };

@@ -23,9 +23,13 @@
   }
 }
 
+.sticky-wrapper {
+  position: absolute;
+  top: 0;
+}
+
 .sticky-tag-list {
   position: fixed;
-  top: 0;
   visibility: hidden;
   z-index: 2;
   box-sizing: border-box;

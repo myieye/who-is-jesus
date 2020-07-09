@@ -5,15 +5,19 @@ import {
   EventEmitter,
   ElementRef,
   ViewChild,
-  HostListener,
   ChangeDetectionStrategy,
   AfterViewInit,
+  OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { VerseTagKey, VerseTag } from '../models/tags';
 import { first, difference } from 'lodash';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { QueryParamService } from '../services/query-param.service';
 import { ScreenSizeService } from '../services/screen-size.service';
+import { IonContent } from '@ionic/angular';
+import { takeUntil, throttleTime } from 'rxjs/operators';
+import { Subject, asyncScheduler } from 'rxjs';
 
 const TAG_PARAM = 'tags';
 
@@ -29,7 +33,7 @@ const TAG_PARAM = 'tags';
     }
   ]
 })
-export class TagListComponent implements AfterViewInit {
+export class TagListComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   set multiple(multiple: boolean) {
@@ -82,6 +86,8 @@ export class TagListComponent implements AfterViewInit {
   private cachedSelectedTags: VerseTagKey[];
   private selectedTags: VerseTagKey[] = [];
 
+  private readonly destroy$ = new Subject<void>();
+
   private get hasSelectedTags(): boolean {
     return this.selectedTags.length > 0;
   }
@@ -89,7 +95,13 @@ export class TagListComponent implements AfterViewInit {
   constructor(
     private readonly paramService: QueryParamService,
     private readonly screenSizeService: ScreenSizeService,
+    private readonly scrollableParent: IonContent,
+    private readonly ref: ChangeDetectorRef,
   ) {
+    scrollableParent.ionScroll.pipe(
+      throttleTime(200, asyncScheduler, {leading: false, trailing: true}),
+      takeUntil(this.destroy$),
+    ).subscribe(() => this.updateStickyList());
   }
 
   ngAfterViewInit(): void {
@@ -102,20 +114,20 @@ export class TagListComponent implements AfterViewInit {
     this.updateTagStates();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   tagClicked(tag: VerseTagKey) {
     this.selectTag(tag, this.selectedTagMap[tag] !== true);
     const wasVisible = this.stickyListVisible;
     this.updateStickyList();
     setTimeout(() => {
       if (!this.hasSelectedTags && wasVisible) {
-        window.scrollTo({ top: this.container.nativeElement.offsetTop, behavior: 'smooth' });
+        this.scrollableParent.scrollToPoint(0, this.container.nativeElement.offsetTop, 500);
       }
     });
-  }
-
-  @HostListener('window:scroll')
-  onScroll() {
-    this.updateStickyList();
   }
 
   private selectTag(tag: VerseTagKey, select = true): void {
@@ -140,11 +152,18 @@ export class TagListComponent implements AfterViewInit {
     this.cacheSelectedTags();
   }
 
-  private updateStickyList(): void {
-    const rect = this.container.nativeElement.getBoundingClientRect();
+  private async updateStickyList(): Promise<void> {
+    const containerElem = this.container.nativeElement;
     const stickyListHeight = this.stickyContainer.nativeElement.clientHeight;
-    this.stickyListVisible = this.hasSelectedTags && rect.bottom <= stickyListHeight;
+    const scrollThreshold = containerElem.offsetTop + (containerElem.clientHeight - stickyListHeight);
+
+    const scroll = (await this.scrollableParent.getScrollElement()).scrollTop;
+
+    const crossedScrollThreshold = scroll > scrollThreshold;
+    this.stickyListVisible = this.hasSelectedTags && crossedScrollThreshold;
+
     this.collapsed = !this.screenSizeService.isVeryBigScreen;
+    this.ref.markForCheck();
   }
 
   private updateTagStates(): void {

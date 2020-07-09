@@ -1,0 +1,8 @@
+{
+    "name": "com.timhaasdyk.whoisjesus",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "angular"
+  }
+  

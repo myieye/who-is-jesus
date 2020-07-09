@@ -26,9 +26,16 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/.htaccess"
+              "src/.htaccess",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
             ],
             "styles": [
+              "src/cordova/ionic-variables.scss",
+              "src/cordova/ionic-globals.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -79,7 +86,9 @@
               ],
               "styles": [
                 "src/styles.scss",
-                "src/cordova/fonts/fonts.css"
+                "src/cordova/fonts/fonts.css",
+                "src/cordova/ionic-variables.scss",
+                "src/cordova/ionic-globals.scss"
               ],
               "assets": [
                 {
@@ -91,6 +100,11 @@
                   "glob": "**/*",
                   "input": "platforms/android/platform_www",
                   "output": "./cordova/android"
+                },
+                {
+                  "glob": "**/*.svg",
+                  "input": "node_modules/ionicons/dist/ionicons/svg",
+                  "output": "./svg"
                 }
               ],
               "fileReplacements": [
@@ -171,6 +185,30 @@
             "branch": "master",
             "baseHref": "/who-is-jesus/"
           }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/angular-toolkit:cordova-build",
+          "options": {
+            "browserTarget": "app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production"
+            }
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/angular-toolkit:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "app:ionic-cordova-build",
+            "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:production",
+              "devServerTarget": "app:serve:production"
+            }
+          }
         }
       }
     }
@@ -178,5 +216,13 @@
   "defaultProject": "who-is-jesus",
   "cli": {
     "analytics": "ce2a2b91-964a-489f-aac2-82922650629a"
+  },
+  "schematics": {
+    "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@ionic/angular-toolkit:page": {
+      "styleext": "scss"
+    }
   }
 }

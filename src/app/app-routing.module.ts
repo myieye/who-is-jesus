@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { DEFAULT_LANGUAGE, languages, Language } from './content/languages';
 
@@ -32,6 +32,7 @@ const routes: Routes = [
       {
         paramsInheritanceStrategy: 'always',
         //enableTracing: true, // <-- debugging purposes only
+        preloadingStrategy: PreloadAllModules,
       }
     ),
   ],

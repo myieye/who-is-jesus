@@ -6,7 +6,8 @@ import { tagVerses } from '../references';
 import { Language } from '../languages';
 
 export const CONTENT: Content = {
-    language: Language.EN,
+    languageCode: Language.EN,
+    language: 'Language',
     jesus: 'Jesus',
     all: 'All',
     synopticGospels: 'Synoptic Gospels',
@@ -68,5 +69,8 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
     impressum: 'Impressum',
     privacyPolicy: 'Privacy policy',
     internetRequiredForLanguageVerses:
-'Due to copyright, an internet connection is required to view verses in the selected language.'
+'Due to copyright, an internet connection is required to view verses in the selected language.',
+    menu: 'Menu',
+    en: 'English',
+    de: 'Deutsch',
 };

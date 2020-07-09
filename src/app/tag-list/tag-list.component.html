@@ -1,22 +1,23 @@
 <div #container class="tag-container mat-app-background static-tag-list">
   <mat-chip-list #chipList [multiple]="true">
-    <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
-      [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]"
-      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip"
-      class="clickable">
-      {{tag.name}}
-    </mat-chip>
+    <ng-container *ngTemplateOutlet="chips; context: { $implicit: tags}"></ng-container>
   </mat-chip-list>
 </div>
 
-<div #stickyContainer class="tag-container mat-app-background sticky-tag-list" [class.visible]="stickyListVisible" [class.collapsed]="collapsed">
-  <mat-chip-list #stickyChipList [multiple]="true">
-    <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
-      [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]"
-      [matTooltip]="tag.description" matTooltipTouchGestures="auto" matTooltipClass="tooltip"
-      class="clickable">
-      {{tag.name}}
-    </mat-chip>
-  </mat-chip-list>
-  <span class="open-toggle" (click)="collapsed = !collapsed">V</span>
+<div class="sticky-wrapper">
+  <div #stickyContainer class="tag-container mat-app-background sticky-tag-list" [class.visible]="stickyListVisible"
+    [class.collapsed]="collapsed">
+    <mat-chip-list #stickyChipList [multiple]="true">
+      <ng-container *ngTemplateOutlet="chips; context: { $implicit: tags}"></ng-container>
+    </mat-chip-list>
+    <span class="open-toggle" (click)="collapsed = !collapsed">V</span>
+  </div>
 </div>
+
+<ng-template #chips let-tags>
+  <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
+        [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]" #tooltip="matTooltip" [matTooltip]="tag.description"
+        matTooltipTouchGestures="auto" matTooltipClass="tooltip" class="clickable">
+        {{tag.name}}
+      </mat-chip>
+</ng-template>

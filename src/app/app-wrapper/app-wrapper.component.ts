@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LanguageService } from '../services/language.service';
 import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-wrapper',
@@ -30,13 +32,14 @@ export class AppWrapperComponent {
     private readonly snackBar: MatSnackBar,
     private readonly languageService: LanguageService,
     private readonly contentService: ContentService,
+    private readonly statusBar: StatusBar,
+    private readonly platform: Platform,
   ) {
     this.route.paramMap.subscribe((paramMap) => this.onParamsChanged(paramMap));
   }
 
   private onParamsChanged(paramMap: ParamMap): void {
-
-    this.languageService.setLanguage(paramMap.get('lang'));
+    this.languageService.init(paramMap.get('lang'));
 
     // Perform a brute force recreation of the app
     if (isNil(this.previousParams) || !isEqual(this.previousParams, paramMap)) {
@@ -44,7 +47,7 @@ export class AppWrapperComponent {
 
       let contentIniter = this.loadLanguageVerses()
         .catch(() => languageVersesAvailable = false)
-        .finally(() => this.contentService.initPropsDynamically() as Promise<unknown>);
+        .finally(() => this.contentService.initPropsDynamically()) as Promise<unknown>;
 
       if (this.enabled) {
         this.loading = true;
@@ -55,9 +58,11 @@ export class AppWrapperComponent {
 
       contentIniter = contentIniter
         .then(() => window.deviceReady$)
-        .then(() => window.webFontConfigActive$);
+        .then(() => window.webFontConfigActive$)
+        .then(() => this.platform.ready());
 
       contentIniter.then(() => {
+        this.statusBar.styleDefault();
         this.enabled = true;
         this.ref.detectChanges();
         this.loading = false;
