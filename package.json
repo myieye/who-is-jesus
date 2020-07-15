@@ -3,7 +3,7 @@
   "displayName": "Who is Jesus?",
   "description": "A streamlined tool for exploring the biblical greatness of Jesus in the gospels.",
   "author": "Tim Haasdyk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "ng": "ng",
