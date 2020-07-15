@@ -1,0 +1,8 @@
+{
+    "search.exclude": {
+        "**/__private/backups": true,
+        "**/dist": true,
+        "**/platforms": true,
+        "**/www": true
+    }
+}
