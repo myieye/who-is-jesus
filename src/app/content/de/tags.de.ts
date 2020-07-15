@@ -14,7 +14,7 @@ export const tags: VerseTagMap = {
     [VerseTagKey.Faith]: { key: VerseTagKey.Faith, name: 'Glaube', description: 'Jesus ist das Objekt des Glaubens vieler Menschen.' },
     [VerseTagKey.FP]: { key: VerseTagKey.FP, name: 'Erfüllte Prophezeiung', description: 'Jesus ist die Erfühlung viele alttestamentlicher Prophezeiungen.' },
     [VerseTagKey.Glory]: { key: VerseTagKey.Glory, name: 'Herrlichkeit', description: 'Große Herrlichkeit wird Jesus zugeschrieben; sogar die Herrlichkeit seines Vaters.' },
-    [VerseTagKey.God]: { key: VerseTagKey.God, name: 'Gott', description: 'Jesus wird (teils explicit und teils implicit) als Gott dargestellt.' },
+    [VerseTagKey.God]: { key: VerseTagKey.God, name: 'Gott', description: 'Jesus wird (teils explizit und teils implizit) als Gott dargestellt.' },
     [VerseTagKey.Greater]: { key: VerseTagKey.Greater, name: 'Größer', description: 'Jesus ist größer als eine großartige Menge von großen Menschen und Sachen.' },
     [VerseTagKey.Heaven]: { key: VerseTagKey.Heaven, name: 'Himmel', description: 'Jesus kam vom Himmel und existierte daher auch bevor er geboren wurde.' },
     [VerseTagKey.Himself]: { key: VerseTagKey.Himself, name: 'Jesus Selbst', description: 'Jesus hatte viel Erstaunliches über sich selbst zu sagen.' },
