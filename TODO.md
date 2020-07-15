@@ -4,9 +4,8 @@
 
 
 ## Ideas/Backlog
+- [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)
 - [Bugfix(2)] Fix compile warnings
-- [Bugfix(1)] Verse tags are under BibleGateway icon
-- [Design(4)] Optimize Cordova version for Android
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(7)] Simplify/Group tags for better overview
     - 2 Modes/Categorizations: Identity + Attributes/Characteristics
@@ -16,6 +15,8 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Design(4)] Optimize Cordova version for Android
+- [Bugfix(1)] Verse tags are under BibleGateway icon
 - [Platform(2)] Prepare first signed APK for publishing
 - [Platform(5)] Configure Cordova completely
     - Load German verses with script tag in header

@@ -171,7 +171,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.verseIndexer(this.mapVerseCollectionItemToVerse(verse)));
     if (isNil(verses)) {
       this.verses = sortedVerses;
-      this.ref.detectChanges();
     }
 
     return sortedVerses;
