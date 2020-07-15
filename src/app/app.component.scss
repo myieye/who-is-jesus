@@ -62,9 +62,11 @@
   display: none;
 }
 
-.verse-container-wrapper {
-  padding-left: $page-padding;
-  padding-right: $page-padding;
+ion-app:not(.use-app-features) {
+  .verse-container-wrapper {
+    padding-left: $page-padding;
+    padding-right: $page-padding;
+  }
 }
 
 .verse {

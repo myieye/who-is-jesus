@@ -1,6 +1,6 @@
 @import "../../vars.scss";
 
-:host {
+.verse-container {
   @include centered-grid-column-layout;
   // #{'min(55vw, #{$text-block-width})'} would be better, but it's not well supported yet
   // check Matt.24:27, 30-31 (parallels merged)
@@ -55,8 +55,12 @@
   }
 }
 
+.tag-container {
+  z-index: 1;
+}
+
 @media only screen and ($not-big-screen) {
-  :host {
+  .verse-container {
     display: block;
     max-width: $text-block-width;
     margin: auto;
@@ -126,11 +130,6 @@
 
 .actions > * {
   padding-left: 5px;
-}
-
-.verse-tags {
-  height: 0;
-  position: relative;
 }
 
 .tag-count {

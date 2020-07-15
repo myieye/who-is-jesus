@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app [class.use-app-features]="platform.useAppFeatures | async">
   <ion-split-pane contentId="main-content">
     <ng-container *ngIf="platform.useAppFeatures | async">
       <ion-menu [menuId]="menus.main" contentId="main-content" type="overlay">

@@ -5,6 +5,7 @@ import { DebugSettings } from '../../debug-settings';
 import { Subject } from 'rxjs';
 import { VerseTagKey, VerseTag } from '../models/tags';
 import { isNil } from 'lodash';
+import { PlatformService } from '../services/platform.service';
 
 @Component({
   selector: 'app-verse',
@@ -43,6 +44,7 @@ export class VerseComponent implements OnDestroy {
   constructor(
     readonly content: ContentService,
     private readonly ref: ChangeDetectorRef,
+    readonly platform: PlatformService,
     window: Window,
   ) {
     VerseComponent.initialize(window);
