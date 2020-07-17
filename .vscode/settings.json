@@ -3,6 +3,7 @@
         "**/__private/backups": true,
         "**/dist": true,
         "**/platforms": true,
+        "**/plugins": true,
         "**/www": true
     }
 }
