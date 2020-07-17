@@ -69,6 +69,11 @@ ion-app:not(.use-app-features) {
   }
 }
 
+ion-app.use-app-features app-tagged-verse-group-header {
+  padding-left: $page-padding;
+  padding-right: $page-padding;
+}
+
 .verse {
   @media only screen and ($small-screen) {
     margin-bottom: 10px;
