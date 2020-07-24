@@ -13,9 +13,9 @@
                 <button class="tag-count big-screen-content" (click)="toggleTags($event)"
                     [class.selected]="showTags">{{selectedVerse.tags.length}}</button>
                 <ng-container *ngIf="showTags">
-                    <mat-chip *ngFor="let tag of getTagsForVerse(selectedVerse)" [selectable]="false"
-                        [disableRipple]="true" class="verse-tag" (click)="tagClicked.emit(tag.key)">{{tag.name}}
-                    </mat-chip>
+                    <ion-chip *ngFor="let tag of getTagsForVerse(selectedVerse)"
+                        class="verse-tag" (click)="tagClicked.emit(tag.key)">{{tag.name}}
+                    </ion-chip>
                 </ng-container>
             </div>
         </div>

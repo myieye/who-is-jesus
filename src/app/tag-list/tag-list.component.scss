@@ -10,15 +10,20 @@
   max-width: 900px;
   margin: auto;
 
-  ::ng-deep .mat-chip-list-wrapper {
+  .verse-tag-list {
     justify-content: center;
   }
 }
 
-.tag-container {
-  padding: 10px $page-padding;
+.verse-tag-list {
+  display: flex;
+  flex-flow: wrap;
+}
 
-  .mat-chip {
+.tag-container {
+  padding: 6px $page-padding;
+
+  .verse-tag {
     user-select: none;
   }
 }
@@ -34,6 +39,7 @@
   z-index: 2;
   box-sizing: border-box;
   width: 100%;
+  background: var(--ion-background-color);
 
   .open-toggle {
     position: absolute;
@@ -51,22 +57,23 @@
   }
 
   &.collapsed {
-    padding: 0 4px;
+    padding: 0;
 
-    .mat-chip {
+    .verse-tag {
       overflow: initial;
       white-space: nowrap;
     }
 
-    .mat-chip:not(.mat-chip-selected) {
+    .verse-tag:not(.selected) {
       display: none;
     }
 
-    ::ng-deep.mat-chip-list-wrapper {
+    .verse-tag-list {
       flex-wrap: initial;
       overflow-x: auto;
       overflow-y: hidden;
       padding: 10px 0;
+      margin: -4px 0;
 
       &:after,
       &:before {

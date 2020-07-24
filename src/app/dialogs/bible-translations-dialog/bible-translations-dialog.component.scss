@@ -1,18 +1,16 @@
 @import "./../../../vars.scss";
 
-.search-field {
-    width: 100%;
-}
-
-.mat-chip.mat-standard-chip.label-chip.default {
-    color: $mid-grey;
-    border-color: $mid-grey;
-}
-
 .dialog-content {
     padding-bottom: 70px;
 }
 
-.save-button-container {
-    right: 32px;
+.selected-bibles,
+.translation-list {
+    margin-top: 20px;
+}
+
+.search-item.ios {
+    position: relative;
+    left: -20px;
+    width: calc(100% + 20px);
 }

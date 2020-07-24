@@ -9,11 +9,11 @@ $not-very-big-screen: "max-width: 1299px";
 $big-screen: "min-width: 1050px";
 $not-big-screen: "max-width: 1049px";
 
-$jesus-red-light: #ED4646;
-$jesus-red: #AD0606;
+$jesus-red-light: #ed4646;
+$jesus-red: #ad0606;
 $jesus-red-dark: #ad060650;
 
-$light-grey: #CCC;
+$light-grey: #ccc;
 $mid-grey: #666;
 $dark-grey: #333;
 
@@ -24,4 +24,28 @@ $text-block-width: 600px;
 @mixin centered-grid-column-layout {
   display: grid;
   grid-template-columns: 1fr $text-block-width 1fr;
+}
+
+@mixin darkStyles($selector: "") {
+  @media (prefers-color-scheme: dark) {
+    @if & {
+      html#{$selector} & {
+        @content;
+      }
+    } @else {
+      html#{$selector} {
+        @content;
+      }
+    }
+  }
+
+  @if & {
+    html.dark#{$selector} & {
+      @content;
+    }
+  } @else {
+    html.dark#{$selector} {
+      @content;
+    }
+  }
 }

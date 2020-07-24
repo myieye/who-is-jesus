@@ -7,12 +7,6 @@
   // Extract the palettes you need from the theme definition.
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
-
-  app-tag-list .tag-container {
-    .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
-      color: mat-color($background, unselected-chip);
-    }
-  }
   
   .sticky-tag-list {
     border-bottom: 1px solid mat-color($primary, lighter);

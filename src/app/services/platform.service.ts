@@ -22,6 +22,6 @@ export class PlatformService {
   }
 
   get isCordova(): boolean {
-    return window.isCordova;
+    return window.isCordova ?? false;
   }
 }

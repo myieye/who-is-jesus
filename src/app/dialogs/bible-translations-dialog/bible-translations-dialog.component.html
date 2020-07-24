@@ -1,34 +1,33 @@
 <ng-container *ngIf="content">
     <app-dialog-header [title]="content.bibleGatewayTranslations"></app-dialog-header>
     <ion-content>
-        <div mat-dialog-content class="dialog-content">
+        <div class="dialog-content">
             <p>{{content.bibleGatewayTranslationsDescription}}</p>
 
-            <mat-form-field class="search-field" floatLabel="never">
-                <mat-label>{{content.searchByLanguageOrTranslation}}</mat-label>
-                <input matInput #searchInput (keydown.enter)="searchInput.blur()"
-                    (input)="searchChanged(searchInput.value)">
-            </mat-form-field>
+            <ion-item class="search-item">
+                <ion-input color="primary" [placeholder]="content.searchByLanguageOrTranslation"
+                    (ionChange)="searchChanged($event.detail.value)"></ion-input>
+            </ion-item>
 
-            <mat-chip-list class="selected-bibles">
-                <mat-chip *ngFor="let bible of (selectedBibles?.length) ? selectedBibles : defaultBibles"
-                    class="label-chip" [class.default]="!selectedBibles?.length" [removable]="selectedBibles?.length"
-                    (removed)="deselectBible(bible)" [matTooltip]="bible.name">
+            <div class="selected-bibles">
+                <ion-chip *ngFor="let bible of (selectedBibles?.length) ? selectedBibles : defaultBibles"
+                    (click)="deselectBible(bible)"
+                    class="label-chip verse-tag" [class.default]="!selectedBibles?.length">
                     {{bible.key}}
-                    <mat-icon matChipRemove *ngIf="selectedBibles?.length">cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
+                    <ion-icon name="close-circle" *ngIf="selectedBibles?.length"></ion-icon>
+                </ion-chip>
+            </div>
 
-            <mat-selection-list #bibles>
+            <div class="translation-list">
                 <ng-container *ngFor="let language of biblesByLanguage">
                     <p [class.hidden]="this.hiddenBibles[language.language.name]">{{language.language.name}}</p>
-                    <mat-list-option *ngFor="let bible of language.bibles" [value]="bible" (click)="toggleBible(bible)"
-                        [selected]="selectedBibles.includes(bible)"
+                    <ion-item *ngFor="let bible of language.bibles" (click)="$event.preventDefault(); toggleBible(bible);"
                         [class.hidden]="this.hiddenBibles[language.language.name] || this.hiddenBibles[bible.name]">
-                        {{bible.name}}
-                    </mat-list-option>
+                        <ion-label>{{bible.name}}</ion-label>
+                        <ion-checkbox [checked]="selectedBibles.includes(bible)"></ion-checkbox>
+                    </ion-item>
                 </ng-container>
-            </mat-selection-list>
+            </div>
         </div>
     </ion-content>
 

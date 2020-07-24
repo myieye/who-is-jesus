@@ -1,19 +1,18 @@
 import { $bigScreen, bigScreenClass } from '../vars';
 import { isNil } from 'lodash';
 import { Observable } from 'rxjs';
+import { setBodyClass } from './dom-util';
 
 export const initScreenSizeCssClassHandlers = () => {
     createBodyClassMediaQueryHandler($bigScreen, bigScreenClass);
 };
 
 const createBodyClassMediaQueryHandler = (query: string, cssClass: string): void => {
-    createMediaQueryHandler(query, (matches: boolean): void => {
-        window.document.body.classList.toggle(cssClass, matches);
-    });
+    createMediaQueryHandler(query, (matches: boolean): void => setBodyClass(cssClass, matches));
 };
 
 export const createBodyClassObservableHandler = (observable: Observable<boolean>, cssClass: string): void => {
-    observable.subscribe((on) => window.document.body.classList.toggle(cssClass, on));
+    observable.subscribe((on) => setBodyClass(cssClass, on));
 };
 
 export const createMediaQueryHandler = (

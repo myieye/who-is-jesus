@@ -1,23 +1,26 @@
-<div #container class="tag-container mat-app-background static-tag-list">
-  <mat-chip-list #chipList [multiple]="true">
+<div #container class="tag-container static-tag-list">
+  <div #chipList class="verse-tag-list">
     <ng-container *ngTemplateOutlet="chips; context: { $implicit: tags}"></ng-container>
-  </mat-chip-list>
+  </div>
 </div>
 
 <div class="sticky-wrapper">
-  <div #stickyContainer class="tag-container mat-app-background sticky-tag-list" [class.visible]="stickyListVisible"
+  <div #stickyContainer class="tag-container sticky-tag-list" [class.visible]="stickyListVisible"
     [class.collapsed]="collapsed">
-    <mat-chip-list #stickyChipList [multiple]="true">
+    <div #stickyChipList class="verse-tag-list">
       <ng-container *ngTemplateOutlet="chips; context: { $implicit: tags}"></ng-container>
-    </mat-chip-list>
+    </div>
     <span class="open-toggle" (click)="collapsed = !collapsed">V</span>
   </div>
 </div>
 
 <ng-template #chips let-tags>
-  <mat-chip *ngFor="let tag of tags" [value]="tag" #chip="matChip" (click)="tagClicked(chip.value.key)"
-        [selected]="selectedTagMap[tag.key]" [disabled]="disabledTagMap[tag.key]" #tooltip="matTooltip" [matTooltip]="tag.description"
-        matTooltipTouchGestures="auto" matTooltipClass="tooltip" class="clickable">
-        {{tag.name}}
-      </mat-chip>
+  <ion-chip *ngFor="let tag of tags" (click)="tagClicked(tag.key)"
+    class="clickable verse-tag"
+    [class.selected]="selectedTagMap[tag.key]"
+    [class.disabled]="disabledTagMap[tag.key]"
+    #tooltip="matTooltip" [matTooltip]="tag.description"
+    matTooltipTouchGestures="auto" matTooltipClass="tooltip">
+    {{tag.name}}
+  </ion-chip>
 </ng-template>

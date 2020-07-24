@@ -1,7 +1,7 @@
 # Todo
 
 ## Doing
-
+- [Design(4)] Dark mode
 
 ## Ideas/Backlog
 - [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)

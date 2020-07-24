@@ -7,6 +7,9 @@ import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
+import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
+import { setHtmlClass } from 'src/utils/dom-util';
+import { darkClass } from '../../vars';
 
 @Component({
   selector: 'app-wrapper',
@@ -34,6 +37,7 @@ export class AppWrapperComponent {
     private readonly contentService: ContentService,
     private readonly statusBar: StatusBar,
     private readonly platform: Platform,
+    private readonly theme: ThemeDetection,
   ) {
     this.route.paramMap.subscribe((paramMap) => this.onParamsChanged(paramMap));
   }
@@ -59,10 +63,10 @@ export class AppWrapperComponent {
       contentIniter = contentIniter
         .then(() => window.deviceReady$)
         .then(() => window.webFontConfigActive$)
-        .then(() => this.platform.ready());
+        .then(() => this.platform.ready())
+        .then(() => this.initTheme());
 
       contentIniter.then(() => {
-        this.statusBar.styleDefault();
         this.enabled = true;
         this.ref.detectChanges();
         this.loading = false;
@@ -83,6 +87,15 @@ export class AppWrapperComponent {
     this.previousParams = paramMap;
   }
 
+  async initTheme(): Promise<void> {
+    if (await this.useDarkMode()) {
+      setHtmlClass(darkClass);
+      if (this.platform.is('cordova')) {
+        this.statusBar.styleBlackOpaque();
+      }
+    }
+  }
+
   private loadLanguageVerses(): Promise<void> {
     const languageConfig = this.languageService.languageConfig;
 
@@ -96,5 +109,10 @@ export class AppWrapperComponent {
   private showInternetRequiredMessage(): void {
     this.snackBar.open(
       this.contentService.internetRequiredForLanguageVerses, undefined, { duration: 10000 });
+  }
+
+  private async useDarkMode(): Promise<boolean> {
+    return this.platform.is('cordova') &&
+      (await this.theme.isDarkModeEnabled())?.value;
   }
 }

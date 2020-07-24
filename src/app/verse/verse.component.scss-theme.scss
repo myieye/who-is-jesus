@@ -1,6 +1,14 @@
 @import "~@angular/material/theming";
 @import "../../vars.scss";
 
+@mixin wij-verse-theme-darkStyles() {
+  app-verse {
+    .references {
+      color: #5F7F7F;
+    }
+  }
+}
+
 @mixin wij-verse-theme($theme) {
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
@@ -22,12 +30,23 @@
     .tag-count.selected {
       color: mat-color($primary);
       border-color: mat-color($primary);
-      background: mat-color($primary, lighter);
+      background: var(--verse-tag-background);
     }
 
-    .verse-tag.mat-chip {
-      color: mat-color($primary);
-      box-shadow: 0px 0px 10px 3px mat-color($background, background);
+    .verse-tag {
+      box-shadow: 0px 0px 10px 3px var(--verse-tag-background);
     }
+
+    .references {
+      color: #2F4F4F;
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    @include wij-verse-theme-darkStyles();
+  }
+  
+  .dark {
+    @include wij-verse-theme-darkStyles();
   }
 }

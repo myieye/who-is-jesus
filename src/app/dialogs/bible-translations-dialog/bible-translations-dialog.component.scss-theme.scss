@@ -12,5 +12,17 @@
         .mat-list-base .mat-list-option {
             height: auto;
         }
+
+        .label-chip.default {
+            color: $mid-grey;
+            border-color: $mid-grey;
+        }
+    }
+
+    body:not(.use-app-features) app-bible-translations-dialog {
+        .save-button-container {
+            // Make space for a fat desktop scroll-bar
+            right: 32px;
+        }
     }
 }

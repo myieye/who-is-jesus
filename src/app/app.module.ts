@@ -34,6 +34,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DialogHeaderComponent } from './dialogs/dialog-header/dialog-header.component';
+import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { DialogHeaderComponent } from './dialogs/dialog-header/dialog-header.com
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     StatusBar,
+    ThemeDetection,
   ],
   bootstrap: [AppRouterComponent],
 })

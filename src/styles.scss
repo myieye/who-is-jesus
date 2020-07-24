@@ -8,6 +8,7 @@
 @import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
 @import "./app/dialogs/info-dialog/info-dialog.component.scss-theme.scss";
 @import "./app/dialogs/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss";
+@import "./vars.scss";
 
 // Plus imports for other components in your app.
 
@@ -80,7 +81,8 @@ h3 {
   }
 }
 
-app-root, app-tag-list {
+app-root,
+app-tag-list {
   display: block;
 }
 
@@ -90,6 +92,12 @@ app-root, app-tag-list {
 
 .primary {
   color: mat-color($primary);
+}
+
+@include darkStyles {
+  .jesus {
+    color: #ed4646 !important;
+  }
 }
 
 .inverse-section {
@@ -125,12 +133,6 @@ app-root, app-tag-list {
   visibility: hidden;
 }
 
-.mat-chip.mat-standard-chip.label-chip {
-  color: mat-color($primary);
-  border: 1px solid mat-color($primary);
-  font-weight: 600;
-}
-
 @media only screen and ($not-small-screen) {
   .cdk-overlay-container .mat-dialog-container {
     padding: 40px;
@@ -162,6 +164,25 @@ body {
   }
 }
 
+.verse-tag {
+  color: mat-color($primary);
+  background-color: var(--verse-tag-background);
+  font-weight: 600;
+
+  &.label-chip {
+    border: 1px solid mat-color($primary);
+  }
+
+  &.selected {
+    color: mat-color($background, unselected-chip);
+    background-color: mat-color($primary);
+  }
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
 .inline-icon-container {
   position: relative;
   top: 2px;
@@ -176,13 +197,52 @@ body {
   }
 }
 
-.mat-chip.clickable {
-  color: mat-color($primary);
-  font-weight: 600;
+.mat-form-field-flex {
+  padding: 0px 10px 2px 10px !important;
 }
 
-.dialog-content {
-  padding: 20px;
+.mat-form-field-can-float .mat-form-field-flex {
+  padding-top: 9px !important;
+}
+
+@include darkStyles {
+  .inline-icon-container img {
+    filter: grayscale(100%) invert(100%);
+  }
+
+  .mat-select-placeholder,
+  .mat-select-value-text,
+  .mat-menu-item,
+  .mat-option:not(.jesus),
+  .mat-form-field-label {
+    color: var(--ion-color-primary-contrast) !important;
+  }
+
+  .mat-pseudo-checkbox:not(.mat-pseudo-checkbox-checked) {
+    border-color: var(--ion-color-primary-contrast) !important;
+  }
+
+  .mat-form-field-label {
+    filter: brightness(0.6);
+  }
+
+  .ios .mat-form-field-underline {
+    background-color: var(--ion-color-primary-contrast) !important;
+    filter: brightness(0.6);
+  }
+
+  .mat-select-arrow {
+    border-top-color: var(--ion-color-primary-contrast) !important;
+  }
+
+  .mat-form-field-flex {
+    background-color: var(--ion-item-background) !important;
+  }
+
+  .mat-select-panel,
+  .mat-menu-panel {
+    background-color: var(--ion-background-color) !important;
+  }
 }
 
 /* Hack for displaying tooltips on the bottom of the screen */

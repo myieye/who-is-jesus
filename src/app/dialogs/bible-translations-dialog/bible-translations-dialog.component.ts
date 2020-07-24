@@ -1,7 +1,6 @@
-import { Component, ViewChild, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
 import { ContentService } from '../../services/content.service';
 import { BG_BIBLES, BibleGatewayTranslation } from '../../content/bible-gateway-bibles';
-import { MatSelectionList } from '@angular/material/list';
 import { flatMap } from 'lodash';
 import { ModalController } from '@ionic/angular';
 
@@ -24,8 +23,6 @@ export class BibleTranslationsDialogComponent implements OnInit {
       : this.defaultBibles;
     this.prevSelectedBibles = [...this.selectedBibles];
   }
-
-  @ViewChild(MatSelectionList, { static: true }) translationList: MatSelectionList;
 
   readonly biblesByLanguage = bgBiblesByLanguage;
   hiddenBibles: { [index: string]: boolean } = {};

@@ -93,6 +93,7 @@ ion-app.use-app-features app-tagged-verse-group-header {
 
   @media only screen and ($small-screen) {
     flex-direction: column;
+    padding: 0;
   }
 
   * {
@@ -110,6 +111,10 @@ ion-app.use-app-features app-tagged-verse-group-header {
   .multi-select {
     margin-top: 18px;
   }
+}
+
+ion-app.use-app-features .option-container {
+  margin-bottom: 10px;
 }
 
 .top-bar {
@@ -149,4 +154,8 @@ ion-list-header {
   &.ios {
     margin-bottom: 20px;
   }
+}
+
+ion-list {
+  min-height: 100%;
 }
