@@ -131,6 +131,12 @@ ion-app.use-app-features .option-container {
   & > *:last-child {
     margin-right: 8px;
   }
+
+  .theme-toggle ion-icon {
+    position: relative;
+    font-size: 18px;
+    top: -1px;
+  }
 }
 
 .no-verses-filler {

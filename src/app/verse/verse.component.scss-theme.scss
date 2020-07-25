@@ -1,14 +1,6 @@
 @import "~@angular/material/theming";
 @import "../../vars.scss";
 
-@mixin wij-verse-theme-darkStyles() {
-  app-verse {
-    .references {
-      color: #5F7F7F;
-    }
-  }
-}
-
 @mixin wij-verse-theme($theme) {
   $primary: map-get($theme, primary);
   $background: map-get($theme, background);
@@ -38,15 +30,13 @@
     }
 
     .references {
-      color: #2F4F4F;
+      color: #2f4f4f;
     }
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    @include wij-verse-theme-darkStyles();
-  }
-  
-  .dark {
-    @include wij-verse-theme-darkStyles();
+
+    @include darkStyles {
+      .references {
+        color: #5f7f7f;
+      }
+    }
   }
 }

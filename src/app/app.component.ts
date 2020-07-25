@@ -12,6 +12,7 @@ import { hideInstructions } from '../utils/hider-util';
 import { ModalController, MenuController } from '@ionic/angular';
 import { LanguageService } from './services/language.service';
 import { PlatformService } from './services/platform.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     readonly platform: PlatformService,
     private readonly modalController: ModalController,
     private readonly menuController: MenuController,
+    readonly themeService: ThemeService,
   ) {
     this.verses = this.content.verses;
   }

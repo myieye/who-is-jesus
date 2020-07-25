@@ -5,17 +5,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LanguageService } from '../services/language.service';
 import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
-import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
-import { setHtmlClass } from 'src/utils/dom-util';
-import { darkClass } from '../../vars';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-wrapper',
   templateUrl: './app-wrapper.component.html',
   styleUrls: ['./app-wrapper.component.scss'],
-  providers: [LanguageService, ContentService],
+  providers: [LanguageService, ContentService, ThemeService],
 })
 export class AppWrapperComponent {
 
@@ -35,9 +32,8 @@ export class AppWrapperComponent {
     private readonly snackBar: MatSnackBar,
     private readonly languageService: LanguageService,
     private readonly contentService: ContentService,
-    private readonly statusBar: StatusBar,
     private readonly platform: Platform,
-    private readonly theme: ThemeDetection,
+    private readonly themeService: ThemeService,
   ) {
     this.route.paramMap.subscribe((paramMap) => this.onParamsChanged(paramMap));
   }
@@ -64,7 +60,7 @@ export class AppWrapperComponent {
         .then(() => window.deviceReady$)
         .then(() => window.webFontConfigActive$)
         .then(() => this.platform.ready())
-        .then(() => this.initTheme());
+        .then(() => this.themeService.init());
 
       contentIniter.then(() => {
         this.enabled = true;
@@ -87,15 +83,6 @@ export class AppWrapperComponent {
     this.previousParams = paramMap;
   }
 
-  async initTheme(): Promise<void> {
-    if (await this.useDarkMode()) {
-      setHtmlClass(darkClass);
-      if (this.platform.is('cordova')) {
-        this.statusBar.styleBlackOpaque();
-      }
-    }
-  }
-
   private loadLanguageVerses(): Promise<void> {
     const languageConfig = this.languageService.languageConfig;
 
@@ -109,10 +96,5 @@ export class AppWrapperComponent {
   private showInternetRequiredMessage(): void {
     this.snackBar.open(
       this.contentService.internetRequiredForLanguageVerses, undefined, { duration: 10000 });
-  }
-
-  private async useDarkMode(): Promise<boolean> {
-    return this.platform.is('cordova') &&
-      (await this.theme.isDarkModeEnabled())?.value;
   }
 }

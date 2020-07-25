@@ -266,3 +266,8 @@ body.use-app-features {
     width: auto !important;
   }
 }
+
+ion-icon[name*="contrast-"],
+ion-icon[icon*="contrast-"] {
+  transform: rotate(210deg);
+}

@@ -1,4 +1,4 @@
-<button class="trigger" mat-button #trigger="matMenuTrigger" [matMenuTriggerFor]="menu">{{ language$ | async | uppercase }}</button>
+<ion-button fill="clear" color="dark" class="trigger" #trigger="matMenuTrigger" [matMenuTriggerFor]="menu">{{ language$ | async | uppercase }}</ion-button>
 <div class="icon"><span class="mat-select-arrow"></span></div>
 
 <mat-menu #menu="matMenu">

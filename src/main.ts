@@ -3,7 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { initScreenSizeCssClassHandlers } from './utils/screen-size-util';
+import { initScreenSizeCssClassHandlers } from './utils/media-util';
 
 if (environment.production) {
   enableProdMode();

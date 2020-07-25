@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { $veryBigScreen, $smallScreen } from 'src/vars';
-import { createMediaQueryHandler } from 'src/utils/screen-size-util';
+import { createMediaQueryHandler } from 'src/utils/media-util';
 import { BehaviorSubject } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 

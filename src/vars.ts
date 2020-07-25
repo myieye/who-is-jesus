@@ -8,4 +8,8 @@ export const $notVeryBigScreen = 'max-width: 1299px';
 
 export const bigScreenClass = 'big-screen';
 export const useAppFeaturesClass = 'use-app-features';
-export const darkClass = 'dark';
+
+export const themeKey = 'theme';
+export const darkMode = 'dark-mode';
+export const lightMode = 'light-mode';
+export const themes = [darkMode, lightMode];

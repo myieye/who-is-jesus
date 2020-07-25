@@ -29,22 +29,22 @@ $text-block-width: 600px;
 @mixin darkStyles($selector: "") {
   @media (prefers-color-scheme: dark) {
     @if & {
-      html#{$selector} & {
+      html#{$selector}:not(.light-mode) & {
         @content;
       }
     } @else {
-      html#{$selector} {
+      html#{$selector}:not(.light-mode) {
         @content;
       }
     }
   }
 
   @if & {
-    html.dark#{$selector} & {
+    html.dark-mode#{$selector}:not(.light-mode) & {
       @content;
     }
   } @else {
-    html.dark#{$selector} {
+    html.dark-mode#{$selector}:not(.light-mode) {
       @content;
     }
   }

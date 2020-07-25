@@ -16,6 +16,11 @@
               <ion-icon slot="start" icon="language-outline"></ion-icon>
               <ion-label>{{content.language}}</ion-label>
             </ion-item>
+
+            <ion-item (click)="themeService.toggleTheme()">
+              <ion-icon slot="start" icon="contrast-outline"></ion-icon>
+              <ion-label>{{themeService.nextThemeName}}</ion-label>
+            </ion-item>
           </ion-list>
         </ion-content>
       </ion-menu>
@@ -56,7 +61,10 @@
 
       <ion-content [scrollEvents]="true">
         <div class="top-bar" *ngIf="!(platform.useAppFeatures | async)">
-          <button mat-button (click)="infoClicked()">{{content.about | uppercase}}</button>
+          <ion-button class="theme-toggle" fill="clear" color="dark" (click)="themeService.toggleTheme()">
+            <ion-icon slot="icon-only" name="contrast-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="dark" (click)="infoClicked()">{{content.about | uppercase}}</ion-button>
           <app-language-picker></app-language-picker>
         </div>
 

@@ -71,6 +71,8 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
     internetRequiredForLanguageVerses:
 'Due to copyright, an internet connection is required to view verses in the selected language.',
     menu: 'Menu',
+    light: 'Light',
+    dark: 'Dark',
     en: 'English',
     de: 'Deutsch',
 };

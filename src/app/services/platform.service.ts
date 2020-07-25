@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ScreenSizeService } from './screen-size.service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { createBodyClassObservableHandler } from '../../utils/screen-size-util';
+import { createBodyClassObservableHandler } from '../../utils/media-util';
 import { useAppFeaturesClass } from '../../vars';
 
 @Injectable({

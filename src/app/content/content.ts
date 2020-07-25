@@ -47,6 +47,8 @@ export class ContentTemplate {
     privacyPolicy = '';
     internetRequiredForLanguageVerses = '';
     menu = '';
+    light = '';
+    dark = '';
     [Language.EN] = '';
     [Language.DE] = '';
 }
