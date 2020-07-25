@@ -47,7 +47,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-theme-detection": "^1.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.3"
