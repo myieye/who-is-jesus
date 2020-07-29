@@ -51,7 +51,6 @@ export class ContentTemplate {
     menu = '';
     light = '';
     dark = '';
-    loadingVerses = '';
 }
 
 type ContentProps = Array<keyof ContentTemplate>;

@@ -12,6 +12,7 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Refactor(2)] Optimize Bible Gateway translation dialog
 - [Bugfix(1)] Disabled tags don't work
 - [Bugfix(2)] Fix compile warnings
 - [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)

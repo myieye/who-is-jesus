@@ -79,5 +79,4 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
     menu: 'Menü',
     light: 'Hell',
     dark: 'Dunkel',
-    loadingVerses: 'Lädt Verse',
 };

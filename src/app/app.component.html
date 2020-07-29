@@ -121,11 +121,10 @@
           </div>
         </div>
 
-        <ion-infinite-scroll #infiniteScroll threshold="1000px"
+        <ion-infinite-scroll #infiniteScroll threshold="500px"
           (ionInfinite)="loadMoreVerses(infiniteScroll)"
           [disabled]="renderedVerseCount >= verseCount || verseCount === 0">
-          <ion-infinite-scroll-content [loadingText]="content.loadingVerses + '...'">
-          </ion-infinite-scroll-content>
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll>
 
         <app-page-footer></app-page-footer>

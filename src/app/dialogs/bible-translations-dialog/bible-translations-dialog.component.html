@@ -5,8 +5,7 @@
             <p>{{content.bibleGatewayTranslationsDescription}}</p>
 
             <ion-item class="search-item">
-                <ion-input color="primary" [placeholder]="content.searchByLanguageOrTranslation"
-                    (ionChange)="searchChanged($event.detail.value)"></ion-input>
+                <ion-input color="primary" [placeholder]="content.searchByLanguageOrTranslation"></ion-input>
             </ion-item>
 
             <div class="selected-bibles">
@@ -19,14 +18,19 @@
             </div>
 
             <div class="translation-list">
-                <ng-container *ngFor="let language of biblesByLanguage">
-                    <p [class.hidden]="this.hiddenBibles[language.language.name]">{{language.language.name}}</p>
-                    <ion-item *ngFor="let bible of language.bibles" (click)="$event.preventDefault(); toggleBible(bible);"
-                        [class.hidden]="this.hiddenBibles[language.language.name] || this.hiddenBibles[bible.name]">
-                        <ion-label>{{bible.name}}</ion-label>
+                <ng-container *ngFor="let language of renderedBiblesByLanguage; trackBy:bibleLanguageGroupTracker">
+                    <p>{{language.language.name}}</p>
+                    <ion-item *ngFor="let bible of language.bibles" (click)="$event.preventDefault(); toggleBible(bible);">
+                        <ion-label class="translation-name">{{bible.name}}</ion-label>
                         <ion-checkbox [checked]="selectedBibles.includes(bible)"></ion-checkbox>
                     </ion-item>
                 </ng-container>
+
+                <ion-infinite-scroll #infiniteScroll threshold="100px"
+                  (ionInfinite)="loadMoreBibles(infiniteScroll)"
+                  [disabled]="renderedBibleCount >= bibleCount || bibleCount === 0">
+                  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+                </ion-infinite-scroll>
             </div>
         </div>
     </ion-content>
