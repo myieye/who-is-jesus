@@ -1,7 +1,6 @@
 # Todo
 
 ## Doing
-- [Bugfix(1)] Disabled tags don't work
 
 ## Ideas/Backlog
 - [Function(5)] Show in context (load over API without red-letter)
@@ -13,6 +12,7 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Bugfix(1)] Disabled tags don't work
 - [Bugfix(2)] Fix compile warnings
 - [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)
 - [Design(4)] Dark mode

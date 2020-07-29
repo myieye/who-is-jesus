@@ -169,6 +169,10 @@ body {
   background-color: var(--verse-tag-background);
   font-weight: 600;
 
+  &.disabled {
+    opacity: 0.5;
+  }
+
   &.label-chip {
     border: 1px solid mat-color($primary);
   }
