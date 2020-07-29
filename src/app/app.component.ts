@@ -178,7 +178,7 @@ export class AppComponent implements OnInit, AfterViewInit {
           tag: this.content.tags[tag],
           verses: this.filterVersesAndMergeParallels(tagAndSourceFilteredVerses, (verse) => verse.tags.includes(tag)),
         };
-      });
+      }).filter((verseGroup) => verseGroup.verses.length);
     }
 
     this.ref.markForCheck();
