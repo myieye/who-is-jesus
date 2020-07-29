@@ -1,11 +1,9 @@
 # Todo
 
 ## Doing
-- [Design(4)] Dark mode
+- [Bugfix(2)] Fix compile warnings
 
 ## Ideas/Backlog
-- [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)
-- [Bugfix(2)] Fix compile warnings
 - [Function(5)] Show in context (load over API without red-letter)
 - [Function(7)] Simplify/Group tags for better overview
     - 2 Modes/Categorizations: Identity + Attributes/Characteristics
@@ -15,6 +13,8 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Refactor(2)] Optimize verse refreshing (algorithm is fast; rendering is slow)
+- [Design(4)] Dark mode
 - [Design(4)] Optimize Cordova version for Android
 - [Bugfix(1)] Verse tags are under BibleGateway icon
 - [Platform(2)] Prepare first signed APK for publishing

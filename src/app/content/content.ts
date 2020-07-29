@@ -4,9 +4,11 @@ import { Language } from './languages';
 
 // tslint:disable:member-ordering
 export class ContentTemplate {
+    jesus = '';
     languageCode: Language = undefined;
     language = '';
-    jesus = '';
+    [Language.EN] = '';
+    [Language.DE] = '';
     all = '';
     synopticGospels = '';
     standard = '';
@@ -49,8 +51,7 @@ export class ContentTemplate {
     menu = '';
     light = '';
     dark = '';
-    [Language.EN] = '';
-    [Language.DE] = '';
+    loadingVerses = '';
 }
 
 type ContentProps = Array<keyof ContentTemplate>;

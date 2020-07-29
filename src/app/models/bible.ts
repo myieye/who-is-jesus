@@ -1,4 +1,4 @@
-import { VerseTagKey } from './tags';
+import { VerseTag, VerseTagKey } from './tags';
 
 export enum BibleBookKey {
     Gen = 'Gen', Ex = 'Ex', Lev = 'Lev', Num = 'Num', Deut = 'Deut', Josh = 'Josh', Judg = 'Judg',
@@ -65,3 +65,8 @@ export interface TaggedReference extends Tagged {
 export type TaggedVerseCollectionItem = TaggedVerse | TaggedVerse[];
 
 export type TaggedVerseCollection = TaggedVerseCollectionItem[];
+
+export interface TaggedVerseGroup {
+    tag: VerseTag;
+    verses: TaggedVerseCollection;
+}

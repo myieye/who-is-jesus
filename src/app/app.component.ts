@@ -4,15 +4,17 @@ import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { VerseTag, offLimits, VerseTagKey } from './models/tags';
-import { TaggedVerse, TaggedVerseCollection, TaggedVerseCollectionItem } from './models/bible';
+import { TaggedVerse, TaggedVerseCollection, TaggedVerseCollectionItem, TaggedVerseGroup } from './models/bible';
 import { ContentService } from './services/content.service';
 import { OptionsSelection, OptionKey } from './options-list/options';
 import { VERSE_SEPARATOR } from '../utils/constants';
 import { hideInstructions } from '../utils/hider-util';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController, MenuController, IonInfiniteScroll } from '@ionic/angular';
 import { LanguageService } from './services/language.service';
 import { PlatformService } from './services/platform.service';
 import { ThemeService } from './services/theme.service';
+
+const RENDER_STEP_COUNT = 10;
 
 @Component({
   selector: 'app-root',
@@ -34,8 +36,37 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   readonly options = OptionKey;
 
-  verses: TaggedVerseCollection;
-  verseGroups: { tag: VerseTag, verses: TaggedVerseCollection }[];
+  renderedVerseGroups: TaggedVerseGroup[];
+  private _verseGroups: TaggedVerseGroup[];
+  get verseGroups(): TaggedVerseGroup[] {
+    return this._verseGroups;
+  }
+  set verseGroups(verseGroups: TaggedVerseGroup[]) {
+    this._verseGroups = verseGroups;
+    this.verseCount = verseGroups.reduce((total, next) => total + next.verses.length, 0);
+    if (verseGroups.length) {
+      this.renderedVerseGroups = this.sliceVerseGroups(verseGroups, RENDER_STEP_COUNT);
+    } else {
+      this.renderedVerseGroups = [];
+    }
+  }
+
+  renderedVerses: TaggedVerseCollection;
+  private _verses: TaggedVerseCollection;
+  get verses(): TaggedVerseCollection {
+    return this._verses;
+  }
+  set verses(verses: TaggedVerseCollection) {
+    this.renderedVerseCount = RENDER_STEP_COUNT;
+    this.verseCount = verses.length;
+    this._verses = verses;
+    if (verses.length) {
+      this.renderedVerses = verses.slice(0, Math.min(RENDER_STEP_COUNT, verses.length));
+    } else {
+      this.renderedVerses = [];
+    }
+  }
+
   tags: VerseTag[];
   activeTags: VerseTagKey[];
   optionsSelection: OptionsSelection = {};
@@ -49,6 +80,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   private selectedTagKeys: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
+  renderedVerseCount = RENDER_STEP_COUNT;
+  verseCount: number;
+
 
   get groupByTag(): boolean {
     return this.optionsSelection.GroupByTag && this.selectedTagKeys.length > 0;
@@ -101,6 +135,22 @@ export class AppComponent implements OnInit, AfterViewInit {
   selectedOptionsChanged(optionsSelection: OptionsSelection): void {
     this.optionsSelection = optionsSelection;
     this.refreshVerses();
+  }
+
+  loadMoreVerses(infiniteScroll: IonInfiniteScroll): void {
+    this.renderedVerseCount += RENDER_STEP_COUNT;
+
+    if (this.groupByTag) {
+      this.renderedVerseGroups = this.sliceVerseGroups(this.verseGroups, this.renderedVerseCount);
+    } else {
+      this.renderedVerses = this.verses.slice(0, this.renderedVerseCount);
+    }
+
+    infiniteScroll.complete();
+  }
+
+  verseGroupTracker(i: number, verseGroup: TaggedVerseGroup): VerseTagKey {
+    return verseGroup.tag.key;
   }
 
   private refreshVerses(): void {
@@ -170,7 +220,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     const sortedVerses = sortBy(unsortedVerses, (verse) =>
-    this.verseIndexer(this.mapVerseCollectionItemToVerse(verse)));
+      this.verseIndexer(this.mapVerseCollectionItemToVerse(verse)));
     if (isNil(verses)) {
       this.verses = sortedVerses;
     }
@@ -225,5 +275,28 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private mapVerseCollectionItemToVerse(item: TaggedVerseCollectionItem): TaggedVerse {
     return Array.isArray(item) ? item[0] : item;
+  }
+
+  private sliceVerseGroups(verseGroups: TaggedVerseGroup[], count: number): TaggedVerseGroup[] {
+    const slicedGroups = [];
+
+    let i = 0;
+    for (const verseGroup of verseGroups) {
+      if (i === count) {
+        break;
+      }
+
+      const verses = [];
+      slicedGroups.push({ tag: verseGroup.tag, verses });
+      for (const verse of verseGroup.verses) {
+        verses.push(verse);
+
+        if (++i === count) {
+          break;
+        }
+      }
+    }
+
+    return slicedGroups;
   }
 }

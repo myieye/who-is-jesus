@@ -6,9 +6,11 @@ import { tagVerses } from '../references';
 import { Language } from '../languages';
 
 export const CONTENT: Content = {
+    jesus: 'Jesus',
     languageCode: Language.EN,
     language: 'Language',
-    jesus: 'Jesus',
+    en: 'English',
+    de: 'Deutsch',
     all: 'All',
     synopticGospels: 'Synoptic Gospels',
     standard: 'Standard',
@@ -73,6 +75,5 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
     menu: 'Menu',
     light: 'Light',
     dark: 'Dark',
-    en: 'English',
-    de: 'Deutsch',
+    loadingVerses: 'Loading verses',
 };

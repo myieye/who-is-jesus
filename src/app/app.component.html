@@ -99,16 +99,16 @@
 
         <div class="verse-container-wrapper">
           <div class="verse-container" [class.hide-verses]="!content.showVerseNumbers">
-            <ng-container *ngIf="verses.length; else noVersesFiller">
+            <ng-container *ngIf="renderedVerses.length; else noVersesFiller">
               <ng-container *ngIf="groupByTag; else standardVerseList">
-                <div class="verse-group" *ngFor="let group of verseGroups">
+                <div class="verse-group" *ngFor="let group of renderedVerseGroups; trackBy:verseGroupTracker">
                   <ng-container *ngTemplateOutlet="standardVerseList; context: group"></ng-container>
                 </div>
               </ng-container>
               <ng-template #standardVerseList let-verseGroup="verses" let-tag="tag">
                 <app-tagged-verse-group-header *ngIf="tag || selectedTags.length" [tags]="tag || selectedTags">
                 </app-tagged-verse-group-header>
-                <div *ngFor="let verse of verseGroup || verses" class="verse">
+                <div *ngFor="let verse of verseGroup || renderedVerses" class="verse">
                   <app-verse [verses]="verse" [translations]="this.optionsSelection.BGTranslations"></app-verse>
                 </div>
               </ng-template>
@@ -120,6 +120,13 @@
             </ng-template>
           </div>
         </div>
+
+        <ion-infinite-scroll #infiniteScroll threshold="1000px"
+          (ionInfinite)="loadMoreVerses(infiniteScroll)"
+          [disabled]="renderedVerseCount === verseCount">
+          <ion-infinite-scroll-content [loadingText]="content.loadingVerses + '...'">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
 
         <app-page-footer></app-page-footer>
       </ion-content>
