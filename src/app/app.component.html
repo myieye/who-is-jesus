@@ -123,7 +123,7 @@
 
         <ion-infinite-scroll #infiniteScroll threshold="1000px"
           (ionInfinite)="loadMoreVerses(infiniteScroll)"
-          [disabled]="renderedVerseCount === verseCount">
+          [disabled]="renderedVerseCount >= verseCount || verseCount === 0">
           <ion-infinite-scroll-content [loadingText]="content.loadingVerses + '...'">
           </ion-infinite-scroll-content>
         </ion-infinite-scroll>
