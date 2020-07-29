@@ -1,5 +1,5 @@
-@import "~@angular/material/theming";
-@import "../../vars.scss";
+@use "~@angular/material/theming" as *;
+@use "../../vars.scss" as *;
 
 @mixin wij-verse-theme($theme) {
   $primary: map-get($theme, primary);

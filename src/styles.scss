@@ -1,14 +1,14 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import "~@angular/material/theming";
-@import "./app/verse/verse.component.scss-theme.scss";
-@import "./app/tag-list/tag-list.component.scss-theme.scss";
-@import "./app/source-filter/source-filter.component.scss-theme.scss";
-@import "./app/page-footer/page-footer.component.scss-theme.scss";
-@import "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss";
-@import "./app/dialogs/info-dialog/info-dialog.component.scss-theme.scss";
-@import "./app/dialogs/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss";
-@import "./vars.scss";
+@use "~@angular/material/theming" as *;
+@use "./app/verse/verse.component.scss-theme.scss" as *;
+@use "./app/tag-list/tag-list.component.scss-theme.scss" as *;
+@use "./app/source-filter/source-filter.component.scss-theme.scss" as *;
+@use "./app/page-footer/page-footer.component.scss-theme.scss" as *;
+@use "./app/tagged-verse-group-header/tagged-verse-group-header.component.scss-theme.scss" as *;
+@use "./app/dialogs/info-dialog/info-dialog.component.scss-theme.scss" as *;
+@use "./app/dialogs/bible-translations-dialog/bible-translations-dialog.component.scss-theme.scss" as *;
+@use "./vars.scss" as *;
 
 // Plus imports for other components in your app.
 

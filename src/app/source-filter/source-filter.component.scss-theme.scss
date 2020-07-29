@@ -1,4 +1,4 @@
-@import "~@angular/material/theming";
+@use "~@angular/material/theming" as *;
 
 @mixin wij-source-filter-theme($theme) {
   $foreground: map-get($theme, foreground);
