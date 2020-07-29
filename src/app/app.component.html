@@ -21,6 +21,12 @@
               <ion-icon slot="start" icon="contrast-outline"></ion-icon>
               <ion-label>{{themeService.nextThemeName}}</ion-label>
             </ion-item>
+
+            <ion-item *ngIf="!platform.isCordova && !platform.isIos"
+              href="https://play.google.com/store/apps/details?id=com.timhaasdyk.whoisjesus" target="_blank">
+              <ion-icon slot="start" name="logo-google-playstore"></ion-icon>
+              <ion-label>{{content.getTheApp}}</ion-label>
+            </ion-item>
           </ion-list>
         </ion-content>
       </ion-menu>
@@ -61,7 +67,11 @@
 
       <ion-content [scrollEvents]="true">
         <div class="top-bar" *ngIf="!(platform.useAppFeatures | async)">
-          <ion-button class="theme-toggle" fill="clear" color="dark" (click)="themeService.toggleTheme()">
+          <ion-button *ngIf="!platform.isCordova && !platform.isIos" fill="clear" color="dark"
+            href="https://play.google.com/store/apps/details?id=com.timhaasdyk.whoisjesus" target="_blank">
+            <ion-icon slot="icon-only" name="logo-google-playstore"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="dark" (click)="themeService.toggleTheme()">
             <ion-icon slot="icon-only" name="contrast-outline"></ion-icon>
           </ion-button>
           <ion-button fill="clear" color="dark" (click)="infoClicked()">{{content.about | uppercase}}</ion-button>
@@ -121,8 +131,7 @@
           </div>
         </div>
 
-        <ion-infinite-scroll #infiniteScroll threshold="500px"
-          (ionInfinite)="loadMoreVerses(infiniteScroll)"
+        <ion-infinite-scroll #infiniteScroll threshold="500px" (ionInfinite)="loadMoreVerses(infiniteScroll)"
           [disabled]="renderedVerseCount >= verseCount || verseCount === 0">
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll>

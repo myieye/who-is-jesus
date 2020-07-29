@@ -4,6 +4,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { createBodyClassObservableHandler } from '../../utils/media-util';
 import { useAppFeaturesClass } from '../../vars';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class PlatformService {
 
   constructor(
     private readonly screenSizeService: ScreenSizeService,
+    private readonly platform: Platform,
   ) {
     this.useAppFeatures = this.screenSizeService.$isSmallScreen.pipe(
       startWith(false),
@@ -22,6 +24,10 @@ export class PlatformService {
   }
 
   get isCordova(): boolean {
-    return window.isCordova ?? false;
+    return this.platform.is('cordova');
+  }
+
+  get isIos(): boolean {
+    return this.platform.is('ios');
   }
 }

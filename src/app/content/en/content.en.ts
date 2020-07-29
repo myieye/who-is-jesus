@@ -75,4 +75,5 @@ or open an issue on <a href="https://github.com/myieye/who-is-jesus/">GitHub</a>
     menu: 'Menu',
     light: 'Light',
     dark: 'Dark',
+    getTheApp: 'Get the app',
 };
