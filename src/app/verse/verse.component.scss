@@ -46,24 +46,6 @@
   cursor: pointer;
 }
 
-.multiple-references .reference {
-  border-bottom-color: $light-grey;
-
-  &.selected-verse {
-    border-bottom-color: $dark-grey;
-  }
-}
-
-@include darkStyles {
-  .multiple-references .reference {
-    border-bottom-color: $dark-grey;
-  
-    &.selected-verse {
-      border-bottom-color: $light-grey;
-    }
-  }
-}
-
 .tag-container {
   z-index: 1;
 }

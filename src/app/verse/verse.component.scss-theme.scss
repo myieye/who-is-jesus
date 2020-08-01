@@ -33,9 +33,25 @@
       color: #2f4f4f;
     }
 
+    .multiple-references .reference {
+      border-bottom-color: $light-grey;
+    
+      &.selected-verse {
+        border-bottom-color: $dark-grey;
+      }
+    }
+
     @include darkStyles {
       .references {
         color: #5f7f7f;
+      }
+      
+      .multiple-references .reference {
+        border-bottom-color: $dark-grey;
+      
+        &.selected-verse {
+          border-bottom-color: $light-grey;
+        }
       }
     }
   }
