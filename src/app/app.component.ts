@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { flatMap, union, difference, intersection, sortBy, isNil, groupBy } from 'lodash';
+import { flatMap, union, difference, intersection, sortBy, isNil, groupBy, isEmpty } from 'lodash';
 import { SourceFilterChangeEvent } from './source-filter';
 import { VerseIndexer } from './verse-order-select';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
@@ -13,6 +13,7 @@ import { ModalController, MenuController, IonInfiniteScroll } from '@ionic/angul
 import { LanguageService } from './services/language.service';
 import { PlatformService } from './services/platform.service';
 import { ThemeService } from './services/theme.service';
+import { isSubSet } from '../utils/array-utils';
 
 const RENDER_STEP_COUNT = 10;
 
@@ -44,11 +45,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   set verseGroups(verseGroups: TaggedVerseGroup[]) {
     this._verseGroups = verseGroups;
     this.verseCount = verseGroups.reduce((total, next) => total + next.verses.length, 0);
-    if (verseGroups.length) {
-      this.renderedVerseGroups = this.sliceVerseGroups(verseGroups, RENDER_STEP_COUNT);
-    } else {
-      this.renderedVerseGroups = [];
-    }
   }
 
   renderedVerses: TaggedVerseCollection;
@@ -57,14 +53,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this._verses;
   }
   set verses(verses: TaggedVerseCollection) {
-    this.renderedVerseCount = RENDER_STEP_COUNT;
     this.verseCount = verses.length;
     this._verses = verses;
-    if (verses.length) {
-      this.renderedVerses = verses.slice(0, Math.min(RENDER_STEP_COUNT, verses.length));
-    } else {
-      this.renderedVerses = [];
-    }
   }
 
   tags: VerseTag[];
@@ -80,12 +70,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   private selectedTagKeys: VerseTagKey[] = [];
   private verseFilters: SourceFilterChangeEvent = { filters: [], all: true };
   private verseIndexer: VerseIndexer;
-  renderedVerseCount = RENDER_STEP_COUNT;
+  renderedVerseCount: number;
   verseCount: number;
 
 
   get groupByTag(): boolean {
-    return this.optionsSelection.GroupByTag && this.selectedTagKeys.length > 0;
+    return (this.optionsSelection.GroupByTag && this.selectedTagKeys.length > 1) ?? false;
   }
 
   constructor(
@@ -98,6 +88,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     readonly themeService: ThemeService,
   ) {
     this.verses = this.content.verses;
+    this.resetRenderedRows();
   }
 
   ngOnInit(): void {
@@ -109,9 +100,22 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   selectedTagsChanged(selectedTagKeys: VerseTagKey[]) {
+    const prevTags = [...this.selectedTagKeys];
     this.selectedTagKeys = selectedTagKeys;
     this.selectedTags = selectedTagKeys.map((tagKey) => this.content.tags[tagKey]);
-    this.refreshVerses();
+
+    this.refreshVerses(false);
+
+    if (!this.groupByTag || isEmpty(selectedTagKeys)) {
+      this.resetRenderedRows();
+    } else if (isSubSet(selectedTagKeys, prevTags)) {
+      this.renderedVerseCount = Math.min(this.renderedVerseCount, this.verseCount);
+      this.refreshRenderedRows();
+    } else if (isSubSet(prevTags, selectedTagKeys)) {
+      this.refreshRenderedRows();
+    } else {
+      this.resetRenderedRows();
+    }
   }
 
   sourceFilterChanged(filtersChange: SourceFilterChangeEvent): void {
@@ -128,23 +132,31 @@ export class AppComponent implements OnInit, AfterViewInit {
       } else {
         // Slightly more performant than a full refresh
         this.sortVerses();
+        this.resetRenderedRows();
       }
     }
   }
 
   selectedOptionsChanged(optionsSelection: OptionsSelection): void {
+    const prevGroupByTag = this.groupByTag;
+    const prevOptions = this.optionsSelection;
+
     this.optionsSelection = optionsSelection;
-    this.refreshVerses();
+
+    this.refreshVerses(false);
+
+    if (prevGroupByTag !== this.groupByTag) {
+      this.resetRenderedRows();
+    } else if (prevOptions.MergeParallels !== this.optionsSelection.MergeParallels) {
+      this.renderedVerseCount = Math.min(this.renderedVerseCount, this.verseCount);
+      this.refreshRenderedRows();
+    }
   }
 
   loadMoreVerses(infiniteScroll: IonInfiniteScroll): void {
     this.renderedVerseCount += RENDER_STEP_COUNT;
 
-    if (this.groupByTag) {
-      this.renderedVerseGroups = this.sliceVerseGroups(this.verseGroups, this.renderedVerseCount);
-    } else {
-      this.renderedVerses = this.verses.slice(0, this.renderedVerseCount);
-    }
+    this.refreshRenderedRows();
 
     infiniteScroll.complete();
   }
@@ -153,7 +165,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     return verseGroup.tag.key;
   }
 
-  private refreshVerses(): void {
+  private refreshVerses(resetRenderedRows = true): void {
     const sourceFilteredVerses = this.verseFilters.all ? this.content.verses
       : this.content.verses.filter((verse) => this.verseFilters.filters.some(filter => filter(verse)));
     let tagAndSourceFilteredVerses: TaggedVerse[] = [];
@@ -179,6 +191,10 @@ export class AppComponent implements OnInit, AfterViewInit {
           verses: this.filterVersesAndMergeParallels(tagAndSourceFilteredVerses, (verse) => verse.tags.includes(tag)),
         };
       }).filter((verseGroup) => verseGroup.verses.length);
+    }
+
+    if (resetRenderedRows) {
+      this.resetRenderedRows();
     }
 
     this.ref.markForCheck();
@@ -271,6 +287,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     return filteredVerses;
+  }
+
+  private resetRenderedRows(): void {
+    this.renderedVerseCount = RENDER_STEP_COUNT;
+    this.refreshRenderedRows();
+  }
+
+  private refreshRenderedRows(): void {
+    if (this.groupByTag) {
+      this.renderedVerseGroups = this.sliceVerseGroups(this.verseGroups ?? [], this.renderedVerseCount);
+    } else {
+      this.renderedVerses = this.verses.slice(0, this.renderedVerseCount);
+    }
   }
 
   private mapVerseCollectionItemToVerse(item: TaggedVerseCollectionItem): TaggedVerse {
