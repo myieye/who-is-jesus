@@ -5,6 +5,7 @@ import { darkMode, lightMode, themeKey, themes } from '../../vars';
 import { pickHtmlClass } from '../../utils/dom-util';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ContentService } from './content.service';
+import { UserSettingsService } from './user-settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ThemeService {
     private readonly themeDetection: ThemeDetection,
     private readonly statusBar: StatusBar,
     private readonly content: ContentService,
+    private readonly userSettings: UserSettingsService,
   ) {
   }
 
@@ -33,7 +35,7 @@ export class ThemeService {
   set theme(theme: string) {
     if (this.isValidTheme(theme)) {
       this._theme = theme;
-      localStorage.setItem(themeKey, theme);
+      this.userSettings.put(themeKey, theme);
       this.refreshDisplayTheme();
     }
   }
@@ -52,17 +54,11 @@ export class ThemeService {
     this.theme = themes[nextThemeI];
   }
 
-  private get hasUserTheme(): boolean {
-    return this.isValidTheme(this.userTheme);
-  }
-
-  private get userTheme(): string {
-    return localStorage.getItem(themeKey);
-  }
-
   private async pickInitialTheme(): Promise<string> {
-    if (this.hasUserTheme) {
-      return this.userTheme;
+    const userTheme: string = await this.userSettings.get(themeKey);
+
+    if (this.isValidTheme(userTheme)) {
+      return userTheme;
     }
 
     const preferseDarkMode = await this.prefersDarkMode();

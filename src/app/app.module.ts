@@ -35,6 +35,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DialogHeaderComponent } from './dialogs/dialog-header/dialog-header.component';
 import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
+import { AppPreferences } from '@ionic-native/app-preferences/ngx';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     StatusBar,
     ThemeDetection,
+    AppPreferences,
   ],
   bootstrap: [AppRouterComponent],
 })
