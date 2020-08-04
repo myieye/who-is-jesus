@@ -10,6 +10,8 @@ export const bigScreenClass = 'big-screen';
 export const useAppFeaturesClass = 'use-app-features';
 
 export const themeKey = 'theme';
+export const pathKey = 'path';
+
 export const darkMode = 'dark-mode';
 export const lightMode = 'light-mode';
 export const themes = [darkMode, lightMode];

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { isNil } from 'lodash';
+import { isNil, isEmpty } from 'lodash';
+import { UserSettingsService } from './user-settings.service';
+import { pathKey } from '../../vars';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class QueryParamService {
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute) {
+    private readonly route: ActivatedRoute,
+    private readonly userSettings: UserSettingsService,
+  ) {
   }
 
   loadParam(key: string, loader: (value: string) => void): void {
@@ -37,6 +41,24 @@ export class QueryParamService {
       this.router.navigate([], {
         queryParams: { [key]: value },
         queryParamsHandling: 'merge',
-      }));
+      })).then(async () => {
+        await this.saveCurrentPath();
+        return true;
+      });
+  }
+
+  async saveCurrentPath(): Promise<void> {
+    return this.userSettings.put(pathKey, location.pathname + location.search);
+  }
+
+  async loadSavedPath(): Promise<boolean> {
+    const savedPath = await this.userSettings.get(pathKey);
+
+    if (isEmpty(savedPath)) {
+      return false;
+    } else {
+      const urlTree = this.router.parseUrl(savedPath);
+      return this.router.navigateByUrl(urlTree);
+    }
   }
 }

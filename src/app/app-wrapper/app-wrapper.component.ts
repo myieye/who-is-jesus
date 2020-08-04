@@ -7,6 +7,7 @@ import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
 import { Platform } from '@ionic/angular';
 import { ThemeService } from '../services/theme.service';
+import { QueryParamService } from '../services/query-param.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -34,12 +35,24 @@ export class AppWrapperComponent {
     private readonly contentService: ContentService,
     private readonly platform: Platform,
     private readonly themeService: ThemeService,
+    private readonly queryParamService: QueryParamService,
   ) {
     this.route.paramMap.subscribe((paramMap) => this.onParamsChanged(paramMap));
   }
 
-  private onParamsChanged(paramMap: ParamMap): void {
-    this.languageService.init(paramMap.get('lang'));
+  private async onParamsChanged(paramMap: ParamMap): Promise<void> {
+    const lang = paramMap.get('lang');
+
+    if (isNil(lang)) {
+      if (await this.queryParamService.loadSavedPath()) {
+        return;
+      } else {
+        this.languageService.init();
+        return;
+      }
+    }
+
+    this.languageService.init(lang);
 
     // Perform a brute force recreation of the app
     if (isNil(this.previousParams) || !isEqual(this.previousParams, paramMap)) {

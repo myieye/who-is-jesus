@@ -4,6 +4,14 @@ import { languages, DEFAULT_LANGUAGE, Language } from '../content/languages';
 import { CustomLanguageConfig } from '../models/mobile-language-config';
 import { languageConfigs } from '../content/language-configs';
 import { Router } from '@angular/router';
+import { isNil } from 'lodash';
+import { QueryParamService } from './query-param.service';
+
+const userCulture =
+  navigator.languages && navigator.languages[0] || // Chrome / Firefox
+  navigator.language; // All browsers
+const userLang = userCulture.substring(0, 2).toLowerCase() as Language;
+const defaultLang = languages.includes(userLang) ? userLang : DEFAULT_LANGUAGE;
 
 @Injectable()
 export class LanguageService implements OnDestroy {
@@ -27,10 +35,16 @@ export class LanguageService implements OnDestroy {
 
   constructor(
     private readonly router: Router,
+    private readonly queryParamService: QueryParamService,
   ) {
   }
 
-  init(language: string) {
+  init(language?: string): void {
+    if (isNil(language)) {
+      this.setLanguage(defaultLang, false);
+      return;
+    }
+
     language = language.toLowerCase();
 
     if (languages.includes(language as Language)) {
@@ -39,10 +53,14 @@ export class LanguageService implements OnDestroy {
     }
   }
 
-  setLanguage(language: string): void {
+  setLanguage(language: string, save = true): void {
     setTimeout(() => {
       this.router.navigate([language], {
         queryParamsHandling: 'merge',
+      }).then(() => {
+        if (save) {
+          this.queryParamService.saveCurrentPath();
+        }
       });
     });
   }

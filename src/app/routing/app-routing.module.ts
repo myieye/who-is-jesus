@@ -1,15 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
-import { DEFAULT_LANGUAGE, languages, Language } from './content/languages';
-
-const userCulter =
-  navigator.languages && navigator.languages[0] || // Chrome / Firefox
-  navigator.language; // All browsers
-const userLang = userCulter.substring(0, 2).toLowerCase() as Language;
-const defaultLang = languages.includes(userLang) ? userLang : DEFAULT_LANGUAGE;
-
+import { AppWrapperComponent } from '../app-wrapper/app-wrapper.component';
 
 const routes: Routes = [
   {
@@ -19,7 +11,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: defaultLang,
+    component: AppWrapperComponent,
   }
 ];
 
