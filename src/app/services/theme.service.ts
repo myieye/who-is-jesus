@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
 import { darkMode, lightMode, themeKey, themes } from '../../vars';
 import { pickHtmlClass } from '../../utils/dom-util';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ContentService } from './content.service';
 import { UserSettingsService } from './user-settings.service';
 import { PlatformService } from './platform.service';
@@ -17,7 +16,6 @@ export class ThemeService {
   constructor(
     private readonly platform: PlatformService,
     private readonly themeDetection: ThemeDetection,
-    private readonly statusBar: StatusBar,
     private readonly content: ContentService,
     private readonly userSettings: UserSettingsService,
   ) {
@@ -67,14 +65,6 @@ export class ThemeService {
 
   private refreshDisplayTheme(): void {
     pickHtmlClass(this.theme, themes);
-
-    if (this.platform.isCordova) {
-      if (this.theme === lightMode) {
-        this.statusBar.styleDefault();
-      } else if (this.theme === darkMode) {
-        this.statusBar.styleBlackOpaque();
-      }
-    }
   }
 
   private async prefersDarkMode(): Promise<boolean> {

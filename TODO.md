@@ -12,6 +12,8 @@
 - [Bugfix(2)] When merging parallels from the same book, parts could get filtered out before the merge
 
 ## Done
+- [Function(3)] Save user settings in mobile app preferences
+- [Function(1)] Add "Get the app" and "Rate me" buttons
 - [Refactor(2)] Optimize Bible Gateway translation dialog
 - [Bugfix(1)] Disabled tags don't work
 - [Bugfix(2)] Fix compile warnings

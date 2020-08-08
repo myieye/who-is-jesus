@@ -32,7 +32,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { TagInstructionsContentComponent } from './content/tag-instructions-content.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DialogHeaderComponent } from './dialogs/dialog-header/dialog-header.component';
 import { ThemeDetection } from '@ionic-native/theme-detection/ngx';
 import { AppPreferences } from '@ionic-native/app-preferences/ngx';
@@ -77,7 +76,6 @@ import { AppPreferences } from '@ionic-native/app-preferences/ngx';
   providers: [
     { provide: Window, useValue: window },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    StatusBar,
     ThemeDetection,
     AppPreferences,
   ],
