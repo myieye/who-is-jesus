@@ -15,3 +15,5 @@ export const pathKey = 'path';
 export const darkMode = 'dark-mode';
 export const lightMode = 'light-mode';
 export const themes = [darkMode, lightMode];
+
+export const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.timhaasdyk.whoisjesus';

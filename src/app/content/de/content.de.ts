@@ -80,4 +80,5 @@ oder erstell ein Issue auf <a href="https://github.com/myieye/who-is-jesus/">Git
     light: 'Hell',
     dark: 'Dunkel',
     getTheApp: 'Hole die App',
+    rateMe: 'App bewerten',
 };

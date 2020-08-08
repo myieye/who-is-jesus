@@ -22,10 +22,14 @@
               <ion-label>{{themeService.nextThemeName}}</ion-label>
             </ion-item>
 
-            <ion-item *ngIf="!platform.isCordova && !platform.isIos"
-              href="https://play.google.com/store/apps/details?id=com.timhaasdyk.whoisjesus" target="_blank">
+            <ion-item *ngIf="!platform.isCordova && !platform.isIos" [href]="vars.playStoreUrl" target="_blank">
               <ion-icon slot="start" name="logo-google-playstore"></ion-icon>
               <ion-label>{{content.getTheApp}}</ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="platform.isCordova" [href]="vars.playStoreUrl" target="_blank">
+              <ion-icon slot="start" name="star-half-outline"></ion-icon>
+              <ion-label>{{content.rateMe}}</ion-label>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -68,7 +72,7 @@
       <ion-content [scrollEvents]="true">
         <div class="top-bar" *ngIf="!(platform.useAppFeatures | async)">
           <ion-button *ngIf="!platform.isCordova && !platform.isIos" fill="clear" color="dark"
-            href="https://play.google.com/store/apps/details?id=com.timhaasdyk.whoisjesus" target="_blank">
+            [href]="vars.playStoreUrl" target="_blank">
             <ion-icon slot="icon-only" name="logo-google-playstore"></ion-icon>
           </ion-button>
           <ion-button fill="clear" color="dark" (click)="themeService.toggleTheme()">

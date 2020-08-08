@@ -14,6 +14,7 @@ import { LanguageService } from './services/language.service';
 import { PlatformService } from './services/platform.service';
 import { ThemeService } from './services/theme.service';
 import { isSubSet } from '../utils/array-utils';
+import * as vars from '../vars';
 
 const RENDER_STEP_COUNT = 10;
 
@@ -62,6 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   optionsSelection: OptionsSelection = {};
   selectedTags: VerseTag[] = [];
 
+  readonly vars = vars;
   readonly menus = {
     main: 'main',
     language: 'language',
