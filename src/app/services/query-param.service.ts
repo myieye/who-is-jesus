@@ -49,7 +49,7 @@ export class QueryParamService {
   }
 
   async saveCurrentPath(): Promise<void> {
-    return this.userSettings.put(pathKey, location.pathname + location.search);
+    return this.userSettings.put(pathKey, this.router.url);
   }
 
   async loadSavedPath(): Promise<boolean> {
