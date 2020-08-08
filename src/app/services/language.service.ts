@@ -57,6 +57,7 @@ export class LanguageService implements OnDestroy {
     setTimeout(() => {
       this.router.navigate([language], {
         queryParamsHandling: 'merge',
+        replaceUrl: true,
       }).then(() => {
         if (save) {
           this.queryParamService.saveCurrentPath();

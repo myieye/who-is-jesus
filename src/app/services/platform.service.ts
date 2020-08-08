@@ -13,6 +13,16 @@ export class PlatformService {
 
   readonly useAppFeatures: Observable<boolean>;
 
+  get isCordova(): boolean {
+    return this.platform.is('cordova') || this.readySource === 'cordova' || window.isCordova;
+  }
+
+  get isIos(): boolean {
+    return this.platform.is('ios');
+  }
+
+  private readySource: string;
+
   constructor(
     private readonly screenSizeService: ScreenSizeService,
     private readonly platform: Platform,
@@ -23,11 +33,7 @@ export class PlatformService {
     createBodyClassObservableHandler(this.useAppFeatures, useAppFeaturesClass);
   }
 
-  get isCordova(): boolean {
-    return this.platform.is('cordova');
-  }
-
-  get isIos(): boolean {
-    return this.platform.is('ios');
+  async ready(): Promise<void> {
+    this.readySource = await this.platform.ready();
   }
 }

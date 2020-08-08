@@ -1,6 +1,6 @@
 <app-root *ngIf="enabled"></app-root>
 
-<div class="loader-bg" [class.active]="loading" [class.hidden]="isCordova && !appStarted">
+<div class="loader-bg" [class.active]="loading" [class.hidden]="platform.isCordova && !appStarted">
     <div class="spinner">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>

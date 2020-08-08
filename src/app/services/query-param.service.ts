@@ -41,6 +41,7 @@ export class QueryParamService {
       this.router.navigate([], {
         queryParams: { [key]: value },
         queryParamsHandling: 'merge',
+        replaceUrl: true,
       })).then(async () => {
         await this.saveCurrentPath();
         return true;
@@ -58,7 +59,9 @@ export class QueryParamService {
       return false;
     } else {
       const urlTree = this.router.parseUrl(savedPath);
-      return this.router.navigateByUrl(urlTree);
+      return this.router.navigateByUrl(urlTree, {
+        replaceUrl: true,
+      });
     }
   }
 }

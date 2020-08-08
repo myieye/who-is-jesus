@@ -45,7 +45,7 @@
     "angular-cli-ghpages": "^0.6.2",
     "cordova-android": "^8.1.0",
     "cordova-disable-http-cache": "^1.0.0",
-    "cordova-plugin-app-preferences": "^0.99.3",
+    "cordova-plugin-app-preferences": "git+https://github.com/myieye/me.apla.cordova.app-preferences.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-theme-detection": "^1.2.1",

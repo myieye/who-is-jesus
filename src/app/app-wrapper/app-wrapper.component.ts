@@ -5,9 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LanguageService } from '../services/language.service';
 import { ContentService } from '../services/content.service';
 import { DebugSettings } from '../../debug-settings';
-import { Platform } from '@ionic/angular';
 import { ThemeService } from '../services/theme.service';
 import { QueryParamService } from '../services/query-param.service';
+import { PlatformService } from '../services/platform.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -21,10 +21,6 @@ export class AppWrapperComponent {
   enabled = false;
   loading = true;
 
-  get isCordova(): boolean {
-    return window.isCordova;
-  }
-
   private previousParams: ParamMap;
 
   constructor(
@@ -33,7 +29,7 @@ export class AppWrapperComponent {
     private readonly snackBar: MatSnackBar,
     private readonly languageService: LanguageService,
     private readonly contentService: ContentService,
-    private readonly platform: Platform,
+    readonly platform: PlatformService,
     private readonly themeService: ThemeService,
     private readonly queryParamService: QueryParamService,
   ) {
@@ -43,13 +39,18 @@ export class AppWrapperComponent {
   private async onParamsChanged(paramMap: ParamMap): Promise<void> {
     const lang = paramMap.get('lang');
 
+    await Promise.all([
+      window.deviceReady$,
+      window.webFontConfigActive$,
+      this.platform.ready(),
+    ]);
+
     if (isNil(lang)) {
-      if (await this.queryParamService.loadSavedPath()) {
-        return;
-      } else {
+      if (!await this.queryParamService.loadSavedPath()) {
         this.languageService.init();
-        return;
       }
+      // return, because the initialisation will change the URL params and call this method again
+      return;
     }
 
     this.languageService.init(lang);
@@ -58,39 +59,33 @@ export class AppWrapperComponent {
     if (isNil(this.previousParams) || !isEqual(this.previousParams, paramMap)) {
       let languageVersesAvailable = true;
 
-      let contentIniter = this.loadLanguageVerses()
+      await this.loadLanguageVerses()
         .catch(() => languageVersesAvailable = false)
-        .finally(() => this.contentService.initPropsDynamically()) as Promise<unknown>;
+        .finally(() => this.contentService.initPropsDynamically());
 
       if (this.enabled) {
         this.loading = true;
         this.enabled = false;
         this.ref.detectChanges();
-        contentIniter = contentIniter.then(() => new Promise((resolve) => setTimeout(resolve, 500)));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
 
-      contentIniter = contentIniter
-        .then(() => window.deviceReady$)
-        .then(() => window.webFontConfigActive$)
-        .then(() => this.platform.ready())
-        .then(() => this.themeService.init());
+      await this.themeService.init();
 
-      contentIniter.then(() => {
-        this.enabled = true;
-        this.ref.detectChanges();
-        this.loading = false;
-        setTimeout(() => navigator.splashscreen?.hide(), 500);
-        this.appStarted = true;
+      this.enabled = true;
+      this.ref.detectChanges();
+      this.loading = false;
+      setTimeout(() => navigator.splashscreen?.hide(), 500);
+      this.appStarted = true;
 
-        if (DebugSettings.reloadNotification) {
-          console.log('Reloaded with params:', paramMap);
-          this.snackBar.open('Reloaded', undefined, { duration: 3000 });
-        }
+      if (DebugSettings.reloadNotification) {
+        console.log('Reloaded with params:', paramMap);
+        this.snackBar.open('Reloaded', undefined, { duration: 3000 });
+      }
 
-        if (!languageVersesAvailable) {
-          this.showInternetRequiredMessage();
-        }
-      });
+      if (!languageVersesAvailable) {
+        this.showInternetRequiredMessage();
+      }
     }
 
     this.previousParams = paramMap;
