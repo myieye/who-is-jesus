@@ -4,7 +4,7 @@ import { VerseTagMap, VerseTagKey } from '../../models/tags';
 export const tags: VerseTagMap = {
     [VerseTagKey.Authority]: { key: VerseTagKey.Authority, name: 'Autorität', description: 'Jesus zeigte Autorität über Krankheit, Natur, Dämonen etc. Merkwürdig ist, dass er Wunder bewirkt ohne sich explicit auf Gottes Hilfe zu berufen.' },
     [VerseTagKey.Blasphemy]: { key: VerseTagKey.Blasphemy, name: 'Gotteslästerung', description: 'Jesus wird mehrmals Gotteslästerung vorgeworfen. Meistens dann, wenn seine Zuhörer meinen, er stelle sich auf Gottes Position.' },
-    [VerseTagKey.Bridegroom]: { key: VerseTagKey.Bridegroom, name: 'Bräutigam', description: 'Jesus behauptet er sei der Brautigam der Kirche, seiner Braut.' },
+    [VerseTagKey.Bridegroom]: { key: VerseTagKey.Bridegroom, name: 'Bräutigam', description: 'Jesus behauptet er sei der Bräutigam der Kirche, seiner Braut.' },
     [VerseTagKey.Christ]: { key: VerseTagKey.Christ, name: 'Christus', description: 'Jesus ist der Christus (oder verheißener Messias) oft als Sohn Davids bezeichnet.' },
     [VerseTagKey.Clean]: { key: VerseTagKey.Clean, name: 'Rein', description: 'Jesus heilt die Unreinen. Religiöse Reinheit wird in engem Zusammenhang mit Sünde vertsanden.' },
     [VerseTagKey.Clouds]: { key: VerseTagKey.Clouds, name: 'Wolken', description: 'Wolken in der Bibel stellen Gottes Gegenwart oder Herrlichkeit dar (z.B. 2. Mose 16,10; 40,34-35; 4. Mose 11,25).' },
@@ -12,7 +12,7 @@ export const tags: VerseTagMap = {
     [VerseTagKey.Demons]: { key: VerseTagKey.Demons, name: 'Dämonen', description: 'Dämonen hielten viel von Jesus.' },
     [VerseTagKey.Eternal]: { key: VerseTagKey.Eternal, name: 'Ewig', description: 'Jesus ist derselbe gestern, heute und in Ewigkeit. Er war am Anfang und wird für immer sein.' },
     [VerseTagKey.Faith]: { key: VerseTagKey.Faith, name: 'Glaube', description: 'Jesus ist das Objekt des Glaubens vieler Menschen.' },
-    [VerseTagKey.FP]: { key: VerseTagKey.FP, name: 'Erfüllte Prophezeiung', description: 'Jesus ist die Erfühlung viele alttestamentlicher Prophezeiungen.' },
+    [VerseTagKey.FP]: { key: VerseTagKey.FP, name: 'Erfüllte Prophezeiung', description: 'Jesus ist die Erfüllung viele alttestamentlicher Prophezeiungen.' },
     [VerseTagKey.Glory]: { key: VerseTagKey.Glory, name: 'Herrlichkeit', description: 'Große Herrlichkeit wird Jesus zugeschrieben; sogar die Herrlichkeit seines Vaters.' },
     [VerseTagKey.God]: { key: VerseTagKey.God, name: 'Gott', description: 'Jesus wird (teils explizit und teils implizit) als Gott dargestellt.' },
     [VerseTagKey.Greater]: { key: VerseTagKey.Greater, name: 'Größer', description: 'Jesus ist größer als eine großartige Menge von großen Menschen und Sachen.' },
