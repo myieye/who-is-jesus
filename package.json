@@ -43,7 +43,7 @@
     "@types/cordova": "0.0.34",
     "@types/lodash": "^4.14.149",
     "angular-cli-ghpages": "^0.6.2",
-    "cordova-android": "^8.1.0",
+    "cordova-android": "^11.0.0",
     "cordova-disable-http-cache": "^1.0.0",
     "cordova-plugin-app-preferences": "git+https://github.com/myieye/me.apla.cordova.app-preferences.git",
     "cordova-plugin-ionic-webview": "^5.0.0",
